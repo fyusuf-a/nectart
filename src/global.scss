@@ -29,3 +29,15 @@ table {
 	border-spacing: 0;
 }
 /* End of CSS reset */
+
+@font-face {
+  font-family: "Saol Display";
+  src: url("../fonts/SaolDisplay-LightItalic.woff2") format("woff2");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Avantt";
+  src: url("../fonts/Avantt-Extrabold.woff2") format("woff2");
+  font-weight: bold;
+}
