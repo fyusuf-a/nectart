@@ -10,9 +10,7 @@
   <div class="circle">
     <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
-  <div class="rocks">
-    <img src="photos/rocks.png" alt="" />
-  </div>
+  <img src="photos/rocks.png" alt="Black rocks shining reflecting a discreet blue light" />
 </div>
 
 <style lang="scss">
@@ -27,8 +25,16 @@
   }
 
   .circle {
-    width: 50vw;
-    height: 50vw;
+    width: 90vw;
+    height: 90vw;
+    @include sm {
+      width: 80vw;
+      height: 80vw;
+    }
+    @include md {
+      width: 50vw;
+      height: 50vw;
+    }
     background-color: green;
     border-radius: 50%;
     overflow: hidden;
@@ -36,19 +42,24 @@
     z-index: 1;
   }
 
-  .rocks img {
+  img {
     background-color: transparent;
     position: absolute;
-    width: 100%;
-    bottom: calc(50% - 27vw);
-    left: 0;
-    right: 0;
-    z-index: 2;
-  }
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-  .rocks {
-    position: relative;
-    width: 100vw;
-    height: calc(100vh - 92px);
+    width: 200%;
+    bottom: calc(50% - 110vw);
+
+    @include sm {
+      width: 150%;
+      bottom: calc(50% - 82.5vw);
+    }
+
+    @include md {
+      width: 100%;
+      bottom: calc(50% - 55vw);
+    }
+    z-index: 1;
   }
 </style>
