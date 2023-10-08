@@ -128,6 +128,10 @@ a {
 }
 /* End of CSS reset */
 
+:root {
+  --Black: #010204;
+}
+
 @font-face {
   font-family: 'Saol Display';
   src: url('../fonts/SaolDisplay-LightItalic.woff2') format('woff2');
