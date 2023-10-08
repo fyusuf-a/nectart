@@ -7,15 +7,8 @@
 </script>
 
 <div class="section1">
-  <MouseAcceleratedVideo
-    cssSelector="video.mouseAccelerated"
-    targetReturnTime={1}
-    {easingFunction}
-  />
   <div class="circle">
-    <video autoplay muted loop class="mouseAccelerated">
-      <source src="videos/oleg-lehnitsky.mp4" type="video/mp4" />
-    </video>
+    <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
   <div class="rocks">
     <img src="photos/rocks.png" alt="" />
@@ -41,12 +34,6 @@
     overflow: hidden;
     position: absolute;
     z-index: 1;
-  }
-
-  .circle video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   .rocks img {

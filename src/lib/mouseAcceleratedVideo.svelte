@@ -1,11 +1,11 @@
 <script lang="ts">
-  export let cssSelector: string;
   export let targetReturnTime: number;
   export let easingFunction: (t: number) => number;
 
   import { onMount } from 'svelte';
   import * as THREE from 'three';
 
+  let video: HTMLVideoElement;
   let timeAtLastMouseMove = 0;
   let videoRateAtLastMouseMove = 0;
   let targetPlaybackRate = 0.7;
@@ -13,7 +13,6 @@
   onMount(() => {
     const mouse = { x: 0, y: 0 };
     const clock = new THREE.Clock();
-    const video = document.querySelector(cssSelector) as HTMLVideoElement;
     window.addEventListener('mousemove', function (event) {
       const mouseSpeed = Math.sqrt(
         Math.pow(mouse.x - event.clientX, 2) + Math.pow(mouse.y - event.clientY, 2)
@@ -45,3 +44,15 @@
     };
   });
 </script>
+
+<video autoplay muted loop bind:this={video}>
+  <source src="videos/oleg-lehnitsky.mp4" type="video/mp4" />
+</video>
+
+<style lang="scss">
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
