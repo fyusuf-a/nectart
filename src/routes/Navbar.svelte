@@ -24,6 +24,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    z-index: 100;
   }
 
   .link-container {
