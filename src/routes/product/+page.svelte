@@ -1,65 +1,52 @@
 <script lang="ts">
-  import MouseAcceleratedVideo from '$lib/mouseAcceleratedVideo.svelte';
-  import { easeCubicFactory } from '$lib/easing';
+  import { onMount } from 'svelte';
+  import { gsap } from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  import Section1 from './Section1.svelte';
+  import Section2 from './Section2.svelte';
+  import Section3 from './Section3.svelte';
 
-  let easingParameters: [number, number, number, number] = [0.16, 1, 0.3, 1];
-  let easingFunction = easeCubicFactory(...easingParameters);
+  gsap.registerPlugin(ScrollTrigger);
+
+  onMount(() => {
+    /*const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#section3',
+        start: 'top center',
+        end: 'center center',
+        scrub: true,
+        markers: true,
+      }
+    });
+
+    tl.to('#bottle', {
+      top: '50%',
+      ease: easingFunction
+    });*/
+    /*return () => {
+      tl.clear();
+    };*/
+  });
 </script>
 
-<div class="section1">
-  <div class="circle">
-    <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
-  </div>
-  <img src="photos/rocks.png" alt="Black rocks shining reflecting a discreet blue light" />
-</div>
+<img id="bottle" src="photos/bottle.png" alt="A bottle of water" />
+<Section1 />
+<Section2 />
+<Section3 />
+<div id="section4" />
 
 <style lang="scss">
-  .section1 {
-    background-color: var(--Black);
-    width: 100vw;
-    height: calc(100vh - 92px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  #section4 {
+    background-color: purple;
+    height: 100vh;
   }
 
-  .circle {
-    width: 90vw;
-    height: 90vw;
-    @include sm {
-      width: 80vw;
-      height: 80vw;
-    }
-    @include md {
-      width: 50vw;
-      height: 50vw;
-    }
-    background-color: green;
-    border-radius: 50%;
-    overflow: hidden;
-    position: absolute;
+  #bottle {
+    width: 30vw;
     z-index: 1;
-  }
-
-  img {
-    background-color: transparent;
-    position: absolute;
+    position: fixed;
     left: 50%;
+    top: 55%;
     transform: translate(-50%, -50%);
-
-    width: 200%;
-    bottom: calc(50% - 110vw);
-
-    @include sm {
-      width: 150%;
-      bottom: calc(50% - 82.5vw);
-    }
-
-    @include md {
-      width: 100%;
-      bottom: calc(50% - 55vw);
-    }
-    z-index: 1;
   }
 </style>
