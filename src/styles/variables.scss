@@ -9,27 +9,58 @@
   text-transform: none;
 }
 
-$screen-sm-min: 576px;
-$screen-md-min: 768px;
-$screen-lg-min: 992px;
-$screen-xl-min: 1200px;
+$screen-sm-min: 576;
+$screen-md-min: 768;
+$screen-lg-min: 992;
+$screen-xl-min: 1200;
 @mixin sm {
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: #{$screen-sm-min}px) {
     @content;
   }
 }
 @mixin md {
-  @media (min-width: $screen-md-min) {
+  @media (min-width: #{$screen-md-min}px) {
     @content;
   }
 }
 @mixin lg {
-  @media (min-width: $screen-lg-min) {
+  @media (min-width: #{$screen-lg-min}px) {
     @content;
   }
 }
 @mixin xl {
-  @media (min-width: $screen-xl-min) {
+  @media (min-width: #{$screen-xl-min}px) {
     @content;
   }
+}
+
+/* https://spencermortensen.com/articles/typographic-scale/ */
+@mixin typographic-scale($octave: 0, $note: 0) {
+  font-size: calc(1rem * pow(2, $octave) * pow(2, $note / 3));
+}
+
+@mixin css-lock(
+  $min-size: 1,
+  $max-size: 1.4,
+  $min-width: 20,
+  $max-width: 100,
+  $property: font-size,
+  $unit: px,
+) {
+  #{$property}: calc(
+    calc(#{$min-size}#{$unit}) + calc((#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}#{$unit}) /
+          (#{$max-width} - #{$min-width})))
+  );
+
+  @media (max-width: #{$min-width}#{$unit}) {
+    #{$property}: #{$min-size}#{$unit};
+  }
+
+  @media (min-width: #{$max-width}#{$unit}) {
+    #{$property}: #{$max-size}#{$unit};
+  }
+}
+
+:root {
+  @include css-lock(16, 25, $screen-sm-min, $screen-xl-min);
 }

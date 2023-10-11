@@ -16,7 +16,7 @@
 <style lang="scss">
   a {
     @include impact;
-    font-size: 12px;
+    @include typographic-scale(0, 0);
   }
 
   nav {
