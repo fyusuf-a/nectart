@@ -35,7 +35,7 @@
   />
 </div>
 
-<style>
+<style lang="scss">
   #section1 {
     background-color: var(--Black);
     width: 100vw;
@@ -54,8 +54,8 @@
       height: 80vw;
     }
     @include md {
-      width: 50vw;
-      height: 50vw;
+      width: max(50vh, 50vw);
+      height: max(50vh, 50vw);
     }
     background-color: green;
     border-radius: 50%;
