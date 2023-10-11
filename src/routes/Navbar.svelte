@@ -4,13 +4,9 @@
 </script>
 
 <nav {style}>
-  <div class="link-container">
     <a href="/">Our product</a>
     <a href="/plum-elixir">Plum elixir</a>
-  </div>
-  <div class="link-container">
     <a href="/contact">Contact</a>
-  </div>
 </nav>
 
 <style lang="scss">
@@ -25,12 +21,5 @@
     justify-content: space-between;
     flex-direction: row;
     z-index: 100;
-  }
-
-  .link-container {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    gap: 40px;
   }
 </style>
