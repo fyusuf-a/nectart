@@ -34,9 +34,14 @@ $screen-xl-min: 1200;
   }
 }
 
+$navbar-note: 0;
+@function scale($octave: 0, $note: 0) {
+  @return calc(1rem * pow(2, $octave) * pow(2, $note / 3));
+}
+
 /* https://spencermortensen.com/articles/typographic-scale/ */
 @mixin typographic-scale($octave: 0, $note: 0) {
-  font-size: calc(1rem * pow(2, $octave) * pow(2, $note / 3));
+  font-size: scale($octave, $note);
 }
 
 @mixin css-lock(
