@@ -39,7 +39,7 @@
   #section1 {
     background-color: var(--Black);
     width: 100vw;
-    height: calc(100vh - 92px);
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

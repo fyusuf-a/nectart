@@ -69,3 +69,17 @@ $navbar-note: 0;
 :root {
   @include css-lock(16, 25, $screen-sm-min, $screen-xl-min);
 }
+
+$navbar-vertical-padding: 40px;
+$navbar-scale: 0;
+$navbar-note: 0;
+@function navbar-height() {
+  @return calc(
+    2 * #{$navbar-vertical-padding} +
+      scale($navbar-scale, $navbar-note)
+  );
+}
+
+:root {
+  --navbar-height: #{navbar-height()};
+}

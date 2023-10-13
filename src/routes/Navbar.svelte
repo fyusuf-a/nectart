@@ -3,7 +3,7 @@
   const style = `background-color: ${theme.backgroundColor}; color: ${theme.color};`;
 </script>
 
-<nav {style}>
+<nav {style} id="navbar">
     <a href="/">Our product</a>
     <a href="/plum-elixir">Plum elixir</a>
     <a href="/contact">Contact</a>
@@ -16,10 +16,19 @@
   }
 
   nav {
-    padding: 40px 60px;
+    padding: #{$navbar-vertical-padding} 0px;
+    @include sm {
+      padding: #{$navbar-vertical-padding} 60px;
+    }
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: navbar-height();
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: row;
     z-index: 100;
+    transition: top 1s;
   }
 </style>
