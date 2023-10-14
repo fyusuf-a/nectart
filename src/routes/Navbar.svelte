@@ -13,7 +13,6 @@
   a {
     width: 10em;
     text-align: center;
-    @include impact;
     @include typographic-scale(0, 0);
   }
 

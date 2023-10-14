@@ -49,7 +49,7 @@
   #bottle {
     width: circle-size(0.5);
     z-index: 1;
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
     bottom: calc(rest-height(0.5) - circle-size(0.4));

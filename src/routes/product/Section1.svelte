@@ -33,7 +33,11 @@
     src="photos/rocks.png"
     alt="Black rocks shining reflecting a discreet blue light"
   />
-  <div id="section1-black" />
+  <div class="cta">
+    Scroll to discover
+    <div class="underline" />
+  </div>
+  <div id="black-rectangle" />
 </div>
 
 <style lang="scss">
@@ -50,7 +54,6 @@
     position: relative;
     overflow: hidden;
   }
-
 
   .circle {
     position: relative;
@@ -70,12 +73,27 @@
     z-index: 2;
   }
 
-  #section1-black {
+  #black-rectangle {
     position: absolute;
     bottom: 0;
-    height: calc($bottom-rocks + 1px);
+    height: $bottom-rocks;
     width: 100vw;
     background-color: var(--Black);
     z-index: 3;
+  }
+
+  .cta {
+    position: absolute;
+    color: var(--White);
+    text-transform: uppercase;
+    bottom: 0;
+    z-index: 4;
+    bottom: circle-size(0.1);
+  }
+
+  .underline {
+    height: 1px;
+    background-color: var(--White);
+    width: 100%;
   }
 </style>

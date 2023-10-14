@@ -134,6 +134,7 @@ a {
 :root {
   --Black: #010204;
   --White: #fff;
+  @include impact;
 }
 
 @font-face {
