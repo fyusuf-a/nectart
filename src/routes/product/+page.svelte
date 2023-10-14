@@ -36,17 +36,24 @@
 <div id="section4" />
 
 <style lang="scss">
+  @import "./style.scss";
+
+  :global(body) {
+    background-color: var(--Black);
+  }
   #section4 {
     background-color: purple;
     height: 100vh;
   }
 
   #bottle {
-    width: 30vw;
+    width: circle-size(0.5);
     z-index: 1;
-    position: fixed;
+    position: absolute;
     left: 50%;
-    top: 55%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
+    bottom: calc(rest-height(0.5) - circle-size(0.4));
+    left: 50%;
+    z-index: 1;
   }
 </style>

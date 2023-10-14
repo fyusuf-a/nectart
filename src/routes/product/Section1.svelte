@@ -33,55 +33,49 @@
     src="photos/rocks.png"
     alt="Black rocks shining reflecting a discreet blue light"
   />
+  <div id="section1-black" />
 </div>
 
 <style lang="scss">
+  @import "./style.scss";
+
   #section1 {
     background-color: var(--Black);
     width: 100vw;
-    height: 100vh;
+    margin-top: navbar-height();
+    height: rest-height(1);
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    overflow: hidden;
   }
 
+
   .circle {
-    width: 90vw;
-    height: 90vw;
-    @include sm {
-      width: 80vw;
-      height: 80vw;
-    }
-    @include md {
-      width: max(50vh, 50vw);
-      height: max(50vh, 50vw);
-    }
-    background-color: green;
+    position: relative;
+    width: circle-size(0.9);
+    height: circle-size(0.9);
     border-radius: 50%;
     overflow: hidden;
-    position: absolute;
     z-index: 0;
   }
 
+  $bottom-rocks: calc(50% - circle-size(0.46));
   #rocks {
     background-color: transparent;
     position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 200%;
-    bottom: calc(50% - 110vw);
-
-    @include sm {
-      width: 150%;
-      bottom: calc(50% - 82.5vw);
-    }
-
-    @include md {
-      width: 100%;
-      bottom: calc(50% - 55vw);
-    }
+    width: circle-size(1.8);
+    bottom: $bottom-rocks;
     z-index: 2;
+  }
+
+  #section1-black {
+    position: absolute;
+    bottom: 0;
+    height: calc($bottom-rocks + 1px);
+    width: 100vw;
+    background-color: var(--Black);
+    z-index: 3;
   }
 </style>
