@@ -4,8 +4,8 @@
   import { onMount } from 'svelte';
 
   const theme = {
-    backgroundColor: '#000',
-    color: '#fff'
+    backgroundColor: 'var(--Black)',
+    color: 'var(--White)'
   };
 
 
