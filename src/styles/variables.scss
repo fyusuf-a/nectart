@@ -87,3 +87,7 @@ $navbar-note: 0;
 :root {
   --navbar-height: #{navbar-height()};
 }
+
+@function circle-size($ratio) {
+    @return min(calc(100vw * #{$ratio}), rest-height($ratio));
+ }
