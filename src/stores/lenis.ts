@@ -1,5 +1,7 @@
 import type Lenis from '@studio-freight/lenis';
 import { writable } from 'svelte/store';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { gsap } from 'gsap';
 
 function createLenis() {
   const { subscribe, set } = writable(null as Lenis | null);
@@ -12,11 +14,11 @@ function createLenis() {
           return;
         }
         set(newLenis);
-        function raf(time: number) {
-          newLenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-        window.requestAnimationFrame(raf);
+        newLenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+          newLenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
       });
     },
     destroy: () => {

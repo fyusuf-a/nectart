@@ -1,12 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { gsap } from 'gsap';
-  import ScrollTrigger from 'gsap/ScrollTrigger';
   import Section1 from './Section1.svelte';
   import Section2 from './Section2.svelte';
   import Section3 from './Section3.svelte';
-
-  gsap.registerPlugin(ScrollTrigger);
 
   onMount(() => {
     /*const tl = gsap.timeline({

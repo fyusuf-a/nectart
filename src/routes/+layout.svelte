@@ -4,6 +4,10 @@
   import { onMount } from 'svelte';
   import Lenis from '@studio-freight/lenis';
   import { lenis } from '../stores/lenis';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  import { gsap } from 'gsap';
+
+  gsap.registerPlugin(ScrollTrigger);
 
   const theme = {
     backgroundColor: 'var(--Black)',
