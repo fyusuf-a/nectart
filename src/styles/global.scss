@@ -129,6 +129,11 @@ a {
 * {
   box-sizing: border-box;
 }
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
 /* End of CSS reset */
 
 :root {

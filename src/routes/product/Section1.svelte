@@ -4,11 +4,21 @@
   import { gsap } from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import { onMount } from 'svelte';
+  import { lenis } from '../../stores/lenis';
 
   const easingParameters: [number, number, number, number] = [0.16, 1, 0.3, 1];
   const easingFunction = easeCubicFactory(...easingParameters);
 
+  let ctaText: HTMLDivElement;
+
+  const activateUnmuted = () => {
+    // let the user scroll again
+    lenis.start();
+    ctaText.innerHTML = 'Scroll to discover';
+  };
+
   onMount(() => {
+    ctaText.innerHTML = 'Activate sound';
     const straightBottleAnimation = () => {
       gsap.to('#bottle', {
         rotate: 0,
@@ -33,10 +43,14 @@
     src="photos/rocks.png"
     alt="Black rocks shining reflecting a discreet blue light"
   />
-  <div class="cta">
-    Scroll to discover
+  <button on:click={activateUnmuted}
+    class="cta"
+  >
+    <div bind:this={ctaText}>
+      Scroll to discover
+    </div>
     <div class="underline" />
-  </div>
+  </button>
   <div id="black-rectangle" />
 </div>
 
@@ -92,8 +106,14 @@
   }
 
   .underline {
+    margin-top: 6px;
     height: 1px;
     background-color: var(--White);
     width: 100%;
+  }
+
+  button {
+    @include impact;
+    @include typographic-scale(0, 0);
   }
 </style>
