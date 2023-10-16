@@ -1,9 +1,29 @@
-<script>
+<script lang="ts">
   export let theme;
+  import { onMount } from 'svelte';
+
   const style = `background-color: ${theme.backgroundColor}; color: ${theme.color};`;
+
+  let navbar: HTMLElement;
+  onMount(() => {
+    const navbarHeight = getComputedStyle(navbar).height;
+    let prevScrollpos = window.scrollY;
+    window.onscroll = function () {
+      const currentScrollPos = window.scrollY;
+      if (prevScrollpos > currentScrollPos) {
+        navbar.style.top = null;
+      } else {
+        navbar.style.top = '-' + navbarHeight;
+      }
+      prevScrollpos = currentScrollPos;
+    };
+    return () => {
+      window.onscroll = null;
+    };
+  })
 </script>
 
-<nav {style} id="navbar">
+<nav {style} id="navbar" bind:this={navbar}>
     <a href="/">Our product</a>
     <a href="/plum-elixir">Plum elixir</a>
     <a href="/contact">Contact</a>
