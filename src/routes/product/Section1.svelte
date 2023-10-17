@@ -90,7 +90,7 @@
   #black-rectangle {
     position: absolute;
     bottom: 0;
-    height: $bottom-rocks;
+    height: calc($bottom-rocks + 5px);
     width: 100vw;
     background-color: var(--Black);
     z-index: 3;
