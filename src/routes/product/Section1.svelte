@@ -71,18 +71,18 @@
 
   .circle {
     position: relative;
-    width: circle-size(0.9);
-    height: circle-size(0.9);
+    width: circle-size-with-navbar(0.9);
+    height: circle-size-with-navbar(0.9);
     border-radius: 50%;
     overflow: hidden;
     z-index: 0;
   }
 
-  $bottom-rocks: calc(50% - circle-size(0.46));
+  $bottom-rocks: calc(50% - circle-size-with-navbar(0.46));
   #rocks {
     background-color: transparent;
     position: absolute;
-    width: circle-size(1.8);
+    width: circle-size-with-navbar(1.8);
     bottom: $bottom-rocks;
     z-index: 2;
   }
@@ -102,7 +102,7 @@
     text-transform: uppercase;
     bottom: 0;
     z-index: 4;
-    bottom: circle-size(0.1);
+    bottom: circle-size-with-navbar(0.1);
   }
 
   .underline {

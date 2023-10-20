@@ -89,5 +89,5 @@ $navbar-note: 0;
 }
 
 @function circle-size($ratio) {
-    @return min(calc(100vw * #{$ratio}), rest-height($ratio));
+    @return calc(min(100vw, 100vh) * #{$ratio});
  }
