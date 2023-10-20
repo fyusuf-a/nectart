@@ -20,7 +20,7 @@
   onMount(() => {
     ctaText.innerHTML = 'Activate sound';
     const straightBottleAnimation = () => {
-      gsap.to('#bottle', {
+      gsap.to('#bottle-container', {
         rotate: 0,
         duration: 1,
         ease: 'easeInOut'
