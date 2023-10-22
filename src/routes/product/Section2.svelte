@@ -112,6 +112,16 @@
         },
       )
       .add(fadeTween(precedingOdor, 'italic'), '<')
+      .to(`#background-${currentOdor}`,
+        {
+          onStart() {
+            (document.querySelector(`#background-${precedingOdor}`) as HTMLElement).style.visibility = 'visible';
+          },
+          opacity: 0.0,
+          duration: 3,
+        },
+        '<'
+      )
       .to(`#odor-${precedingOdor}`, 
         {
           left: middleStyle.left,
@@ -178,6 +188,7 @@
         odor(followingOdor).classList.remove('right-odor');
         odor(followingOdor).classList.add('faded');
         odor(followingOdor).removeAttribute('style');
+        document.querySelector(`#background-${currentOdor}`)!.removeAttribute('style');
         currentOdor = precedingOdor;
       }
     });
@@ -214,8 +225,16 @@
 <div id="section2">
   <img
     class="background"
+    id={`background-${precedingOdor}`}
+    style="visibility:hidden;"
+    src={`photos/${odors[precedingOdor].photoUrl}`}
+    alt={odors[precedingOdor].photoAlt}
+  />
+  <img
+    class="background"
+    id={`background-${currentOdor}`}
     src={`photos/${odors[currentOdor].photoUrl}`}
-    alt="Black rocks shining reflecting a discreet blue light"
+    alt={odors[currentOdor].photoAlt}
   />
 
   {#each odors as odor, i }
