@@ -337,10 +337,20 @@
 
   .video-container {
     position: relative;
-    width: circle-size(0.7);
-    height: circle-size(0.7);
+    width: circle-size(0.45);
+    height: circle-size(0.45);
     border-radius: 50%;
     overflow: hidden;
+
+    @include md {
+      width: circle-size(0.5);
+      height: circle-size(0.5);
+    }
+
+    @include xl {
+      width: circle-size(0.6);
+      height: circle-size(0.6);
+    }
 
     & video {
       width: 100%;
@@ -366,11 +376,9 @@
 
   .odor-caption {
     position: absolute;
-    width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 250px;
     text-align: center;
     font-family: 'Saol Display', serif;
     text-transform: none;
