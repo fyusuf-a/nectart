@@ -15,19 +15,19 @@
 
   #bottle-container {
     position: fixed;
-    width: circle-size(0.5);
+    width: circle-size-with-navbar(0.5);
+    left: 50%;
+    top: 0;
+    bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
-    top: 0;
-    bottom: calc(rest-height(0.5) - circle-size-with-navbar(0.7));
-    left: 50%;
     z-index: 1;
   }
 
   #centering-container {
     position: absolute;
-    top: 50%;
-    transform: translate(0%, -50%);
+    width: 100%;
+    bottom: calc(rest-height(0.5) - circle-size-with-navbar(0.4));
   }
 
   #bottle, #bottle-shadow {
