@@ -66,6 +66,7 @@
   let buttonsActive = true;
 
   onMount(() => {
+    // Try to play the video's audio when the section is in view
     ScrollTrigger.create({
       trigger: '#section2',
       start: 'top center',
@@ -76,7 +77,14 @@
       onLeaveBack: mute,
     });
 
+    // Pin the section
+    ScrollTrigger.create({
+      trigger: '#section2',
+      pin: true,
+      end: 'bottom 70%'
+    });
 
+    // The carousel animation
     const _smallTextStyle = window.getComputedStyle(odor(precedingOdor));
     const smallTextStyle = {
       fontSize: _smallTextStyle.fontSize,
