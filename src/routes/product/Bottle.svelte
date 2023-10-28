@@ -1,4 +1,53 @@
 <script>
+  import { onMount } from 'svelte';
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+
+  onMount(() => {
+    const centeringTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#section3',
+        start: 'top center',
+        end: 'center center',
+        scrub: true,
+        markers: true,
+      }
+    });
+
+    centeringTimeline.to('#centering-container', {
+      bottom: 'calc(50vh)',
+      transform: 'translate(0, 50%)',
+    });
+
+    let randomAngle = gsap.utils.random(-5, 5, true);
+    let randomTime = gsap.utils.random(3, 5, true);
+    const bouncingTimeline = gsap.timeline({
+      repeat: -1,
+      repeatRefresh: true,
+      paused: true
+    });
+
+    bouncingTimeline.to('#bottle-container', {
+      rotate: randomAngle,
+      duration: randomTime,
+      ease: 'easeInOut'
+    });
+
+    ScrollTrigger.create({
+      trigger: '#section3',
+      scrub: true,
+      onEnter: () => bouncingTimeline.play(),
+      onLeave: () => bouncingTimeline.pause(),
+      onEnterBack: () => bouncingTimeline.play(),
+      onLeaveBack: () => bouncingTimeline.pause()
+    });
+
+
+    return () => {
+      centeringTimeline.clear();
+      bouncingTimeline.clear();
+    };
+  });
 </script>
 
 
