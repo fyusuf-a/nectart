@@ -27,7 +27,8 @@
   #centering-container {
     position: absolute;
     width: 100%;
-    bottom: calc(rest-height(0.5) - circle-size-with-navbar(0.4));
+    bottom: calc(rest-height(0.5));
+    transform: translateY(50%);
   }
 
   #bottle, #bottle-shadow {
