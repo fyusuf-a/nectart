@@ -1,10 +1,26 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
 
+  let screenWidth;
+  let screenHeight;
+  const BOTTLE_RATIO = 0.6561;
+  let bottleHeight;
+  let bottleWidth;
+
   // Pin the section
   onMount(() => {
+    // getting dimensions to scale the bottle
+    bottleWidth = (document.getElementById('bottle-container') as HTMLElement).offsetWidth;
+    bottleHeight = bottleWidth * BOTTLE_RATIO;
+    screenWidth = window.innerWidth;
+    screenHeight = window.innerHeight;
+    window.addEventListener('resize', () => {
+      screenWidth = window.innerWidth;
+      screenHeight = window.innerHeight;
+    });
+
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: '#section3',
@@ -21,7 +37,7 @@
       rotate: 0,
     })
       .to('#bottle-container', {
-        width: '140%',
+        scale: 1.5 * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
         onUpdate: () => {
           gsap.set('#bottle-centering-container', {
             transform: 'translate(0, 50%)',
