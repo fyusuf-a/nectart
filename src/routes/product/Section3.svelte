@@ -1,14 +1,33 @@
 <script>
   import { onMount } from 'svelte';
+  import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
 
   // Pin the section
   onMount(() => {
-    ScrollTrigger.create({
-      trigger: '#section3',
-      pin: true,
-      end: 'bottom -100%'
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#section3',
+        scrub: true,
+        pin: true,
+        end: 'bottom -100%',
+        markers: true,
+      }
     });
+
+    timeline.to('#centering-container', {
+      bottom: 'calc(50vh)',
+      transform: 'translate(0, 50%)',
+      rotate: 0,
+    })
+      .to('#bottle-container', {
+        width: '140%',
+        onUpdate: () => {
+          gsap.set('#centering-container', {
+            transform: 'translate(0, 50%)',
+          })
+        }
+      })
 
   });
 </script>
@@ -42,6 +61,7 @@
   }
 
   centered {
+    width: 100%;
     text-align: center;
   }
     
