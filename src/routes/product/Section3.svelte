@@ -76,9 +76,10 @@
 
   }
 
-  centered {
+  .centered {
     width: 100%;
     text-align: center;
+    color: var(--Red);
   }
     
 </style>
