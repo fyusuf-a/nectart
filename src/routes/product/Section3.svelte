@@ -8,9 +8,14 @@
   const BOTTLE_RATIO = 0.6561;
   let bottleHeight;
   let bottleWidth;
+  let sensation: HTMLElement;
+  let emotion: HTMLElement;
 
   // Pin the section
   onMount(() => {
+    emotion.style.display = 'none';
+    emotion.style.opacity = '0';
+
     // getting dimensions to scale the bottle
     bottleWidth = (document.getElementById('bottle-container') as HTMLElement).offsetWidth;
     bottleHeight = bottleWidth * BOTTLE_RATIO;
@@ -31,6 +36,12 @@
       }
     });
 
+    // https://gsap.com/community/forums/topic/8237-blur-filters/
+    const blurElement: HTMLElement = document.querySelector('#bottle-blur')!;
+    const blurStyle = window.getComputedStyle(blurElement)['backdrop-filter'];
+    const blur = Number(/[0-9]+/.exec(blurStyle)[0]);
+    const blurHelper = { blur };
+
     timeline.to('#bottle-centering-container', {
       bottom: 'calc(50vh)',
       transform: 'translate(0, 50%)',
@@ -44,12 +55,32 @@
           })
         }
       })
+      .to('#sensation', {
+        autoAlpha: 0,
+        onComplete: () => {
+          sensation.style.display = 'none';
+          emotion.style.display = 'block';
+        }
+      })
+      .to('#emotion', {
+        autoAlpha: 1,
+        duration: 3,
+      })
+      .to(blurHelper, {
+        blur: 0,
+        onUpdate: () => {
+          gsap.set(blurElement, {
+            'backdrop-filter': `blur(${blurHelper.blur}px)`,
+          });
+        }
+      });
 
   });
 </script>
 
 <div id="section3">
-  <div class="centered">Perfume <span class="accent">is</span><br> a sensation</div>
+  <div id="sensation" bind:this={sensation}>Perfume <span class="accent">is</span><br> a sensation</div>
+  <div id="emotion" bind:this={emotion}>an emotion</div>
 </div>
 
 <style lang="scss">
@@ -66,20 +97,30 @@
     align-items: center;
   }
 
+  #section3 {
+    display: flex;
+    flex-direction: column;
+
+  }
+
   #section3 div {
+    text-align: center;
+  }
+
+  #sensation {
     @include impact;
     @include typographic-scale(3, 0);
+    color: var(--Red);
 
     & .accent {
       @include accent;
     }
-
   }
 
-  .centered {
-    width: 100%;
-    text-align: center;
-    color: var(--Red);
+  #emotion {
+    @include accent;
+    @include typographic-scale(2, 1);
+    color: var(--Black);
   }
     
 </style>
