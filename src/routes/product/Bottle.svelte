@@ -13,7 +13,7 @@
       }
     });
 
-    centeringTimeline.to('#centering-container', {
+    centeringTimeline.to('#bottle-centering-container', {
       bottom: 'calc(50vh)',
       transform: 'translate(0, 50%)',
     });
@@ -51,7 +51,7 @@
 
 
 <div id="bottle-container">
-  <div id="centering-container">
+  <div id="bottle-centering-container">
     <div id="bottle-blur"/>
     <img id="bottle-shadow" src="photos/bottle.png" alt="A bottle of water" />
     <img id="bottle" src="photos/bottle.png" alt="A bottle of water" />
@@ -72,7 +72,7 @@
     z-index: 1;
   }
 
-  #centering-container {
+  #bottle-centering-container {
     position: absolute;
     width: 100%;
     bottom: calc(rest-height(0.5));

@@ -15,7 +15,7 @@
       }
     });
 
-    timeline.to('#centering-container', {
+    timeline.to('#bottle-centering-container', {
       bottom: 'calc(50vh)',
       transform: 'translate(0, 50%)',
       rotate: 0,
@@ -23,7 +23,7 @@
       .to('#bottle-container', {
         width: '140%',
         onUpdate: () => {
-          gsap.set('#centering-container', {
+          gsap.set('#bottle-centering-container', {
             transform: 'translate(0, 50%)',
           })
         }
