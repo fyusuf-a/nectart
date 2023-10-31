@@ -1,6 +1,7 @@
 @mixin impact {
   font-family: 'Avantt', sans-serif;
   text-transform: uppercase;
+  line-height: 0.74;
 }
 
 @mixin accent {
