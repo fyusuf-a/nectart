@@ -6,14 +6,14 @@
 
   let navbar: HTMLElement;
   onMount(() => {
-    const navbarHeight = getComputedStyle(navbar).height;
+    const navbarHeight = () => getComputedStyle(navbar).height;
     let prevScrollpos = window.scrollY;
     window.onscroll = function () {
       const currentScrollPos = window.scrollY;
       if (prevScrollpos > currentScrollPos) {
-        navbar.style.top = null;
+        navbar.style.top = '';
       } else {
-        navbar.style.top = '-' + navbarHeight;
+        navbar.style.top = '-' + navbarHeight();
       }
       prevScrollpos = currentScrollPos;
     };
