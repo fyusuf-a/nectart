@@ -18,6 +18,7 @@
     {#each Array(elementNumber) as _, i}
       <span 
         class={whichClass(i)}
+        aria-hidden={i !== 0}
       >
         {text}
       </span>
