@@ -25,13 +25,16 @@
 <div class="subsection2">
   <div class="background"/>
   <div id="dialogue"> A dialogue between</div>
-  <div class="banner">
-    the soul
-  </div>
-  <div class="banner">
-    the senses
-  </div>
-  <Banner />
+  <Banner
+    direction="left"
+    text="the soul"
+    --block-size-factor="1.8"
+  />
+  <Banner
+    direction="right"
+    text="the senses"
+    --block-size-factor="1.53"
+  />
 </div>
 
 <style lang="scss">
