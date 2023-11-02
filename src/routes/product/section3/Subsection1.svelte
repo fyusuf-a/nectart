@@ -62,6 +62,10 @@
         onComplete: () => {
           sensation.style.display = 'none';
           emotion.style.display = 'flex';
+        },
+        onReverseComplete: () => {
+          sensation.style.display = 'block';
+          emotion.style.display = 'none';
         }
       })
       .to('#emotion', {
