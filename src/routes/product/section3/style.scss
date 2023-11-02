@@ -1,0 +1,19 @@
+  $background-width: 2048;
+  $background-height: 3091;
+  $scale: max(calc(100vw / $background-width), calc(210vh / $background-height));
+  $new-width: calc($background-width * $scale);
+  $new-height: calc($background-height * $scale);
+
+@mixin background {
+  opacity: 0.7;
+  background: url("./photos/mio-ito-B_SLtmXPKNA.jpg"), lightgray -9px -744.762px / 142.222% 193.074% no-repeat;
+  background-size: $new-width $new-height;
+  background-repeat: no-repeat;
+  mix-blend-mode: overlay;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}

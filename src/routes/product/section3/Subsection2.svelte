@@ -51,6 +51,8 @@
 </div>
 
 <style lang="scss">
+@import 'style.scss';
+
 .subsection2 {
   background: #F9E5E3;
   position: relative;
@@ -98,16 +100,7 @@
 }
 
 .section-background {
-  opacity: 0.7;
-  background: url("./photos/mio-ito-B_SLtmXPKNA.jpg"), lightgray -9px -744.762px / 142.222% 193.074% no-repeat;
-  background-size: auto 200vh;
-  background-position: 0 100vh;
-  mix-blend-mode: overlay;
-  height: 200vh;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
+  @include background;
+  background-position: 0 -100vh;
 }
 </style>
