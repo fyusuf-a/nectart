@@ -75,12 +75,14 @@
       onLeave: mute,
       onEnterBack: tryToPlay,
       onLeaveBack: mute,
+      invalidateOnRefresh: true,
     });
 
     // Pin the section
     ScrollTrigger.create({
       trigger: '#section2',
       pin: true,
+      invalidateOnRefresh: true,
       end: 'bottom 70%'
     });
 

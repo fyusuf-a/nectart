@@ -31,6 +31,7 @@
         trigger: '#section3 .subsection1',
         scrub: true,
         pin: '#section3 .subsection1',
+        invalidateOnRefresh: true,
       }
     });
 
@@ -47,7 +48,7 @@
       rotate: 0,
     })
       .to('#bottle-container', {
-        scale: 1.5 * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
+        scale: 1.8 * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
         duration: 2,
         onUpdate: () => {
           gsap.set('#bottle-centering-container', {

@@ -29,7 +29,8 @@
     ScrollTrigger.create({
       trigger: '#section1',
       onEnter: straightBottleAnimation,
-      onEnterBack: straightBottleAnimation
+      onEnterBack: straightBottleAnimation,
+      invalidateOnRefresh: true
     });
   });
 </script>

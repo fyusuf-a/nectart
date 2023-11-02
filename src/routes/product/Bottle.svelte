@@ -10,6 +10,7 @@
         start: 'top center',
         end: 'center center',
         scrub: true,
+        invalidateOnRefresh: true,
       }
     });
 
@@ -38,7 +39,8 @@
       onEnter: () => bouncingTimeline.play(),
       onLeave: () => bouncingTimeline.pause(),
       onEnterBack: () => bouncingTimeline.play(),
-      onLeaveBack: () => bouncingTimeline.pause()
+      onLeaveBack: () => bouncingTimeline.pause(),
+      invalidateOnRefresh: true,
     });
 
 
