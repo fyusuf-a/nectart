@@ -23,6 +23,7 @@
 </script>
 
 <div class="subsection2">
+  <div class="section-background" />
   <div class="background"/>
   <div id="dialogue"> A dialogue between</div>
   <Banner
@@ -39,8 +40,10 @@
 
 <style lang="scss">
 .subsection2 {
-  height: 100vh;
+  background: #F9E5E3;
   position: relative;
+  height: 100vh;
+  width: 100%;
   z-index: -2;
 }
 
@@ -66,5 +69,19 @@
   @include impact;
   @include typographic-scale(3, 0);
   color: var(--White);
+}
+
+.section-background {
+  opacity: 0.7;
+  background: url("./photos/mio-ito-B_SLtmXPKNA.jpg"), lightgray -9px -744.762px / 142.222% 193.074% no-repeat;
+  background-size: auto 200vh;
+  background-position: 0 100vh;
+  mix-blend-mode: overlay;
+  height: 200vh;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
 }
 </style>

@@ -83,19 +83,24 @@
 </script>
 
 <div class="subsection1">
+  <div class="section-background" />
+  <div class="background-circle"/>
   <div id="sensation" bind:this={sensation}>Perfume <span class="accent">is</span><br> a sensation</div>
   <div id="emotion" bind:this={emotion}>an emotion</div>
 </div>
 
 <style lang="scss">
   .subsection1 {
-    /* background-color: red; */
+    background: #F9E5E3;
+    position: relative;
     height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
+    z-index: -2;
   }
 
   #sensation {
@@ -109,18 +114,39 @@
     }
   }
 
-  #emotion {
-    @include accent;
-    @include typographic-scale(2, 1);
-    color: var(--Black);
+  .background-circle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background-color: #bdbdbd;
     border-radius: 50%;
     width: circle-size(0.7);
     height: circle-size(0.7);
+    z-index: -5;
+  }
+
+  #emotion {
+    @include accent;
+    @include typographic-scale(2, 1);
+    color: var(--Black);
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     z-index: -2;
   }
-    
+
+  .section-background {
+    opacity: 0.7;
+    background: url("./photos/mio-ito-B_SLtmXPKNA.jpg"), lightgray -9px -744.762px / 142.222% 193.074% no-repeat;
+    background-size: auto 200vh;
+    mix-blend-mode: overlay;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
 </style>
