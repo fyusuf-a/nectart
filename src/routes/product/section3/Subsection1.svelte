@@ -72,6 +72,13 @@
         autoAlpha: 1,
         duration: 0.5,
       })
+      .to('#section3 .background-circle',
+        {
+          opacity: 1,
+          duration: 0.5,
+        },
+        '<'
+      )
       .to(blurHelper, {
         blur: 0,
         onUpdate: () => {
@@ -130,6 +137,7 @@
     width: circle-size(0.7);
     height: circle-size(0.7);
     z-index: -5;
+    opacity: 0;
   }
 
   #emotion {
