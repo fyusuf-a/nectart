@@ -105,7 +105,7 @@
     margin-right: 2%;
     width: 96%;
     height: 79%;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     z-index: 1;
   }
 </style>
