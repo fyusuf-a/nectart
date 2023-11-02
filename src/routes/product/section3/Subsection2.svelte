@@ -26,16 +26,28 @@
   <div class="section-background" />
   <div class="background"/>
   <div id="dialogue"> A dialogue between</div>
-  <Banner
-    direction="left"
-    text="the soul"
-    --block-size-factor="1.8"
-  />
-  <Banner
-    direction="right"
-    text="the senses"
-    --block-size-factor="1.53"
-  />
+  <div class="banner-container">
+    <Banner
+      direction="left"
+      text="the soul"
+      --block-size-factor="1.8"
+    />
+    <Banner
+      direction="right"
+      text="the senses"
+      --block-size-factor="1.53"
+    />
+    <Banner
+      direction="left"
+      text="the perfumer"
+      --block-size-factor="1.2"
+    />
+    <Banner
+      direction="right"
+      text="you"
+      --block-size-factor="3.8"
+    />
+  </div>
 </div>
 
 <style lang="scss">
@@ -63,6 +75,20 @@
   color: var(--Black);
   text-align: center;
   z-index: 4;
+  height: calc(100vh / 3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-container {
+  height: calc(100vh / 3 * 2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 40px;
+  padding-top: 40px;
 }
 
 .banner {
