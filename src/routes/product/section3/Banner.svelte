@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let elementNumber = 10;
+  export let elementNumber = 50;
   export let direction = 'left';
   export let text = 'the soul';
 
@@ -27,11 +27,11 @@
 </div>
 
 <style lang="scss">
-  $total-size: calc(var(--block-size)* 10);
+  $total-size: calc(var(--block-size)* 50);
   $direction: 'left';
 
   .container {
-    --speed: 30s;
+    --speed: 120s;
     --block-size: calc(#{scale(3, 0)} / var(--block-size-factor) * var(--number-of-characters));
     --number-of-characters: 8;
   }
@@ -68,12 +68,12 @@
   }
 
   @keyframes bannermovesright {
-    0% { margin-left: calc(-6 * var(--block-size)) }
+    0% { margin-left: calc(-25 * var(--block-size)) }
     100% { margin-left: 0px;}
   }
 
   @keyframes bannermovesleft {
     0% { margin-left: 0px }
-    100% { margin-left: calc(-6 * var(--block-size));}
+    100% { margin-left: calc(-25 * var(--block-size));}
   }
 </style>
