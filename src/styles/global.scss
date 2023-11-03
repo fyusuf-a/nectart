@@ -136,6 +136,15 @@ button {
 }
 /* End of CSS reset */
 
+/* Removes draggable and click events on images */
+img {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
+
 :root {
   --Black: #010204;
   --White: #fff;
