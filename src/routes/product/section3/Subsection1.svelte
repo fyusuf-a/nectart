@@ -32,6 +32,15 @@
         scrub: true,
         pin: '#section3 .subsection1',
         invalidateOnRefresh: true,
+        onEnterBack: () => {
+          gsap.set('#bottle-container',
+            {
+              scale: scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
+              transform: 'translate(-50%, 0)',
+              opacity: 1,
+            },
+          );
+        },
       }
     });
 
@@ -41,6 +50,7 @@
 
     const blur = Number(/[0-9]+/.exec(blurStyle)![0]);
     const blurHelper = { blur };
+    const scaleFactor = 1.8;
 
     timeline.to('#bottle-centering-container', {
       bottom: 'calc(50vh)',
@@ -48,7 +58,7 @@
       rotate: 0,
     })
       .to('#bottle-container', {
-        scale: 1.8 * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
+        scale: scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
         duration: 2,
         onUpdate: () => {
           gsap.set('#bottle-centering-container', {

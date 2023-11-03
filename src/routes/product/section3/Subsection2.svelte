@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Banner from './Banner.svelte';
   import { onMount } from 'svelte';
   import gsap from 'gsap';
@@ -10,12 +10,18 @@
         pin: '#section3 .subsection2',
         invalidateOnRefresh: true,
         scrub: true,
+        onEnter: () => gsap.set('#bottle-container', {
+          scale: 1.3,
+          transform: 'translate(calc(50vw - 50%), 0%)',
+          opacity: 0,
+        }),
+        id: '2',
       }
     });
 
-    timeline.to('#dialogue', {
-      autoAlpha: 0,
-      duration: 0.5
+    timeline.to('#bottle-container', {
+      opacity: 1,
+      delay: 0.5,
     });
 
 
@@ -27,26 +33,32 @@
   <div class="background"/>
   <div id="dialogue"> A dialogue between</div>
   <div class="banner-container">
-    <Banner
-      direction="left"
-      text="the soul"
-      --block-size-factor="1.8"
-    />
-    <Banner
-      direction="right"
-      text="the senses"
-      --block-size-factor="1.53"
-    />
-    <Banner
-      direction="left"
-      text="the perfumer"
-      --block-size-factor="1.2"
-    />
-    <Banner
-      direction="right"
-      text="you"
-      --block-size-factor="3.8"
-    />
+    <div class="banner-couple">
+      <Banner
+        direction="left"
+        text="the soul"
+        --block-size-factor="1.8"
+      />
+      <Banner
+        direction="right"
+        text="the senses"
+        --block-size-factor="1.53"
+      />
+    </div>
+    <div class="banner-couple">
+      <Banner
+        direction="left"
+        text="the perfumer"
+        --block-size-factor="1.2"
+        --number-of-characters="12"
+      />
+      <Banner
+        direction="right"
+        text="you"
+        --block-size-factor="3.8"
+        --number-of-characters="3"
+      />
+    </div>
   </div>
 </div>
 
@@ -73,30 +85,29 @@
 
 #dialogue {
   @include accent;
+  
   @include typographic-scale(1, 1);
   color: var(--Black);
   text-align: center;
   z-index: 4;
-  height: calc(100vh / 3);
+  height: calc(100vh / 4);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
 .banner-container {
-  height: calc(100vh / 3 * 2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 40px;
-  padding-top: 40px;
+  margin-top: calc(100vh / 10);
+  height: calc(100vh / 5 * 2);
 }
 
-.banner {
-  @include impact;
-  @include typographic-scale(3, 0);
-  color: var(--White);
+.banner-couple {
+  margin-bottom: calc(100vh / 10);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
 }
 
 .section-background {
