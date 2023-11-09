@@ -10,12 +10,6 @@
         pin: '#section3 .subsection2',
         invalidateOnRefresh: true,
         scrub: true,
-        onEnter: () => gsap.set('#bottle-container', {
-          scale: 1.3,
-          transform: 'translate(calc(50vw - 50%), 0%)',
-          opacity: 0,
-        }),
-        id: '2',
       }
     });
 

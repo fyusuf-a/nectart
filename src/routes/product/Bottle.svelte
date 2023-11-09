@@ -63,6 +63,10 @@
 <style lang="scss">
   @import "./style.scss";
 
+  :root {
+    --blur: 0px;
+  }
+
   #bottle-container {
     position: fixed;
     width: circle-size-with-navbar(0.5);
@@ -105,7 +109,7 @@
     margin-right: 2%;
     width: 96%;
     height: 79%;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(var(--blur));
     z-index: 1;
   }
 </style>

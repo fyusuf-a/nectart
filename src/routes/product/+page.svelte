@@ -3,9 +3,11 @@
   import Section2 from './Section2.svelte';
   import Section3 from './Section3.svelte';
   import Bottle from './Bottle.svelte';
+  
+  const bottleBlur = '10px';
 </script>
 
-<Bottle />
+<Bottle --blur={ bottleBlur } />
 <Section1 />
 <Section2 />
 <Section3 />
