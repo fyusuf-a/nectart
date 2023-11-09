@@ -2,8 +2,20 @@
   import Banner from './Banner.svelte';
   import { onMount } from 'svelte';
   import gsap from 'gsap';
+  let dialogue: HTMLElement;
+  let couple1: HTMLElement;
+  let couple2: HTMLElement;
 
   onMount(() => {
+    // hides the second couple
+    couple2.style.display = 'none';
+    document.querySelectorAll('.couple2 .banner-text')
+      .forEach((el: Element) => {
+        (el as HTMLElement).style.opacity = '0';
+      });
+
+
+
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: '#section3 .subsection2',
@@ -13,21 +25,33 @@
       }
     });
 
-    timeline.to('#bottle-container', {
-      opacity: 1,
-      delay: 0.5,
-    });
-
-
+    timeline.to('.couple1 .banner-text', {
+      opacity: 0,
+      onComplete: () => {
+        couple1.style.display = 'none';
+        couple2.style.display = 'flex';
+      },
+    })
+      .to('.couple2 .banner-text', {
+        opacity: 1,
+        onReverseComplete: () => {
+          couple1.style.display = 'flex';
+          couple2.style.display = 'none';
+          document.querySelectorAll('.couple1 .banner-text')
+            .forEach((el: Element) => {
+              (el as HTMLElement).style.opacity = '0';
+            });
+        },
+      })
   });
 </script>
 
 <div class="subsection2">
   <div class="section-background" />
   <div class="background"/>
-  <div id="dialogue"> A dialogue between</div>
+  <div id="dialogue" bind:this={dialogue}> A dialogue between</div>
   <div class="banner-container">
-    <div class="banner-couple">
+    <div class="banner-couple couple1" bind:this={couple1}>
       <Banner
         direction="left"
         text="the soul"
@@ -39,7 +63,7 @@
         --block-size-factor="1.53"
       />
     </div>
-    <div class="banner-couple">
+    <div class="banner-couple couple2" bind:this={couple2}>
       <Banner
         direction="left"
         text="the perfumer"
