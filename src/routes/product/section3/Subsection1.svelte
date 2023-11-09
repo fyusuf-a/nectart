@@ -32,15 +32,6 @@
         scrub: true,
         pin: '#section3 .subsection1',
         invalidateOnRefresh: true,
-        onEnterBack: () => {
-          gsap.set('#bottle-container',
-            {
-              scale: scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
-              transform: 'translate(-50%, 0)',
-              opacity: 1,
-            },
-          );
-        },
       }
     });
 
