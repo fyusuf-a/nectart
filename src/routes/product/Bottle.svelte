@@ -61,7 +61,10 @@
 </div>
 
 <style lang="scss">
+  @use "sass:math";
   @import "./style.scss";
+
+  $image-ratio: math.div(477, 727);
 
   :root {
     --blur: 0px;
@@ -73,7 +76,6 @@
     left: 50%;
     top: 0;
     bottom: 0;
-    left: 50%;
     transform: translate(-50%, 0);
     z-index: 1;
   }
@@ -82,7 +84,8 @@
     position: absolute;
     width: 100%;
     bottom: calc(rest-height(0.5));
-    transform: translateY(50%);
+    height: calc(image-ratio * 100%);
+    transform: translate(0, 50%);
   }
 
   #bottle, #bottle-shadow {
