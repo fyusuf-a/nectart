@@ -55,25 +55,27 @@
       <Banner
         direction="left"
         text="the soul"
-        --block-size-factor="1.8"
+        --block-size-factor="1.45"
+        --number-of-characters="8"
       />
       <Banner
         direction="right"
         text="the senses"
-        --block-size-factor="1.53"
+        --block-size-factor="1.23"
+        --number-of-characters="10"
       />
     </div>
     <div class="banner-couple couple2" bind:this={couple2}>
       <Banner
         direction="left"
         text="the perfumer"
-        --block-size-factor="1.2"
+        --block-size-factor="0.96"
         --number-of-characters="12"
       />
       <Banner
         direction="right"
         text="you"
-        --block-size-factor="3.8"
+        --block-size-factor="3.1"
         --number-of-characters="3"
       />
     </div>
@@ -104,7 +106,7 @@
 #dialogue {
   @include accent;
   
-  @include typographic-scale(1, 1);
+  @include typographic-scale(2, 0);
   color: var(--Black);
   text-align: center;
   z-index: 4;

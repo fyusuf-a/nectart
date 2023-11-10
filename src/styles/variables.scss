@@ -68,7 +68,7 @@ $navbar-note: 0;
 }
 
 :root {
-  @include css-lock(12, 25, $screen-sm-min, $screen-xl-min);
+  @include css-lock(12, 25, $screen-sm-min, 3000);
 }
 
 $navbar-vertical-padding: 40px;

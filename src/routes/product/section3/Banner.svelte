@@ -48,7 +48,7 @@
 
   .banner-text {
     @include impact;
-    @include typographic-scale(3, 0);
+    @include typographic-scale(3, 1);
     color: var(--White);
     flex-basis: var(--block-size);
     flex-shrink: 0;

@@ -119,7 +119,7 @@
 
   #sensation {
     @include impact;
-    @include typographic-scale(3, 0);
+    @include typographic-scale(3, 1);
     color: var(--Red);
     z-index: 1;
 
@@ -143,7 +143,7 @@
 
   #emotion {
     @include accent;
-    @include typographic-scale(2, 1);
+    @include typographic-scale(3, 0);
     color: var(--Black);
     display: flex;
     justify-content: center;
