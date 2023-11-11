@@ -120,6 +120,7 @@
   #sensation {
     @include impact;
     @include typographic-scale(3, 1);
+    text-align: center;
     color: var(--Red);
     z-index: 1;
 
