@@ -129,6 +129,7 @@
     }
   }
 
+  $emotion-size: circle-size(0.9);
   .background-circle {
     position: absolute;
     left: 50%;
@@ -136,8 +137,8 @@
     transform: translate(-50%, -50%);
     background-color: #bdbdbd;
     border-radius: 50%;
-    width: circle-size(0.7);
-    height: circle-size(0.7);
+    width: $emotion-size;
+    height: $emotion-size;
     z-index: -5;
     opacity: 0;
   }
@@ -151,6 +152,8 @@
     align-items: center;
     position: relative;
     z-index: -2;
+    width: $emotion-size;
+    text-align: center;
   }
 
   .section-background {
