@@ -46,7 +46,7 @@
   });
 </script>
 
-<div class="subsection2">
+<section class="subsection2">
   <div class="section-background" />
   <div class="background"/>
   <div id="dialogue" bind:this={dialogue}> A dialogue between</div>
@@ -80,7 +80,7 @@
       />
     </div>
   </div>
-</div>
+</section>
 
 <style lang="scss">
 @import 'style.scss';

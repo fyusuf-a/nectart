@@ -231,7 +231,7 @@
   });
 </script>
 
-<div id="section2">
+<section id="section2">
   <img
     class="background"
     id={`background-${precedingOdor}`}
@@ -282,7 +282,7 @@
     </div>
   {/each}
 
-</div>
+</section>
 
 <style lang="scss">
   #section2 {

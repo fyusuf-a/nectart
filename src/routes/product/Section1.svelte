@@ -35,7 +35,7 @@
   });
 </script>
 
-<div id="section1">
+<section id="section1">
   <div class="circle">
     <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
@@ -53,7 +53,7 @@
     <div class="underline" />
   </button>
   <div id="black-rectangle" />
-</div>
+</section>
 
 <style lang="scss">
   @import "./style.scss";

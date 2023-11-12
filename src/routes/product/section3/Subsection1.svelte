@@ -94,12 +94,12 @@
   });
 </script>
 
-<div class="subsection1">
+<section class="subsection1">
   <div class="section-background" />
   <div class="background-circle"/>
   <div id="sensation" bind:this={sensation}>Perfume <span class="accent">is</span><br> a sensation</div>
   <div id="emotion" bind:this={emotion}>an emotion</div>
-</div>
+</section>
 
 <style lang="scss">
   @import 'style.scss';
