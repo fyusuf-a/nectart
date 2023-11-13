@@ -1,7 +1,8 @@
+$impact-line-height: 0.75;
 @mixin impact {
   font-family: 'Avantt', sans-serif;
   text-transform: uppercase;
-  line-height: 0.74;
+  line-height: $impact-line-height;
 }
 
 @mixin accent {
