@@ -3,6 +3,7 @@
   import Section2 from './Section2.svelte';
   import Section3 from './Section3.svelte';
   import Section4 from './PerfumeIsArt.svelte';
+  import Section5 from './FleetingEmbrace.svelte';
   import Bottle from './Bottle.svelte';
   
   const bottleBlur = '10px';
@@ -13,7 +14,8 @@
 <Section2 />
 <Section3 />
 <Section4 />
-<div id="section5" />
+<Section5 />
+<div id="section6" />
 
 <style lang="scss">
   @import "./style.scss";
@@ -22,7 +24,7 @@
     background-color: var(--Black);
   }
 
-  #section5 {
+  #section6 {
     height: 100vh;
     background-color: red;
   }
