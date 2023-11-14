@@ -13,36 +13,40 @@
       .forEach((el: Element) => {
         (el as HTMLElement).style.opacity = '0';
       });
+    
+    
+    const gsapContext = gsap.context(() => {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#section3 .subsection2',
+          pin: '#section3 .subsection2',
+          invalidateOnRefresh: true,
+          scrub: true,
+        }
+      });
 
-
-
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#section3 .subsection2',
-        pin: '#section3 .subsection2',
-        invalidateOnRefresh: true,
-        scrub: true,
-      }
-    });
-
-    timeline.to('.couple1 .banner-text', {
-      opacity: 0,
-      onComplete: () => {
-        couple1.style.display = 'none';
-        couple2.style.display = 'flex';
-      },
-    })
-      .to('.couple2 .banner-text', {
-        opacity: 1,
-        onReverseComplete: () => {
-          couple1.style.display = 'flex';
-          couple2.style.display = 'none';
-          document.querySelectorAll('.couple1 .banner-text')
-            .forEach((el: Element) => {
-              (el as HTMLElement).style.opacity = '0';
-            });
+      timeline.to('.couple1 .banner-text', {
+        opacity: 0,
+        onComplete: () => {
+          couple1.style.display = 'none';
+          couple2.style.display = 'flex';
         },
       })
+        .to('.couple2 .banner-text', {
+          opacity: 1,
+          onReverseComplete: () => {
+            couple1.style.display = 'flex';
+            couple2.style.display = 'none';
+            document.querySelectorAll('.couple1 .banner-text')
+              .forEach((el: Element) => {
+                (el as HTMLElement).style.opacity = '0';
+              });
+          },
+        })
+    });
+    return () => {
+      gsapContext.revert();
+    };
   });
 </script>
 

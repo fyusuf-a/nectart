@@ -26,65 +26,70 @@
 
     let secondChildAlreadyDisplayed = false;
 
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: '#perfume-is-art',
-        start: 'top top',
-        end: 'bottom top',
-        pin: true,
-      },
-    })
-      .to(
-        'html',
+    const gsapContext = gsap.context(() => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: '#perfume-is-art',
+          start: 'top top',
+          end: 'bottom top',
+          pin: true,
+        },
+      })
+        .to(
+          'html',
+          {
+            duration: 3,
+          }
+        );
+        
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#perfume-is-art',
+          start: 'top top',
+          end: 'bottom top',
+        },
+        onStart() {
+          sentenceStart.style.opacity='1';
+        },
+      });
+
+      const words = section.querySelectorAll('.sentence-start .word');
+      words.forEach((_, i) => {
+        const delay = i;
+        timeline.from(`#perfume-is-art .sentence-start .word:nth-child(${i + 1}) .char`, {
+          opacity: 0,
+          y: -20,
+          duration: 1,
+          delay,
+          stagger: 0.04,
+        }, '<');
+      })
+      timeline.to(
+        video.style,
         {
-          duration: 3,
+          bottom: '20vh',
+          duration: 1.25,
+          ease: 'power4.out',
+          scale: 1,
+          onStart: () => {
+            firstChild.style.display='block';
+            video.style.opacity = '1';
+          },
+          onUpdate: function() {
+            const progress = this.progress();
+            if (!secondChildAlreadyDisplayed && progress > 0.11) {
+              secondChild.style.display='block';
+              secondChildAlreadyDisplayed = true;
+
+            }
+          },
         }
       );
-      
-
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#perfume-is-art',
-        start: 'top top',
-        end: 'bottom top',
-      },
-      onStart() {
-        sentenceStart.style.opacity='1';
-      },
     });
-
-    const words = section.querySelectorAll('.sentence-start .word');
-    words.forEach((_, i) => {
-      const delay = i;
-      timeline.from(`#perfume-is-art .sentence-start .word:nth-child(${i + 1}) .char`, {
-        opacity: 0,
-        y: -20,
-        duration: 1,
-        delay,
-        stagger: 0.04,
-      }, '<');
-    })
-    timeline.to(
-      video.style,
-      {
-        bottom: '20vh',
-        duration: 1.25,
-        ease: 'power4.out',
-        scale: 1,
-        onStart: () => {
-          firstChild.style.display='block';
-          video.style.opacity = '1';
-        },
-        onUpdate: function() {
-          const progress = this.progress();
-          if (!secondChildAlreadyDisplayed && progress > 0.11) {
-            secondChild.style.display='block';
-            secondChildAlreadyDisplayed = true;
-
-          }
-        },
-      }
-    );
+    return () => {
+      gsapContext.revert();
+    };
   });
 </script>
 

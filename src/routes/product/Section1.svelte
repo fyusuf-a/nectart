@@ -19,19 +19,24 @@
 
   onMount(() => {
     ctaText.innerHTML = 'Activate sound';
-    const straightBottleAnimation = () => {
-      gsap.to('#bottle-container', {
-        rotate: 0,
-        duration: 1,
-        ease: 'easeInOut'
+    const gsapContext = gsap.context(() => {
+      const straightBottleAnimation = () => {
+        gsap.to('#bottle-container', {
+          rotate: 0,
+          duration: 1,
+          ease: 'easeInOut'
+        });
+      };
+      ScrollTrigger.create({
+        trigger: '#section1',
+        onEnter: straightBottleAnimation,
+        onEnterBack: straightBottleAnimation,
+        invalidateOnRefresh: true
       });
-    };
-    ScrollTrigger.create({
-      trigger: '#section1',
-      onEnter: straightBottleAnimation,
-      onEnterBack: straightBottleAnimation,
-      invalidateOnRefresh: true
-    });
+    })
+    return () => {
+      gsapContext.revert();
+    }
   });
 </script>
 

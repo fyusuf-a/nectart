@@ -68,167 +68,172 @@
   let buttonsActive = true;
 
   onMount(() => {
-    // Try to play the video's audio when the section is in view
-    ScrollTrigger.create({
-      trigger: '#section2',
-      start: 'top center',
-      end: 'bottom center',
-      onEnter: tryToPlay,
-      onLeave: mute,
-      onEnterBack: tryToPlay,
-      onLeaveBack: mute,
-      invalidateOnRefresh: true,
-    });
-
-    // Pin the section
-    ScrollTrigger.create({
-      trigger: '#section2',
-      pin: true,
-      invalidateOnRefresh: true,
-      end: 'bottom 70%'
-    });
-
-    // The carousel animation
-    const _smallTextStyle = window.getComputedStyle(odor(precedingOdor));
-    const smallTextStyle = {
-      fontSize: _smallTextStyle.fontSize,
-      fontStyle: _smallTextStyle.fontStyle,
-    };
-    const _bigTextStyle = window.getComputedStyle(odor(INITIAL_CURRENT_ODOR));
-    const bigTextStyle = {
-      fontSize: _bigTextStyle.fontSize,
-      fontStyle: _bigTextStyle.fontStyle,
-    };
-
-    const _middleStyle = window.getComputedStyle(odor(currentOdor));
-    const middleStyle = {
-      left: _middleStyle.left
-    }
-
-
-    const fadeTween = (odorIndex: number, newTextStyle: string) => gsap.to(`#odor-${odorIndex} .odor-caption`,
-      {
-        opacity: 0.0,
-        onComplete() {
-          odor(odorIndex).style.fontStyle = newTextStyle
-        }
-      },
-    );
-
-    const slide = (direction: Direction) => {
-      const nextOdorTimeline = gsap.timeline({
-        defaults: { duration: 1, ease: 'power4.out' },
-      });
-      const disappearingOdor = direction === Direction.LEFT ? precedingOdor : followingOdor;
-      const appearingOdor = direction === Direction.LEFT ? nextRightOdor : nextLeftOdor;
-      const nextOdor = direction === Direction.LEFT ? followingOdor : precedingOdor;
-
-      nextOdorTimeline
-        .fromTo(`#odor-${nextOdor} .video-container`,
-          {
-            scale: 0,
-            opacity: 0,
-          },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.5
-          },
-        )
-        .add(fadeTween(nextOdor, 'italic'), '<')
-        .to(`#background-${currentOdor}`,
-          {
-            onStart() {
-              (document.querySelector(`#background-${nextOdor}`) as HTMLElement).style.visibility = 'visible';
-            },
-            opacity: 0.0,
-            duration: 1.5,
-          },
-          '<'
-        )
-        .to(`#odor-${nextOdor}`, 
-          {
-            left: middleStyle.left,
-            duration: 1.5,
-            ease: 'power3.out',
-          },
-          '<'
-        )
-        .to(`#odor-${nextOdor}`,
-          {
-            fontSize: bigTextStyle.fontSize,
-            duration: 1,
-          },
-          '<50%'
-        )
-        .to(`#odor-${nextOdor} .odor-caption`,
-          {
-            opacity: 1,
-            duration: 0.5,
-          },
-          '<10%'
-        );
-
-
-      const restTimeline = gsap.timeline({
-        defaults: { duration: 1, ease: 'power1.out' },
+    const gsapContext = gsap.context(() => {
+      // Try to play the video's audio when the section is in view
+      ScrollTrigger.create({
+        trigger: '#section2',
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: tryToPlay,
+        onLeave: mute,
+        onEnterBack: tryToPlay,
+        onLeaveBack: mute,
+        invalidateOnRefresh: true,
       });
 
-      restTimeline
-        .to(`#odor-${currentOdor}, #odor-${disappearingOdor}`,
-          {
-            opacity: 0.0,
-            duration: 0.5,
-            onComplete() {
-              odor(currentOdor).style.left = `var(--odor-${direction === Direction.LEFT ? '0' : '2'})`;
-              odor(currentOdor, '.video-container').style.visibility = 'hidden';
-            }
-          },
-          '<'
-        )
-        .to(`#odor-${currentOdor}, #odor-${appearingOdor}`,
-          {
-            opacity: 1,
-            delay: 1.5,
-            duration: 0.5,
-            onStart() {
-              odor(currentOdor).style.fontSize = smallTextStyle.fontSize;
-              odor(currentOdor).style.fontStyle = smallTextStyle.fontStyle
-              odor(appearingOdor).classList.remove('faded');
-              odor(appearingOdor).classList.add(direction === Direction.LEFT ? 'right-odor' : 'left-odor');
-              document.querySelector(`#background-${currentOdor}`)!.removeAttribute('style');
-              odor(appearingOdor).removeAttribute('style');
-              odor(currentOdor).classList.add(direction === Direction.LEFT ? 'left-odor' : 'right-odor');
-              odor(nextOdor).removeAttribute('style');
-              odor(nextOdor, '.video-container').removeAttribute('style');
-              odor(currentOdor).removeAttribute('style');
-              odor(currentOdor, '.video-container').removeAttribute('style');
-              currentOdor = trueModulo(currentOdor + (direction === Direction.LEFT ? 1 : -1 ));
-              buttonsActive = true;
-            },
-          },
-          '<'
-        );
-
-      const masterTimeline = gsap.timeline({
-        onComplete() {
-        }
+      // Pin the section
+      ScrollTrigger.create({
+        trigger: '#section2',
+        pin: true,
+        invalidateOnRefresh: true,
+        end: 'bottom 70%'
       });
 
-      masterTimeline
-        .add(nextOdorTimeline)
-        .add(restTimeline, '<');
-    }
+      // The carousel animation
+      const _smallTextStyle = window.getComputedStyle(odor(precedingOdor));
+      const smallTextStyle = {
+        fontSize: _smallTextStyle.fontSize,
+        fontStyle: _smallTextStyle.fontStyle,
+      };
+      const _bigTextStyle = window.getComputedStyle(odor(INITIAL_CURRENT_ODOR));
+      const bigTextStyle = {
+        fontSize: _bigTextStyle.fontSize,
+        fontStyle: _bigTextStyle.fontStyle,
+      };
 
-    handleClick = (i:number) => {
-      if (i === currentOdor || !buttonsActive) return;
-      buttonsActive = false;
-      if (i === precedingOdor) {
-        slide(Direction.RIGHT);
+      const _middleStyle = window.getComputedStyle(odor(currentOdor));
+      const middleStyle = {
+        left: _middleStyle.left
       }
-      if (i === followingOdor) {
-        slide(Direction.LEFT);
+
+
+      const fadeTween = (odorIndex: number, newTextStyle: string) => gsap.to(`#odor-${odorIndex} .odor-caption`,
+        {
+          opacity: 0.0,
+          onComplete() {
+            odor(odorIndex).style.fontStyle = newTextStyle
+          }
+        },
+      );
+
+      const slide = (direction: Direction) => {
+        const nextOdorTimeline = gsap.timeline({
+          defaults: { duration: 1, ease: 'power4.out' },
+        });
+        const disappearingOdor = direction === Direction.LEFT ? precedingOdor : followingOdor;
+        const appearingOdor = direction === Direction.LEFT ? nextRightOdor : nextLeftOdor;
+        const nextOdor = direction === Direction.LEFT ? followingOdor : precedingOdor;
+
+        nextOdorTimeline
+          .fromTo(`#odor-${nextOdor} .video-container`,
+            {
+              scale: 0,
+              opacity: 0,
+            },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.5
+            },
+          )
+          .add(fadeTween(nextOdor, 'italic'), '<')
+          .to(`#background-${currentOdor}`,
+            {
+              onStart() {
+                (document.querySelector(`#background-${nextOdor}`) as HTMLElement).style.visibility = 'visible';
+              },
+              opacity: 0.0,
+              duration: 1.5,
+            },
+            '<'
+          )
+          .to(`#odor-${nextOdor}`, 
+            {
+              left: middleStyle.left,
+              duration: 1.5,
+              ease: 'power3.out',
+            },
+            '<'
+          )
+          .to(`#odor-${nextOdor}`,
+            {
+              fontSize: bigTextStyle.fontSize,
+              duration: 1,
+            },
+            '<50%'
+          )
+          .to(`#odor-${nextOdor} .odor-caption`,
+            {
+              opacity: 1,
+              duration: 0.5,
+            },
+            '<10%'
+          );
+
+
+        const restTimeline = gsap.timeline({
+          defaults: { duration: 1, ease: 'power1.out' },
+        });
+
+        restTimeline
+          .to(`#odor-${currentOdor}, #odor-${disappearingOdor}`,
+            {
+              opacity: 0.0,
+              duration: 0.5,
+              onComplete() {
+                odor(currentOdor).style.left = `var(--odor-${direction === Direction.LEFT ? '0' : '2'})`;
+                odor(currentOdor, '.video-container').style.visibility = 'hidden';
+              }
+            },
+            '<'
+          )
+          .to(`#odor-${currentOdor}, #odor-${appearingOdor}`,
+            {
+              opacity: 1,
+              delay: 1.5,
+              duration: 0.5,
+              onStart() {
+                odor(currentOdor).style.fontSize = smallTextStyle.fontSize;
+                odor(currentOdor).style.fontStyle = smallTextStyle.fontStyle
+                odor(appearingOdor).classList.remove('faded');
+                odor(appearingOdor).classList.add(direction === Direction.LEFT ? 'right-odor' : 'left-odor');
+                document.querySelector(`#background-${currentOdor}`)!.removeAttribute('style');
+                odor(appearingOdor).removeAttribute('style');
+                odor(currentOdor).classList.add(direction === Direction.LEFT ? 'left-odor' : 'right-odor');
+                odor(nextOdor).removeAttribute('style');
+                odor(nextOdor, '.video-container').removeAttribute('style');
+                odor(currentOdor).removeAttribute('style');
+                odor(currentOdor, '.video-container').removeAttribute('style');
+                currentOdor = trueModulo(currentOdor + (direction === Direction.LEFT ? 1 : -1 ));
+                buttonsActive = true;
+              },
+            },
+            '<'
+          );
+
+        const masterTimeline = gsap.timeline({
+          onComplete() {
+          }
+        });
+
+        masterTimeline
+          .add(nextOdorTimeline)
+          .add(restTimeline, '<');
       }
+
+      handleClick = (i:number) => {
+        if (i === currentOdor || !buttonsActive) return;
+        buttonsActive = false;
+        if (i === precedingOdor) {
+          slide(Direction.RIGHT);
+        }
+        if (i === followingOdor) {
+          slide(Direction.LEFT);
+        }
+      }
+    });
+    return () => {
+      gsapContext.revert();
     }
   });
 </script>

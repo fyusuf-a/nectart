@@ -16,41 +16,45 @@
       c.style.color = '#ccc';
     });
     
-
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: '#fleeting-embrace',
-        start: 'top top',
-        end: 'bottom top',
-      }
-    })
-      .to('.text span .char', {
-        color: '#000',
-        duration: 1,
-        ease: 'sine.inOut',
-        stagger: 0.1,
+    const gsapContext = gsap.context(() => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: '#fleeting-embrace',
+          start: 'top top',
+          end: 'bottom top',
+        }
       })
-    
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#fleeting-embrace .grid',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-        pin: true,
-      },
-    });
+        .to('.text span .char', {
+          color: '#000',
+          duration: 1,
+          ease: 'sine.inOut',
+          stagger: 0.1,
+        })
+      
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#fleeting-embrace .grid',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+          pin: true,
+        },
+      });
 
-    timeline.to('.veil.behind', {
-      height: '100vh',
-      duration: 2,
-      ease: 'sine.inOut',
-    })
-      .to('.veil.before', {
-        height: '0vh',
+      timeline.to('.veil.behind', {
+        height: '100vh',
         duration: 2,
         ease: 'sine.inOut',
-      }, '<');
+      })
+        .to('.veil.before', {
+          height: '0vh',
+          duration: 2,
+          ease: 'sine.inOut',
+        }, '<');
+    });
+    return () => {
+      gsapContext.revert();
+    };
   });
 </script>
 

@@ -26,69 +26,72 @@
     };
     window.addEventListener('resize', getScreenSize);
 
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#section3 .subsection1',
-        scrub: true,
-        pin: '#section3 .subsection1',
-        invalidateOnRefresh: true,
-      }
-    });
-
-    // https://gsap.com/community/forums/topic/8237-blur-filters/
-    const blurElement: HTMLElement = document.querySelector('#bottle-blur')!;
-    const blurStyle = window.getComputedStyle(blurElement)['backdrop-filter'];
-
-    const blur = Number(/[0-9]+/.exec(blurStyle)![0]);
-    const blurHelper = { blur };
-    const scaleFactor = 1.8;
-
-    timeline.to('#bottle-centering-container', {
-      bottom: 'calc(50vh)',
-      transform: 'translate(0, 50%)',
-      rotate: 0,
-    })
-      .to('#bottle-container', {
-        scale: scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
-        duration: 2,
-        onUpdate: () => {
-          gsap.set('#bottle-centering-container', {
-            transform: 'translate(0, 50%)',
-          })
-        }
-      })
-      .to('#sensation', {
-        autoAlpha: 0,
-        duration: 0.5,
-        onComplete: () => {
-          sensation.style.display = 'none';
-          emotion.style.display = 'flex';
-        },
-        onReverseComplete: () => {
-          sensation.style.display = 'block';
-          emotion.style.display = 'none';
-        }
-      })
-      .to('#emotion', {
-        autoAlpha: 1,
-        duration: 0.5,
-      })
-      .to('#section3 .background-circle',
-        {
-          opacity: 1,
-          duration: 0.5,
-        },
-        '<'
-      )
-      .to(blurHelper, {
-        blur: 0,
-        onUpdate: () => {
-          gsap.set(blurElement, {
-            'backdrop-filter': `blur(${blurHelper.blur}px)`,
-          });
+    const gsapContext = gsap.context(() => {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#section3 .subsection1',
+          scrub: true,
+          pin: '#section3 .subsection1',
+          invalidateOnRefresh: true,
         }
       });
+
+      // https://gsap.com/community/forums/topic/8237-blur-filters/
+      const blurElement: HTMLElement = document.querySelector('#bottle-blur')!;
+      const blurStyle = window.getComputedStyle(blurElement)['backdrop-filter'];
+
+      const blur = Number(/[0-9]+/.exec(blurStyle)![0]);
+      const blurHelper = { blur };
+      const scaleFactor = 1.8;
+
+      timeline.to('#bottle-centering-container', {
+        bottom: 'calc(50vh)',
+        transform: 'translate(0, 50%)',
+        rotate: 0,
+      })
+        .to('#bottle-container', {
+          scale: scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
+          duration: 2,
+          onUpdate: () => {
+            gsap.set('#bottle-centering-container', {
+              transform: 'translate(0, 50%)',
+            })
+          }
+        })
+        .to('#sensation', {
+          autoAlpha: 0,
+          duration: 0.5,
+          onComplete: () => {
+            sensation.style.display = 'none';
+            emotion.style.display = 'flex';
+          },
+          onReverseComplete: () => {
+            sensation.style.display = 'block';
+            emotion.style.display = 'none';
+          }
+        })
+        .to('#emotion', {
+          autoAlpha: 1,
+          duration: 0.5,
+        })
+        .to('#section3 .background-circle',
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          '<'
+        )
+        .to(blurHelper, {
+          blur: 0,
+          onUpdate: () => {
+            gsap.set(blurElement, {
+              'backdrop-filter': `blur(${blurHelper.blur}px)`,
+            });
+          }
+        });
+    });
     return () => {
+      gsapContext.revert();
       window.removeEventListener('resize', getScreenSize);
     }
   });
