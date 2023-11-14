@@ -1,24 +1,26 @@
 <script lang="ts">
+  import type { Theme } from '$lib/types/theme.d';
   import { easeCubicFactory } from '$lib/easing';
   import MouseAcceleratedVideo from '$lib/mouseAcceleratedVideo.svelte';
+  import ClickableText from '$lib/UI/ClickableText.svelte';
   import { gsap } from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import { onMount } from 'svelte';
-  import { lenis } from '../../stores/lenis';
+
+  export let theme: Theme;
 
   const easingParameters: [number, number, number, number] = [0.16, 1, 0.3, 1];
   const easingFunction = easeCubicFactory(...easingParameters);
 
-  let ctaText: HTMLDivElement;
+  let ctaText: string = 'Activate sound';
+  let ctaDisabled: boolean = false;
 
   const activateUnmuted = () => {
-    // let the user scroll again
-    lenis.start();
-    ctaText.innerHTML = 'Scroll to discover';
+    ctaText = 'Scroll to discover';
+    ctaDisabled = true;
   };
 
   onMount(() => {
-    ctaText.innerHTML = 'Activate sound';
     const gsapContext = gsap.context(() => {
       const straightBottleAnimation = () => {
         gsap.to('#bottle-container', {
@@ -49,14 +51,14 @@
     src="photos/rocks.png"
     alt="Black rocks shining reflecting a discreet blue light"
   />
-  <button on:click={activateUnmuted}
-    class="cta"
-  >
-    <div bind:this={ctaText}>
-      Scroll to discover
-    </div>
-    <div class="underline" />
-  </button>
+  <div class="cta" >
+    <ClickableText
+      text={ ctaText }
+      { theme }
+      disabled={ ctaDisabled }
+      onClick={activateUnmuted}
+    />
+  </div>
   <div id="black-rectangle" />
 </section>
 
@@ -104,22 +106,8 @@
 
   .cta {
     position: absolute;
-    color: var(--White);
-    text-transform: uppercase;
     bottom: 0;
     z-index: 4;
     bottom: circle-size-with-navbar(0.1);
-  }
-
-  .underline {
-    margin-top: 6px;
-    height: 1px;
-    background-color: var(--White);
-    width: 100%;
-  }
-
-  button {
-    @include impact;
-    @include typographic-scale(0, 0);
   }
 </style>

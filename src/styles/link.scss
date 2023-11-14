@@ -1,0 +1,30 @@
+:root {
+  --color: black;
+}
+
+.button {
+  @include impact;
+  @include typographic-scale(0, 0);
+  color: var(--color);
+  text-transform: uppercase;
+}
+
+.underline {
+  margin-top: 6px;
+  height: 1px;
+  background-color: transparent;
+  width: 100%;
+}
+
+.button.disabled {
+  cursor: initial;
+  opacity: 0.5;
+}
+
+.button.disabled:hover .underline {
+  background-color: transparent;
+}
+
+.button:hover .underline {
+  background-color: var(--color);
+}

@@ -1,6 +1,8 @@
 <script lang="ts">
-  export let theme;
   import { onMount } from 'svelte';
+  import Link from '$lib/UI/Link.svelte';
+  import type { Theme } from '$lib/types/theme.d';
+  export let theme: Theme;
 
   const style = `background-color: ${theme.backgroundColor}; color: ${theme.color};`;
 
@@ -24,16 +26,38 @@
 </script>
 
 <nav {style} id="navbar" bind:this={navbar}>
-    <a href="/">Our product</a>
-    <a href="/plum-elixir">Plum elixir</a>
-    <a href="/contact">Contact</a>
+  <div class="link">
+    <Link
+      { theme }
+      href="/"
+    >
+      Our product
+    </Link>
+  </div>
+  <div class="link">
+    <Link
+      { theme }
+      href="/plum-elixir"
+    >
+      Plum elixir
+    </Link>
+  </div>
+  <div class="link">
+    <Link
+      { theme }
+      href="/contact"
+    >
+      Contact
+    </Link>
+  </div>
 </nav>
 
 <style lang="scss">
-  a {
+  .link {
     width: 10em;
-    text-align: center;
-    @include typographic-scale(0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   nav {
