@@ -16,9 +16,6 @@
 
   onMount(() => {
     lenis.initialize(new Lenis());
-
-    // stop the scroll to force the user to click
-    lenis.stop();
     return () => {
       window.onscroll = null;
       lenis.destroy();
