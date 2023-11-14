@@ -6,41 +6,43 @@ import { gsap } from 'gsap';
 function createLenis() {
   const { subscribe, set } = writable(null as Lenis | null);
 
+  let currentLenis: Lenis | null = null;
+  let stopped = false;
+
   return {
     subscribe,
     initialize: (newLenis: Lenis) => {
-      subscribe((lenis) => {
-        if (lenis) {
+      if (currentLenis) {
+        return;
+      }
+      currentLenis = newLenis;
+      set(newLenis);
+      newLenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        if (stopped) {
           return;
         }
-        set(newLenis);
-        newLenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => {
-          newLenis.raf(time * 1000);
-        });
-        gsap.ticker.lagSmoothing(0);
+        newLenis.raf(time * 1000);
       });
+      gsap.ticker.lagSmoothing(0);
     },
     destroy: () => {
-      subscribe((lenis) => {
-        if (lenis) {
-          lenis.destroy();
-        }
-      });
+      if (currentLenis) {
+        currentLenis.destroy();
+      }
+      set(null);
     },
     start: () => {
-      subscribe((lenis) => {
-        if (lenis) {
-          lenis.start();
-        }
-      });
+      if (currentLenis) {
+        currentLenis.start();
+        stopped = false;
+      }
     },
     stop: () => {
-      subscribe((lenis) => {
-        if (lenis) {
-          lenis.stop();
-        }
-      });
+      if (currentLenis) {
+        currentLenis.stop();
+        stopped = true;
+      }
     }
   };
 }
