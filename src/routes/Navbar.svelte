@@ -2,9 +2,25 @@
   import { onMount } from 'svelte';
   import Link from '$lib/UI/Link.svelte';
   import type { Theme } from '$lib/types/theme.d';
+  import { page } from '$app/stores';
   export let theme: Theme;
 
   const style = `background-color: ${theme.backgroundColor}; color: ${theme.color};`;
+
+  const routes = [
+    {
+      name: 'Our product',
+      path: '/product',
+    },
+    {
+      name: 'Plum elixir',
+      path: '/plum-elixir',
+    },
+    {
+      name: 'Contact',
+      path: '/contact',
+    },
+  ];
 
   let navbar: HTMLElement;
   onMount(() => {
@@ -26,30 +42,17 @@
 </script>
 
 <nav {style} id="navbar" bind:this={navbar}>
-  <div class="link">
-    <Link
-      { theme }
-      href="/"
-    >
-      Our product
-    </Link>
-  </div>
-  <div class="link">
-    <Link
-      { theme }
-      href="/plum-elixir"
-    >
-      Plum elixir
-    </Link>
-  </div>
-  <div class="link">
-    <Link
-      { theme }
-      href="/contact"
-    >
-      Contact
-    </Link>
-  </div>
+  {#each routes as route}
+    <div class="link">
+      <Link
+        { theme }
+        href={route.path}
+        disabled={route.path === $page.url.pathname}
+      >
+        {route.name}
+      </Link>
+    </div>
+  {/each}
 </nav>
 
 <style lang="scss">
