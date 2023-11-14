@@ -20,7 +20,7 @@
 <style lang="scss">
   @import "./style.scss";
 
-  :global(body) {
+  body {
     background-color: var(--Black);
   }
 
