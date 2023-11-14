@@ -39,6 +39,8 @@
         // Autoplay started!
       })
       .catch((error) => {
+        video.muted = true;
+        video.play();
         console.log(error);
         // Autoplay was prevented.
         // Show a "Play" button so that user can start playback.
