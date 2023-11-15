@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { gsap } from 'gsap';
   import { slidesContent } from './cerulean-sky/slides';
+  import { lenis } from '../../stores/lenis';
 
   let title: HTMLHeadingElement;
   let pinTimeline: gsap.core.Timeline;
@@ -36,10 +37,14 @@
       pinTimeline.to('html', {
         duration: 1,
         onStart: () => {
+          lenis.stop();
           slideshow.next();
+          lenis.start();
         },
         onReverseComplete: () => {
+          lenis.stop();
           slideshow.navigate(-1, i === 0);
+          lenis.start();
         },
       })
     }
