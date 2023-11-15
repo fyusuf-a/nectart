@@ -1,15 +1,14 @@
 <script lang="ts">
-
+  import Section1 from './CeruleanSky.svelte';
 </script>
 
-<div id="section1">
-plum elixir
-</div>
+  <Section1 />
+<div id="section2"/>
 
 <style lang="scss">
-#section1 {
+#section2 {
+  background: red;
   width: 100vw;
-  margin-top: navbar-height();
-  height: rest-height(1);
+  height: 100vh;
 }
 </style>
