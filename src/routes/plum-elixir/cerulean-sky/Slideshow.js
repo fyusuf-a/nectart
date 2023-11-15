@@ -41,7 +41,7 @@ export class Slideshow {
     // Initialize DOM elements
     this.DOM.el = DOM_el;
     this.DOM.slides = [...this.DOM.el.querySelectorAll('.slide')];
-    this.DOM.slidesInner = this.DOM.slides.map(item => item.querySelector('.slide__img'));
+    this.DOM.slidesInner = this.DOM.slides.map(item => item.querySelector('.slide__img__container'));
     
     // Set initial slide as current
     this.DOM.slides[this.current].classList.add('slide--current');

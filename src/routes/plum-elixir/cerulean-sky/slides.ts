@@ -15,9 +15,10 @@ export const slidesContent = [
     color: 'var(--White)',
   },
   {
-    img: 'photos/cerulean-sky/dagmara-dombrovska-2itH-1tMxGA-unsplash.jpg',
+    img: 'photos/cerulean-sky/michael-held-ABZLtPf8SkI-unsplash.jpg',
     text: '<span style="font-style:italic">The rustling of the branches</span>',
-    color: 'var(--Black)',
+    color: 'var(--White)',
+    backgroundColor: '#999'
   },
   {
     img: 'photos/cerulean-sky/lenstravelier-obsBswnv7FI-unsplash.jpg',

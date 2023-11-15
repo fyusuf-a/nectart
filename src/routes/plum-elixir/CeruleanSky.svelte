@@ -63,9 +63,15 @@
       {#each slidesContent as slide}
         <div class="slide">
           <div
-            class="slide__img"
-            style="background-image:url({slide.img})"
-          />
+            class="slide__img__container"
+          >
+            <div
+              class="slide__img"
+              style={
+                `background-image:url(${slide.img});               ${slide.backgroundColor ? `background-color:${slide.backgroundColor};background-blend-mode:multiply` : ''}`
+            }
+            />
+          </div>
           <div
             style="color: {slide.color}"
             class="slide__content"
@@ -119,6 +125,11 @@ h1 {
 .slide--current {
   pointer-events: auto;
   opacity: 1;
+}
+
+.slide__img__container {
+  width: 100%;
+  height: 100%;
 }
 
 .slide__img {
