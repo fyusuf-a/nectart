@@ -11,7 +11,6 @@
   onMount(() => {
     const slides = document.querySelector('.slides') as HTMLElement;
     const slideshow = new Slideshow(slides);
-    const slideDuration = 0.2;
 
     const gsapContext = gsap.context(() => {
       pinTimeline = gsap.timeline({
@@ -19,7 +18,7 @@
         scrollTrigger: {
           trigger: '#cerulean-sky',
           start: 'top top',
-          end: `+=${slideDuration * 10}00%`,
+          end: '+=100',
           scrub: true,
           pin: true,
         },
@@ -29,23 +28,26 @@
         opacity: 1,
         y: 0,
       }, {
-        duration: slideDuration,
+        duration: 0.01,
         opacity: 0,
         y: -100,
       })
 
       for (let i = 0; i < slidesContent.length; i++) {
         pinTimeline.to('html', {
-          duration: 1,
           onStart: () => {
             lenis.stop();
-            slideshow.next();
-            lenis.start();
+            slideshow.navigate(1)
+              .then(() => {
+                lenis.start();
+              });
           },
           onReverseComplete: () => {
             lenis.stop();
-            slideshow.navigate(-1, i === 0);
-            lenis.start();
+            slideshow.navigate(-1, i === 0)
+              .then(() => {
+                lenis.start();
+              });
           },
         })
       }

@@ -70,7 +70,7 @@ export class Slideshow {
   /**
   * Navigate through slides.
   * @param {number} direction - The direction to navigate. 1 for next and -1 for previous.
-  * @returns {boolean} - Return false if the animation is currently running.
+  * @returns {Promise<any>} - Return false if the animation is currently running.
   */
   navigate(direction, makeDisappear = false) {  
     // Update the current slide index based on direction
@@ -126,5 +126,6 @@ this.DOM.slides[previous].classList.remove('slide--current');
           filter: 'brightness(100%)'
         }, 'start')
     }
+    return timeline;
   }
 }
