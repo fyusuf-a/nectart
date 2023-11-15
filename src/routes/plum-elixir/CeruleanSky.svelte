@@ -61,6 +61,12 @@
             class="slide__img"
             style="background-image:url({slide.img})"
           />
+          <div
+            style="color: {slide.color}"
+            class="slide__content"
+          >
+            {@html slide.text}
+          </div>
         </div>
       {/each}
     </div>
@@ -117,5 +123,14 @@ h1 {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   will-change: transform, opacity, filter;
+}
+
+.slide__content {
+  @include accent;
+  font-style: normal;
+  @include typographic-scale(2, 1);
+  position: absolute;
+  text-align: center;
+  padding: 2rem;
 }
 </style>
