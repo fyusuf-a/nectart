@@ -2,6 +2,7 @@
   import { gsap } from 'gsap';
   import { onMount } from 'svelte';
   import Subsection1 from './smile/Subsection1.svelte';
+  import Subsection2 from './smile/Subsection2.svelte';
 
   let first: HTMLDivElement;
   let second: HTMLDivElement;
@@ -44,18 +45,18 @@
         y: 0,
         ease: 'power1.inOut',
       });
-    
-
   });
 </script>
 
 <section id="smile">
   <Subsection1 />
+  <Subsection2 />
 </section>
 
 <style lang="scss">
 #smile {
   width: 100vw;
-  height: 100vh;
+  height: 270vh;
+  background-color: var(--Grey);
 }
 </style>
