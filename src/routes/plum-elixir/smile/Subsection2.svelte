@@ -1,7 +1,6 @@
 <script lang="ts">
   import { gsap } from 'gsap';
   import { onMount } from 'svelte';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
   let subsection: HTMLDivElement;
   let caption: HTMLDivElement;
@@ -83,7 +82,7 @@
 <style lang="scss">
   .parallax-container {
     position: relative;
-    height: 100vh;
+    height: 140vh;
     overflow: hidden;
   }
 
