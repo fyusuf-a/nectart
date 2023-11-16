@@ -18,7 +18,7 @@
         {
           scrollTrigger: {
             trigger: '.smile:nth-child(2)',
-            start: 'top center',
+            start: 'top +=70%',
             end: 'bottom top',
           },
         })
