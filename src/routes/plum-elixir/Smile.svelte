@@ -56,7 +56,7 @@
 <style lang="scss">
 #smile {
   width: 100vw;
-  height: 270vh;
+  height: 300vh;
   background-color: var(--Grey);
 }
 </style>

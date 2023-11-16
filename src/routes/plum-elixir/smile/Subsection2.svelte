@@ -1,6 +1,7 @@
 <script lang="ts">
   import { gsap } from 'gsap';
   import { onMount } from 'svelte';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
   let subsection: HTMLDivElement;
   let caption: HTMLDivElement;
@@ -15,31 +16,32 @@
         scrollTrigger: {
           trigger: '#smile .parallax-container',
           scrub: true,
+          pin: '#smile .parallax-container, #smile .filter',
         },
       })
         .to(
           '#smile .parallax',
           {
-            transform: (i, target) => `translateY(${-target.dataset.speed * height}px)`,
+            transform: (i, target) => `translateY(calc(${-target.dataset.speed * height}px)`,
             ease: 'none'
           })
         .to(caption.style,
           {
             opacity: 1,
-            delay: 0.2,
+            delay: 0.1,
             duration: 0.1
           },
           '<');
-
     });
     return () => gsapContext.revert();
   });
 </script>
 
 <div class="parallax-container" bind:this={subsection}>
+  <div class="filter" />
   <div
     class="parallax girl"
-    data-speed="0.8"
+    data-speed="1.4"
   >
     <img src="photos/smile/girl.jpeg" />
   </div>
@@ -62,7 +64,7 @@
   </div>
   <div
     class="parallax pot"
-    data-speed="1.3"
+    data-speed="1.8"
   >
     <img
       src="photos/smile/loes-klinker-T5VHI-Pj2NQ-unsplash.jpg"
@@ -73,7 +75,7 @@
     data-speed="1.6"
   >
     <img
-      src="photos/smile/glen-hodson-NlHGKAZ3jCI-unsplash.jpg"
+      src="photos/smile/old-lady.jpeg"
     />
   </div>
 </div>
@@ -81,12 +83,13 @@
 <style lang="scss">
   .parallax-container {
     position: relative;
-    height: 150vh;
+    height: 100vh;
     overflow: hidden;
   }
 
   .parallax {
     position: absolute;
+    transform: translateY(20vw);
   }
 
   img {
@@ -95,14 +98,28 @@
     object-fit: cover;
   }
 
+  .filter {
+    position: absolute;
+    content: '';
+    top: -50vh;
+    right: 0;
+    left: 0;
+    height: 150vh;
+    opacity: 0.9;
+    backdrop-filter: saturate(0%);
+    mask-image: linear-gradient(to top, black, black 30%, transparent 60%);
+    z-index: 2;
+  }
+
   .girl {
-    top: 65vh;
+    top: 35vh;
     left: 8vw;
     width: 42vw;
+    z-index: 1;
   }
 
   .plums {
-    top: 100vh;
+    top: 45vh;
     left: 20vw;
     width: 60vw;
     height: 94vh;
@@ -121,20 +138,20 @@
   }
 
   .knife {
-    top: 150vh;
+    top: 90vh;
     left: 75vw;
     width: 25vw;
     z-index: 1;
   }
 
   .pot {
-    top: 190vh;
+    top: 130vh;
     left: 0;
     width: 30vw;
   }
 
   .grandma {
-    top: 240vh;
+    top: 170vh;
     left: 49.5vw;
     width: 42vw;
     height: 49vh;
