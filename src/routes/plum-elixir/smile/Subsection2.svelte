@@ -151,7 +151,7 @@
   }
 
   .grandma {
-    top: 170vh;
+    top: 165vh;
     left: 49.5vw;
     width: 42vw;
     height: 49vh;

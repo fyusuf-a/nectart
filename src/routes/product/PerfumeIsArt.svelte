@@ -165,7 +165,6 @@ $text-height: $impact-line-height * scale(4,1);
 .svg-clipped-text {
   position: absolute;
   bottom: 20vh;
-  -webkit-clip-path: url(#svgTextPath);
   clip-path: url(#svgTextPath);
 }
 
