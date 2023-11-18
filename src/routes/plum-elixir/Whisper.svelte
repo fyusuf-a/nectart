@@ -33,7 +33,7 @@
     {
       src: 'glasses.png',
       position: 6,
-      text: 'A ripe jewel <span style="visibility:hidden"><span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">bursting with</span> sugar</span>',
+      text: 'A ripe jewel <span style="visibility:hidden"><span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">bursting with</span> sugar',
     },
     {
       src: 'monika-grabkowska--1PzCC5XAzo-unsplash.jpg',
@@ -45,6 +45,10 @@
       position: 1,
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A liquid sonnet</span>',
     },
+    {
+      src: 'jake-thacker-I63YZy3S9Ns-unsplash.jpg',
+      text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">An ode <span class="end-phrase">to time-honored traditions</span></span>',
+    },
   ]
   let currentSlideIndex = 0;
 
@@ -52,7 +56,7 @@
 
     // initializes the styles
     whisper.querySelectorAll('.img-container').forEach((img, i) => {
-      img.style.top = i === 1 ? '0' : '100vh';
+      img.style.top = i === 0 ? '0' : '100vh';
       img.style.width = '60vw';
       img.style.height = '100vh';
       img.style.left = '20vw';
@@ -109,6 +113,31 @@
           bringToView(i, timeline);
         slideToNthPosition(i, slides[i].position, timeline);
       }
+      bringToView(8, timeline);
+      timeline.to('#whisper .img-8', {
+        duration: 1,
+        width: '100%',
+        left: '0vw',
+        ease: 'power2.inOut',
+      })
+        .to('#whisper .end-phrase', {
+          duration: 0.5,
+          opacity: 0,
+          ease: 'power2.inOut',
+        }, '-=0.75')
+        .to('#whisper .end-phrase', {
+          duration: 0.5,
+          opacity: 1,
+          ease: 'power2.inOut',
+          onStart() {
+            document.querySelectorAll('#whisper .end-phrase')
+              .forEach((el) => el.innerHTML = 'to her');
+          },
+          onReverseComplete() {
+            document.querySelectorAll('#whisper .end-phrase')
+              .forEach((el) => el.innerHTML = 'to time-honored traditions');
+          }
+        }, '<')
     });
 
     return () => {
@@ -118,9 +147,6 @@
 </script>
 
 <div id="whisper" bind:this={whisper}>
-  <div class="img-container central img-8">
-    <img src="photos/whisper/jake-thacker-I63YZy3S9Ns-unsplash.jpg" />
-  </div>
   {#each slides as slide, i}
     <div class={`img-container img-${i}`}>
       <img
@@ -164,12 +190,6 @@
     position: absolute;
     width: 15vw;
     height: #{$lateral-height * 3};
-  }
-
-  .central.img-container {
-    left: 20vw;
-    width: 60vw;
-    height: 100vh;
   }
 
   @for $i from 0 to 4 {
