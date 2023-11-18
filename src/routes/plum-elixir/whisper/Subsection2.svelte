@@ -8,27 +8,27 @@
     {
       src: 'anuj-yadav-W1jNzyZFmIU-unsplash.jpg',
       position: 0,
-      text: 'A sultry dance&mdash;',
+      text: 'A sultry dance<span style="visibility:hidden;font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">&mdash;of aromas</span>',
     },
     {
       src: 'loes-klinker-T5VHI-Pj2NQ-unsplash.jpg',
-      text: 'A sultry dance&mdash;of aromas',
+      text: 'A sultry dance<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">&mdash;of aromas</span>',
       position: 2,
     },
     {
       src: 'pexels-studio-naae-17795179.jpg',
-      text: 'A sweet whisper',
+      text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A sweet</span> whisper',
       position: 3,
     },
     {
       src: 'anthony-salerno-I1hzGTtKMgU-unsplash.jpg',
       position: 5,
-      text: 'A breath of mediterranean breeze',
+      text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A breath of mediterranean</span> breeze',
     },
     {
       src: 'vlad-kutepov-OBR9-lQE_H4-unsplash.jpg',
       position: 4,
-      text: ' aged in antique cellars',
+      text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">Aged in</span> antique cellars',
     },
     {
       src: 'glasses.png',
@@ -38,12 +38,12 @@
     {
       src: 'monika-grabkowska--1PzCC5XAzo-unsplash.jpg',
       position: 7,
-      text: 'A ripe jewel bursting with sugar',
+      text: 'A ripe jewel <span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">bursting with</span> sugar',
     },
     {
       src: 'wine.png',
       position: 1,
-      text: 'A liquid sonnet',
+      text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A liquid sonnet</span>',
     },
   ]
   let currentSlideIndex = 0;
