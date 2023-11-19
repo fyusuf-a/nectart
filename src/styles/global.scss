@@ -152,19 +152,19 @@ img {
 
 @font-face {
   font-family: 'Saol Display';
-  src: url('fonts/SaolDisplay-LightItalic.woff2') format('woff2');
+  src: url('/fonts/SaolDisplay-LightItalic.woff2') format('woff2');
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Saol Display';
-  src: url('fonts/SaolDisplay-Regular.ttf') format('truetype');
+  src: url('/fonts/SaolDisplay-Regular.ttf') format('truetype');
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Avantt';
-  src: url('../fonts/Avantt-Extrabold.woff2') format('woff2');
+  src: url('/fonts/Avantt-Extrabold.woff2') format('woff2');
   font-weight: bold;
 }
 
