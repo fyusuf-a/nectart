@@ -1,5 +1,6 @@
 <script>
   import Navbar from '../Navbar.svelte';
+  import Theme from '$lib/style/Theme.svelte';
 
   const theme = {
     backgroundColor: 'var(--White)',
@@ -7,5 +8,6 @@
   };
 </script>
 
-<Navbar {theme} />
+<Theme {theme} />
+<Navbar />
 <slot />

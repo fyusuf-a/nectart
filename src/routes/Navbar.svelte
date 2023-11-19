@@ -1,11 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Link from '$lib/UI/Link.svelte';
-  import type { Theme } from '$lib/types/theme.d';
   import { page } from '$app/stores';
-  export let theme: Theme;
-
-  const style = `background-color: ${theme.backgroundColor}; color: ${theme.color};`;
 
   const routes = [
     {
@@ -41,11 +37,10 @@
   })
 </script>
 
-<nav {style} id="navbar" bind:this={navbar}>
+<nav id="navbar" bind:this={navbar}>
   {#each routes as route}
     <div class="link">
       <Link
-        { theme }
         href={route.path}
         disabled={route.path === $page.url.pathname}
       >
@@ -64,6 +59,7 @@
   }
 
   nav {
+    background-color: var(--background-color);
     padding: #{$navbar-vertical-padding} 0px;
     @include sm {
       padding: #{$navbar-vertical-padding} 60px;

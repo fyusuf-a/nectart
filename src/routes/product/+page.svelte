@@ -26,10 +26,6 @@
 <style lang="scss">
   @import "./style.scss";
 
-  body {
-    background-color: var(--Black);
-  }
-
   #section6 {
     height: 100vh;
     background-color: red;

@@ -1,12 +1,13 @@
 <script lang="ts">
   import Navbar from '../Navbar.svelte';
-  import type { Theme } from '$lib/types/theme.d';
+  import Theme from '$lib/style/Theme.svelte';
 
-  const theme: Theme = {
+  const theme = {
     backgroundColor: 'var(--Black)',
     color: 'var(--White)'
   };
 </script>
 
-<Navbar {theme} />
+<Theme {theme} />
+<Navbar />
 <slot />

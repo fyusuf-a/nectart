@@ -1,13 +1,10 @@
 <script lang="ts">
-  import type { Theme } from '$lib/types/theme.d';
   import { easeCubicFactory } from '$lib/easing';
   import MouseAcceleratedVideo from '$lib/mouseAcceleratedVideo.svelte';
   import ClickableText from '$lib/UI/ClickableText.svelte';
   import { gsap } from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import { onMount } from 'svelte';
-
-  export let theme: Theme;
 
   const easingParameters: [number, number, number, number] = [0.16, 1, 0.3, 1];
   const easingFunction = easeCubicFactory(...easingParameters);
@@ -54,7 +51,6 @@
   <div class="cta" >
     <ClickableText
       text={ ctaText }
-      { theme }
       disabled={ ctaDisabled }
       onClick={activateUnmuted}
     />
