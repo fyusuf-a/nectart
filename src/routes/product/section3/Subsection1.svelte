@@ -2,13 +2,16 @@
   import { onMount } from 'svelte';
   import gsap from 'gsap';
 
-  let screenWidth: number;
-  let screenHeight: number;
-  const BOTTLE_RATIO = 0.6561;
-  let bottleHeight: number;
-  let bottleWidth: number;
+  // const BOTTLE_RATIO = 0.6561;
   let sensation: HTMLElement;
   let emotion: HTMLElement;
+
+  let screenWidth = 0;
+  let screenHeight = 0;
+  let navbarHeight = 0;
+  $: circleSizeWithNavbar= Math.min(0.9 * screenWidth, 0.9 * (screenHeight - navbarHeight));
+  $: bottleWidth = 0.5 * circleSizeWithNavbar;
+  $: bottleHeight = 0.6561 * bottleWidth;
 
   // Pin the section
   onMount(() => {
@@ -16,14 +19,12 @@
     emotion.style.opacity = '0';
 
     // getting dimensions to scale the bottle
-    bottleWidth = (document.getElementById('bottle-container') as HTMLElement).offsetWidth;
-    bottleHeight = bottleWidth * BOTTLE_RATIO;
-    screenWidth = window.innerWidth;
-    screenHeight = window.innerHeight;
     let getScreenSize = () => {
       screenWidth = window.innerWidth;
       screenHeight = window.innerHeight;
+      navbarHeight = document.querySelector('#navbar')!.clientHeight;
     };
+    getScreenSize();
     window.addEventListener('resize', getScreenSize);
 
     const gsapContext = gsap.context(() => {
@@ -44,19 +45,18 @@
       const blurHelper = { blur };
       const scaleFactor = 1.8;
 
-      timeline.to('#bottle-centering-container', {
-        bottom: 'calc(50vh)',
-        transform: 'translate(0, 50%)',
-        rotate: 0,
-      })
+
+      timeline.fromTo('#bottle-centering-container', 
+        {
+          bottom: () => `${(screenHeight - navbarHeight) / 2}px`,
+        },
+        {
+          bottom: () => '50vh',
+        }
+      )
         .to('#bottle-container', {
-          scale: scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
+          scale: () => scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
           duration: 2,
-          onUpdate: () => {
-            gsap.set('#bottle-centering-container', {
-              transform: 'translate(0, 50%)',
-            })
-          }
         })
         .to('#sensation', {
           autoAlpha: 0,

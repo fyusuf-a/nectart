@@ -1,57 +1,3 @@
-<script>
-  import { onMount } from 'svelte';
-  import gsap from 'gsap';
-  import ScrollTrigger from 'gsap/ScrollTrigger';
-
-  onMount(() => {
-    const gsapContext = gsap.context(() => {
-      const centeringTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#section3',
-          start: 'top center',
-          end: 'center center',
-          scrub: true,
-          invalidateOnRefresh: true,
-        }
-      });
-
-      centeringTimeline.to('#bottle-centering-container', {
-        bottom: 'calc(50vh)',
-        transform: 'translate(0, 50%)',
-      });
-
-      let randomAngle = gsap.utils.random(-5, 5, true);
-      let randomTime = gsap.utils.random(3, 5, true);
-      const bouncingTimeline = gsap.timeline({
-        repeat: -1,
-        repeatRefresh: true,
-        paused: true
-      });
-
-      bouncingTimeline.to('#bottle-container', {
-        rotate: randomAngle,
-        duration: randomTime,
-        ease: 'easeInOut'
-      });
-
-      ScrollTrigger.create({
-        trigger: '#section3',
-        scrub: true,
-        onEnter: () => bouncingTimeline.play(),
-        onLeave: () => bouncingTimeline.pause(),
-        onEnterBack: () => bouncingTimeline.play(),
-        onLeaveBack: () => bouncingTimeline.pause(),
-        invalidateOnRefresh: true,
-      });
-    });
-
-    return () => {
-      gsapContext.revert();
-    };
-  });
-</script>
-
-
 <div id="bottle-container">
   <div id="bottle-centering-container">
     <div id="bottle-blur"/>
@@ -73,7 +19,7 @@
   #bottle-container {
     position: fixed;
     width: circle-size-with-navbar(0.5);
-    left: 50%;
+    left: 50vw;
     top: 0;
     bottom: 0;
     transform: translate(-50%, 0);
@@ -84,7 +30,7 @@
     position: absolute;
     width: 100%;
     bottom: calc(rest-height(0.5));
-    height: calc(image-ratio * 100%);
+    height: calc(image-ratio * rest-height(0.5));
     transform: translate(0, 50%);
   }
 
