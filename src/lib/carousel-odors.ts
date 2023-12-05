@@ -1,32 +1,32 @@
 export const odors = [
   {
     name: 'Bread crust',
-    photoUrl: 'conor-brown-WBYksGoFPb8.jpg',
+    photo: 'conor-brown-WBYksGoFPb8',
     photoAlt: 'bread crust',
     videoUrl: 'bread-carlos-buitrago.mp4'
   },
   {
     name: 'Vanilla',
-    photoUrl: 'sidath-vimukthi-fIGw-jVGy5g.jpg',
+    photo: 'sidath-vimukthi-fIGw-jVGy5g',
     photoAlt: 'vanilla',
     videoUrl: 'vanilla-rodnae-productions.mp4'
   },
   {
     name: 'Saltwater',
-    photoUrl: 'marten-bjork-iXed2ZaTobo.jpg',
+    photo: 'marten-bjork-iXed2ZaTobo',
     photoAlt: 'a landscape on the beach, with yellow maritime plants all along and a deep blue sea',
     videoUrl: 'saltwater.mp4'
   },
   {
     name: 'Pine',
-    photoUrl: 'darius-cotoi-5zLwelu7L8U.jpeg',
+    photo: 'darius-cotoi-5zLwelu7L8U',
     photoAlt: 'a pine branch',
     videoUrl: 'victor-rogov.mp4'
   },
   {
     name: 'Petrichor',
     photoAlt: 'a drenched paved street with a rose',
-    photoUrl: 'jana-muller-2rCRXB4W6-0.jpg',
+    photo: 'jana-muller-2rCRXB4W6-0',
     videoUrl: 'petrichor.mp4'
   },
 ];

@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { odors } from '$lib/carousel-odors';
   import { gsap } from 'gsap';
+  import Image from '$lib/Image.svelte';
 
   gsap.registerPlugin(ScrollTrigger);
   let video: HTMLVideoElement;
@@ -66,6 +67,14 @@
 
   let handleClick: (i:number) => void;
   let buttonsActive = true;
+
+  const backgroundStyle = `
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  `
 
   onMount(() => {
     const gsapContext = gsap.context(() => {
@@ -239,24 +248,22 @@
 </script>
 
 <section id="section2">
-  <img
-    class="background"
+  <Image
     id={`background-${precedingOdor}`}
-    style="visibility:hidden;"
-    src={`photos/${odors[precedingOdor].photoUrl}`}
+    style={`visibility:hidden;${backgroundStyle}`}
+    src={`photos/carousel/${odors[precedingOdor].photo}`}
     alt={odors[precedingOdor].photoAlt}
   />
-  <img
-    class="background"
+  <Image
     id={`background-${followingOdor}`}
-    style="visibility:hidden;"
-    src={`photos/${odors[followingOdor].photoUrl}`}
+    style={`visibility:hidden;${backgroundStyle}`}
+    src={`photos/carousel/${odors[followingOdor].photo}`}
     alt={odors[followingOdor].photoAlt}
   />
-  <img
-    class="background"
+  <Image
+    style={`${backgroundStyle}`}
     id={`background-${currentOdor}`}
-    src={`photos/${odors[currentOdor].photoUrl}`}
+    src={`photos/carousel/${odors[currentOdor].photo}`}
     alt={odors[currentOdor].photoAlt}
   />
 
@@ -341,15 +348,6 @@
   .faded {
     opacity: 0;
   }
-
-  .background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-  
 
   .video-container {
     position: relative;
