@@ -5,20 +5,28 @@
   import { onMount } from 'svelte';
   import SplitType from 'split-type';
   import { lenis } from '../../stores/lenis';
+  import Video from '$lib/Video.svelte';
 
   let section: HTMLElement;
   let sentenceStart: HTMLElement;
   let firstChild: HTMLDivElement;
   let secondChild: HTMLDivElement;
-  let video: HTMLVideoElement;
+  let videoContainer: HTMLDivElement;
+
+  const videoStyle = `
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+  `;
 
   onMount(() => {
     sentenceStart.style.opacity='0';
     firstChild.style.display='none';
     secondChild.style.display='none';
-    video.style.bottom = '50vh';
-    video.style.scale = '0.69';
-    video.style.opacity = '0';
+    videoContainer.style.bottom = '50vh';
+    videoContainer.style.scale = '0.69';
+    videoContainer.style.opacity = '0';
 
     new SplitType('#perfume-is-art .sentence-start', {
       types: ['words', 'chars'],
@@ -66,7 +74,7 @@
         }, '<');
       })
       timeline.to(
-        video.style,
+        videoContainer.style,
         {
           bottom: '20vh',
           duration: 1.25,
@@ -74,7 +82,7 @@
           scale: 1,
           onStart: () => {
             firstChild.style.display='block';
-            video.style.opacity = '1';
+            videoContainer.style.opacity = '1';
           },
           onUpdate: function() {
             const progress = this.progress();
@@ -107,18 +115,22 @@
   </div>
 </div>
 
-<video
-  autoplay
-  muted
-  loop
-  class="svg-clipped-text"
-  bind:this={video}
+<div
+  class="video-container"
+  bind:this={videoContainer}
 >
-  <source
-    src="videos/oleg-lehnitsky.mp4"
-    type="video/mp4"
-  />
-</video>
+  <Video
+    autoplay
+    muted
+    loop
+    style={videoStyle}
+  >
+    <source
+      src="videos/oleg-lehnitsky.mp4"
+      type="video/mp4"
+    />
+  </Video>
+</div>
 
 <svg
   version="1.1"
@@ -162,17 +174,12 @@ $text-height: $impact-line-height * scale(4,1);
   color: var(--White);
 }
 
-.svg-clipped-text {
+.video-container {
   position: absolute;
   bottom: 20vh;
   clip-path: url(#svgTextPath);
-}
-
-video {
   width: 100%;
   height: $text-height;
-  object-fit: cover;
-  object-position: center;
 }
 
 svg text {

@@ -4,11 +4,19 @@
 
   import { onMount } from 'svelte';
   import * as THREE from 'three';
+  import Video from './Video.svelte';
 
+  let videoContainer: HTMLDivElement;
   let video: HTMLVideoElement;
   let timeAtLastMouseMove = 0;
   let videoRateAtLastMouseMove = 0;
   let targetPlaybackRate = 0.7;
+
+  const videoStyle = `
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  `;
 
   onMount(() => {
     const mouse = { x: 0, y: 0 };
@@ -45,14 +53,12 @@
   });
 </script>
 
-<video autoplay muted loop bind:this={video}>
+<Video
+  autoplay
+  muted
+  loop
+  style={videoStyle}
+  bind:video={video}
+>
   <source src="videos/oleg-lehnitsky.mp4" type="video/mp4" />
-</video>
-
-<style lang="scss">
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-</style>
+</Video>
