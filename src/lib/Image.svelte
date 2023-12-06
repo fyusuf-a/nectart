@@ -1,6 +1,6 @@
 <script lang="ts">
   export let src = 'photos/';
-  export let image: HTMLImageElement;
+  export let image: HTMLImageElement | undefined = undefined;
   const resolutions = [100, 200, 400, 800, 1000, 1400, 1800]
 </script>
 

@@ -1,12 +1,15 @@
 <script>
-  import { photos } from '$lib/fleeting-embrace-images.ts';
+  import Image from '$lib/Image.svelte';
+  import { photos } from '$lib/fleeting-embrace-images';
 </script>
 
 <div class="container">
   <div class="grid-container">
     <div class="grid">
       {#each photos as photo}
-      <img
+      <Image
+        class="image"
+        style="height: var(--img-height);width: var(--img-width);object-fit: cover;"
         src={`photos/fleeting-embrace/${photo.photoUrl}`}
       />
       {/each}
@@ -20,10 +23,9 @@ $img-horizontal-padding: 2vw;
 $img-height: 20vh;
 $img-width: calc(#{$ratio * $img-height} + 2 * #{$img-horizontal-padding});
 
-img {
-  height: $img-height;
-  aspect-ratio: $ratio;
-  object-fit: cover;
+:root {
+  --img-height: #{$img-height};
+  --img-width: #{$img-width};
 }
 
 .grid-container {

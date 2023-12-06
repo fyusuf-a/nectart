@@ -1,5 +1,6 @@
 <script lang="ts">
   import { easeCubicFactory } from '$lib/easing';
+  import Image from '$lib/Image.svelte';
   import MouseAcceleratedVideo from '$lib/mouseAcceleratedVideo.svelte';
   import ClickableText from '$lib/UI/ClickableText.svelte';
   import { gsap } from 'gsap';
@@ -43,11 +44,12 @@
   <div class="circle">
     <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
-  <img
-    id="rocks"
-    src="photos/rocks.png"
-    alt="Black rocks shining reflecting a discreet blue light"
-  />
+  <div id="rocks">
+    <Image
+      src="photos/rocks"
+      alt="Black rocks shining reflecting a discreet blue light"
+    />
+  </div>
   <div class="cta" >
     <ClickableText
       text={ ctaText }
@@ -84,7 +86,6 @@
 
   $bottom-rocks: calc(50% - circle-size-with-navbar(0.46));
   #rocks {
-    background-color: transparent;
     position: absolute;
     width: circle-size-with-navbar(1.8);
     bottom: $bottom-rocks;
