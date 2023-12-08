@@ -5,13 +5,8 @@
   import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
 
-  let container: HTMLDivElement;
-  let centeringContainer: HTMLDivElement;
 
   onMount(() => {
-    container = document.querySelector('#bottle-container')!;
-    centeringContainer = document.querySelector('#bottle-centering-container')!;
-
     const gsapContext = gsap.context(() => {
       let randomAngle = gsap.utils.random(-5, 5, true);
       let randomTime = gsap.utils.random(3, 5, true);

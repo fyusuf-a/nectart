@@ -9,20 +9,27 @@
   let screenWidth = 0;
   let screenHeight = 0;
   let navbarHeight = 0;
-  $: circleSizeWithNavbar= Math.min(0.9 * screenWidth, 0.9 * (screenHeight - navbarHeight));
-  $: bottleWidth = 0.5 * circleSizeWithNavbar;
-  $: bottleHeight = 0.6561 * bottleWidth;
 
   // Pin the section
   onMount(() => {
     emotion.style.display = 'none';
     emotion.style.opacity = '0';
 
+    let screenWidth = 0;
+    let screenHeight = 0;
+    let navbarHeight = 0;
+    let circleSizeWithNavbar = 0;
+    let bottleWidth = 0;
+    let bottleHeight = 0;
+
     // getting dimensions to scale the bottle
     let getScreenSize = () => {
       screenWidth = window.innerWidth;
       screenHeight = window.innerHeight;
       navbarHeight = document.querySelector('#navbar')!.clientHeight;
+      circleSizeWithNavbar = Math.min(0.9 * screenWidth, 0.9 * (screenHeight - navbarHeight));
+      bottleWidth = 0.5 * circleSizeWithNavbar;
+      bottleHeight = 0.6561 * bottleWidth;
     };
     getScreenSize();
     window.addEventListener('resize', getScreenSize);
