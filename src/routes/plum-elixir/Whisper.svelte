@@ -1,32 +1,40 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { gsap } from 'gsap';
+  import Image from '$lib/Image.svelte';
 
   let whisper: HTMLDivElement;
 
+  const imageStyle = `
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  `
+
   const slides = [
     {
-      src: 'anuj-yadav-W1jNzyZFmIU-unsplash.jpg',
+      src: 'anuj-yadav-W1jNzyZFmIU-unsplash',
       position: 0,
       text: 'A sultry dance<span style="visibility:hidden;font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">&mdash;of aromas</span>',
     },
     {
-      src: 'loes-klinker-T5VHI-Pj2NQ-unsplash.jpg',
+      src: 'loes-klinker-T5VHI-Pj2NQ-unsplash',
       text: 'A sultry dance<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">&mdash;of aromas</span>',
       position: 2,
     },
     {
-      src: 'pexels-studio-naae-17795179.jpg',
+      src: 'pexels-studio-naae-17795179',
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A sweet</span> whisper',
       position: 3,
     },
     {
-      src: 'anthony-salerno-I1hzGTtKMgU-unsplash.jpg',
+      src: 'anthony-salerno-I1hzGTtKMgU-unsplash',
       position: 5,
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A breath of mediterranean</span> breeze',
     },
     {
-      src: 'vlad-kutepov-OBR9-lQE_H4-unsplash.jpg',
+      src: 'vlad-kutepov-OBR9-lQE_H4-unsplash',
       position: 4,
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">Aged in</span> antique cellars',
     },
@@ -36,7 +44,7 @@
       text: 'A ripe jewel <span style="visibility:hidden"><span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">bursting with</span> sugar',
     },
     {
-      src: 'monika-grabkowska--1PzCC5XAzo-unsplash.jpg',
+      src: 'monika-grabkowska--1PzCC5XAzo-unsplash',
       position: 7,
       text: 'A ripe jewel <span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">bursting with</span> sugar',
     },
@@ -46,7 +54,7 @@
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A liquid sonnet</span>',
     },
     {
-      src: 'jake-thacker-I63YZy3S9Ns-unsplash.jpg',
+      src: 'jake-thacker-I63YZy3S9Ns-unsplash',
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">An ode <span class="end-phrase">to time-honored traditions</span></span>',
     },
   ]
@@ -55,7 +63,7 @@
   onMount(() => {
 
     // initializes the styles
-    whisper.querySelectorAll('.img-container').forEach((img, i) => {
+    (whisper.querySelectorAll('.img-container') as NodeListOf<HTMLElement>).forEach((img, i) => {
       img.style.top = i === 0 ? '0' : '100vh';
       img.style.width = '60vw';
       img.style.height = '100vh';
@@ -149,7 +157,8 @@
 <div id="whisper" bind:this={whisper}>
   {#each slides as slide, i}
     <div class={`img-container img-${i}`}>
-      <img
+      <Image
+        style={ imageStyle }
         src={`photos/whisper/${slide.src}`}
       />
     </div>

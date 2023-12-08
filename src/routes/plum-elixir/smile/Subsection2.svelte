@@ -1,9 +1,15 @@
 <script lang="ts">
   import { gsap } from 'gsap';
   import { onMount } from 'svelte';
+  import Image from '$lib/Image.svelte';
 
   let subsection: HTMLDivElement;
   let caption: HTMLDivElement;
+  const imageStyle = `
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  `
 
   onMount(() => {
     // Initializes the styles
@@ -42,14 +48,18 @@
     class="parallax girl"
     data-speed="1.4"
   >
-    <img src="photos/smile/girl.jpeg" />
+    <Image
+      style={ imageStyle }
+      src="photos/smile/girl"
+    />
   </div>
   <div
     class="parallax knife"
     data-speed="1.5"
   >
-    <img
-      src="photos/smile/heather-gill-HLBki_64qNY-unsplash.jpg"
+    <Image
+      style={ imageStyle }
+      src="photos/smile/heather-gill-HLBki_64qNY-unsplash"
     />
   </div>
   <div
@@ -59,22 +69,27 @@
     <div class="caption" bind:this={caption}>
       A plum compote passed down as a secret
     </div>
-    <img src="photos/smile/plums.jpeg" />
+    <Image
+      style={ imageStyle }
+      src="photos/smile/plums"
+    />
   </div>
   <div
     class="parallax pot"
     data-speed="1.8"
   >
-    <img
-      src="photos/smile/loes-klinker-T5VHI-Pj2NQ-unsplash.jpg"
+    <Image
+      style={ imageStyle }
+      src="photos/smile/loes-klinker-T5VHI-Pj2NQ-unsplash"
     />
   </div>
   <div
     class="parallax grandma"
     data-speed="1.6"
   >
-    <img
-      src="photos/smile/old-lady.jpeg"
+    <Image
+      style={ imageStyle }
+      src="photos/smile/old-lady"
     />
   </div>
 </div>
@@ -89,12 +104,6 @@
   .parallax {
     position: absolute;
     transform: translateY(20vw);
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   .filter {

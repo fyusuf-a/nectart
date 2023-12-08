@@ -4,6 +4,7 @@
   import { gsap } from 'gsap';
   import { slidesContent } from './cerulean-sky/slides';
   import { lenis } from '../../stores/lenis';
+  import Image from '$lib/Image.svelte';
 
   let title: HTMLHeadingElement;
   let pinTimeline: gsap.core.Timeline;

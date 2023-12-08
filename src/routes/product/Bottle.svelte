@@ -1,8 +1,28 @@
+<script>
+  import Image from "$lib/Image.svelte";
+
+  const commonStyle = `
+    width: 100%;
+    height: auto;
+    z-index: 200;
+  `;
+</script>
+
 <div id="bottle-container">
   <div id="bottle-centering-container">
     <div id="bottle-blur"/>
-    <img id="bottle-shadow" src="photos/bottle.png" alt="A bottle of water" />
-    <img id="bottle" src="photos/bottle.png" alt="A bottle of water" />
+    <Image
+      id="bottle-shadow"
+      src="photos/bottle"
+      alt="A bottle of water"
+      style={commonStyle + 'visibility: hidden;'}
+    />
+    <Image
+      id="bottle"
+      src="photos/bottle"
+      alt="A bottle of water"
+      style={commonStyle + 'position: absolute; left: 0;'}
+    />
   </div>
 </div>
 
@@ -32,21 +52,6 @@
     bottom: calc(rest-height(0.5));
     height: calc(image-ratio * rest-height(0.5));
     transform: translate(0, 50%);
-  }
-
-  #bottle, #bottle-shadow {
-    width: 100%;
-    height: auto;
-    z-index: 200;
-  }
-
-  #bottle-shadow {
-    visibility: hidden;
-  }
-
-  #bottle {
-    position: absolute;
-    left: 0;
   }
 
   #bottle-blur {
