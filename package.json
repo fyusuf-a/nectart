@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite dev",
-    "compress": "node scripts/compress.js",
+    "compress": "npm install --force @img/sharp-linux-x64 && node scripts/compress.js",
     "build": "npm run compress && vite build",
     "preview": "vite preview",
     "test": "npm run test:integration && npm run test:unit",
