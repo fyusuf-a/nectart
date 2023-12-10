@@ -45,5 +45,6 @@
     "motion": "^10.16.4",
     "split-type": "^0.3.4",
     "three": "^0.157.0"
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }
