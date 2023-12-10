@@ -6,7 +6,7 @@ $new-height: calc($background-height * $scale);
 
 @mixin background {
   opacity: 0.7;
-  background: url('./photos/mio-ito-B_SLtmXPKNA.jpg'),
+  background: url('/photos/mio-ito-B_SLtmXPKNA.jpg'),
     lightgray -9px -744.762px / 142.222% 193.074% no-repeat;
   background-size: $new-width $new-height;
   background-repeat: no-repeat;
