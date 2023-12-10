@@ -39,7 +39,7 @@
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">Aged in</span> antique cellars'
     },
     {
-      src: 'glasses.png',
+      src: 'glasses',
       position: 6,
       text: 'A ripe jewel <span style="visibility:hidden"><span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">bursting with</span> sugar'
     },
@@ -49,7 +49,7 @@
       text: 'A ripe jewel <span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">bursting with</span> sugar'
     },
     {
-      src: 'wine.png',
+      src: 'wine',
       position: 1,
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A liquid sonnet</span>'
     },
