@@ -5,7 +5,6 @@
   import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
 
-
   onMount(() => {
     const gsapContext = gsap.context(() => {
       let randomAngle = gsap.utils.random(-5, 5, true);
@@ -28,10 +27,10 @@
         onLeave: () => bouncingTimeline.pause(),
         onEnterBack: () => bouncingTimeline.play(),
         onLeaveBack: () => bouncingTimeline.pause(),
-        invalidateOnRefresh: true,
+        invalidateOnRefresh: true
       });
     });
- 
+
     return () => {
       gsapContext.revert();
     };

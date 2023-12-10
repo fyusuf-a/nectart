@@ -9,7 +9,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-  `
+  `;
 
   onMount(() => {
     // Initializes the styles
@@ -17,26 +17,27 @@
 
     const height = subsection.clientHeight;
     const gsapContext = gsap.context(() => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: '#smile .parallax-container',
-          scrub: true,
-          pin: '#smile .parallax-container, #smile .filter',
-        },
-      })
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: '#smile .parallax-container',
+            scrub: true,
+            pin: '#smile .parallax-container, #smile .filter'
+          }
+        })
+        .to('#smile .parallax', {
+          transform: (i, target) => `translateY(calc(${-target.dataset.speed * height}px)`,
+          ease: 'none'
+        })
         .to(
-          '#smile .parallax',
-          {
-            transform: (i, target) => `translateY(calc(${-target.dataset.speed * height}px)`,
-            ease: 'none'
-          })
-        .to(caption.style,
+          caption.style,
           {
             opacity: 1,
             delay: 0.1,
             duration: 0.1
           },
-          '<');
+          '<'
+        );
     });
     return () => gsapContext.revert();
   });
@@ -44,53 +45,21 @@
 
 <div class="parallax-container" bind:this={subsection}>
   <div class="filter" />
-  <div
-    class="parallax girl"
-    data-speed="1.4"
-  >
-    <Image
-      style={ imageStyle }
-      src="photos/smile/girl"
-    />
+  <div class="parallax girl" data-speed="1.4">
+    <Image style={imageStyle} src="photos/smile/girl" />
   </div>
-  <div
-    class="parallax knife"
-    data-speed="1.5"
-  >
-    <Image
-      style={ imageStyle }
-      src="photos/smile/heather-gill-HLBki_64qNY-unsplash"
-    />
+  <div class="parallax knife" data-speed="1.5">
+    <Image style={imageStyle} src="photos/smile/heather-gill-HLBki_64qNY-unsplash" />
   </div>
-  <div
-    class="parallax plums"
-    data-speed="1"
-  >
-    <div class="caption" bind:this={caption}>
-      A plum compote passed down as a secret
-    </div>
-    <Image
-      style={ imageStyle }
-      src="photos/smile/plums"
-    />
+  <div class="parallax plums" data-speed="1">
+    <div class="caption" bind:this={caption}>A plum compote passed down as a secret</div>
+    <Image style={imageStyle} src="photos/smile/plums" />
   </div>
-  <div
-    class="parallax pot"
-    data-speed="1.8"
-  >
-    <Image
-      style={ imageStyle }
-      src="photos/smile/loes-klinker-T5VHI-Pj2NQ-unsplash"
-    />
+  <div class="parallax pot" data-speed="1.8">
+    <Image style={imageStyle} src="photos/smile/loes-klinker-T5VHI-Pj2NQ-unsplash" />
   </div>
-  <div
-    class="parallax grandma"
-    data-speed="1.6"
-  >
-    <Image
-      style={ imageStyle }
-      src="photos/smile/old-lady"
-    />
+  <div class="parallax grandma" data-speed="1.6">
+    <Image style={imageStyle} src="photos/smile/old-lady" />
   </div>
 </div>
 

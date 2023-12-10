@@ -13,8 +13,8 @@
     return () => {
       window.onscroll = null;
       lenis.destroy();
-    }
-  }); 
+    };
+  });
 </script>
 
 <slot />

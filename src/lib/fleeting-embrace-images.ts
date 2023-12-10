@@ -78,5 +78,5 @@ export const photos = [
   {
     photoUrl: 'jonny-gios-KWWTP6r3VNk-unsplash',
     photoAlt: ''
-  },
+  }
 ];

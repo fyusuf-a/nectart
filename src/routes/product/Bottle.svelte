@@ -1,5 +1,5 @@
 <script>
-  import Image from "$lib/Image.svelte";
+  import Image from '$lib/Image.svelte';
 
   const commonStyle = `
     width: 100%;
@@ -10,7 +10,7 @@
 
 <div id="bottle-container">
   <div id="bottle-centering-container">
-    <div id="bottle-blur"/>
+    <div id="bottle-blur" />
     <Image
       id="bottle-shadow"
       src="photos/bottle"
@@ -27,8 +27,8 @@
 </div>
 
 <style lang="scss">
-  @use "sass:math";
-  @import "./style.scss";
+  @use 'sass:math';
+  @import './style.scss';
 
   $image-ratio: math.div(477, 727);
 

@@ -28,5 +28,5 @@ export const odors = [
     photoAlt: 'a drenched paved street with a rose',
     photo: 'jana-muller-2rCRXB4W6-0',
     videoUrl: 'petrichor.mp4'
-  },
+  }
 ];

@@ -3,23 +3,21 @@
   export let direction = 'left';
   export let text = 'the soul';
 
-  const whichClass = (i:number) => {
+  const whichClass = (i: number) => {
     let classList = 'banner-text';
     if (i % 2 === 0) {
       classList += ' transparent';
     }
-    if (i === 0)
-      classList += ' first ' + direction;
+    if (i === 0) classList += ' first ' + direction;
     return classList;
-  }
+  };
 </script>
+
 <div class="container">
   <div class="banner">
+    <!-- eslint-disable -->
     {#each Array(elementNumber) as _, i}
-      <span 
-        class={whichClass(i)}
-        aria-hidden={i !== 0}
-      >
+      <span class={whichClass(i)} aria-hidden={i !== 0}>
         {text}
       </span>
     {/each}
@@ -27,7 +25,7 @@
 </div>
 
 <style lang="scss">
-  $total-size: calc(var(--block-size)* 50);
+  $total-size: calc(var(--block-size) * 50);
   $direction: 'left';
 
   .container {
@@ -68,12 +66,20 @@
   }
 
   @keyframes bannermovesright {
-    0% { margin-left: calc(-25 * var(--block-size)) }
-    100% { margin-left: 0px;}
+    0% {
+      margin-left: calc(-25 * var(--block-size));
+    }
+    100% {
+      margin-left: 0px;
+    }
   }
 
   @keyframes bannermovesleft {
-    0% { margin-left: 0px }
-    100% { margin-left: calc(-25 * var(--block-size));}
+    0% {
+      margin-left: 0px;
+    }
+    100% {
+      margin-left: calc(-25 * var(--block-size));
+    }
   }
 </style>

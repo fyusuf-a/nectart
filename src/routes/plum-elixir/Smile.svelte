@@ -16,36 +16,33 @@
     second.style.transform = 'translateY(1rem)';
     third.style.transform = 'translateX(100vw)';
 
-    gsap.to( '.smile:nth-child(1)',
-      {
-        scrollTrigger: {
-          trigger: '.smile:nth-child(1)',
-          start: 'top center',
-          end: 'bottom top',
-        },
-        x: 0,
-      });
+    gsap.to('.smile:nth-child(1)', {
+      scrollTrigger: {
+        trigger: '.smile:nth-child(1)',
+        start: 'top center',
+        end: 'bottom top'
+      },
+      x: 0
+    });
 
-    gsap.to( '.smile:nth-child(3)',
-      {
-        scrollTrigger: {
-          trigger: '.smile:nth-child(2)',
-          start: 'top center',
-          end: 'bottom top',
-        },
-        x: 0,
-      });
-    gsap.to( '.smile:nth-child(2)',
-      {
-        scrollTrigger: {
-          trigger: '.smile:nth-child(3)',
-          start: 'top center',
-          end: 'bottom top',
-        },
-        opacity: 3,
-        y: 0,
-        ease: 'power1.inOut',
-      });
+    gsap.to('.smile:nth-child(3)', {
+      scrollTrigger: {
+        trigger: '.smile:nth-child(2)',
+        start: 'top center',
+        end: 'bottom top'
+      },
+      x: 0
+    });
+    gsap.to('.smile:nth-child(2)', {
+      scrollTrigger: {
+        trigger: '.smile:nth-child(3)',
+        start: 'top center',
+        end: 'bottom top'
+      },
+      opacity: 3,
+      y: 0,
+      ease: 'power1.inOut'
+    });
   });
 </script>
 
@@ -56,9 +53,9 @@
 </section>
 
 <style lang="scss">
-#smile {
-  position: relative;
-  width: 100vw;
-  background-color: var(--Grey);
-}
+  #smile {
+    position: relative;
+    width: 100vw;
+    background-color: var(--Grey);
+  }
 </style>

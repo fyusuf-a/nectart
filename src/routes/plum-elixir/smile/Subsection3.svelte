@@ -11,33 +11,37 @@
     });
 
     const gsapContext = gsap.context(() => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: '.pouring',
-          start: 'top center',
-          end: 'bottom top',
-        },
-      })
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: '.pouring',
+            start: 'top center',
+            end: 'bottom top'
+          }
+        })
         .to(pouring.style, {
           duration: 2,
           opacity: 1,
-          ease: 'power1.inOut',
+          ease: 'power1.inOut'
         })
-        .to('#smile .pouring span', {
-          duration: 1,
-          y: 0,
-          ease: 'power1.inOut',
-          stagger: 0.3,
-        },
-        '<');
+        .to(
+          '#smile .pouring span',
+          {
+            duration: 1,
+            y: 0,
+            ease: 'power1.inOut',
+            stagger: 0.3
+          },
+          '<'
+        );
     });
     return () => gsapContext.revert();
   });
-
 </script>
 
 <div class="pouring" bind:this={pouring}>
-  A pouring of <span style="font-style:italic">soul</span> and <span style="font-style:italic">love</span>
+  A pouring of <span style="font-style:italic">soul</span> and
+  <span style="font-style:italic">love</span>
 </div>
 
 <style lang="scss">
@@ -51,7 +55,7 @@
     transform: translateX(calc(50vw - 50%));
     text-align: center;
   }
-  
+
   .pouring span {
     display: inline-block;
   }

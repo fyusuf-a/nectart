@@ -18,24 +18,21 @@
   enum Direction {
     LEFT,
     RIGHT
-  };
+  }
 
-  $: shownOdorIndexes = [
-    trueModulo(currentOdor - 1),
-    currentOdor,
-    trueModulo(currentOdor + 1),
-  ];
+  $: shownOdorIndexes = [trueModulo(currentOdor - 1), currentOdor, trueModulo(currentOdor + 1)];
 
   $: precedingOdor = trueModulo(currentOdor - 1);
   $: nextLeftOdor = trueModulo(currentOdor - 2);
   $: followingOdor = trueModulo(currentOdor + 1);
   $: nextRightOdor = trueModulo(currentOdor + 2);
-  
+
   const tryToPlay = () => {
     let video = document.getElementById(`video-${currentOdor}`) as HTMLVideoElement;
     video.volume = 0.3;
     video.muted = false;
-    video.play()
+    video
+      .play()
       .then(() => {
         // Autoplay started!
       })
@@ -46,26 +43,26 @@
         // Autoplay was prevented.
         // Show a "Play" button so that user can start playback.
       });
-  }
+  };
 
   const mute = () => {
     video = document.getElementById(`video-${currentOdor}`) as HTMLVideoElement;
     video.muted = true;
-  }
+  };
 
   const whichClass = (i: number, currentOdor: number) => {
     if (i === currentOdor) return 'middle-odor';
     if (i === trueModulo(currentOdor - 1)) return 'left-odor';
     if (i === trueModulo(currentOdor + 1)) return 'right-odor';
     return 'faded';
-  }
+  };
 
   const odor = (i: number, cssSelector: string = '') => {
     let selector = `#odor-${i}` + (cssSelector ? ` ${cssSelector}` : '');
     return document.querySelector(selector) as HTMLElement;
-  }
+  };
 
-  let handleClick: (i:number) => void;
+  let handleClick: (i: number) => void;
   let buttonsActive = true;
 
   const backgroundStyle = `
@@ -74,7 +71,7 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
-  `
+  `;
 
   onMount(() => {
     const gsapContext = gsap.context(() => {
@@ -87,7 +84,7 @@
         onLeave: mute,
         onEnterBack: tryToPlay,
         onLeaveBack: mute,
-        invalidateOnRefresh: true,
+        invalidateOnRefresh: true
       });
 
       // Pin the section
@@ -102,135 +99,144 @@
       const _smallTextStyle = window.getComputedStyle(odor(precedingOdor));
       const smallTextStyle = {
         fontSize: _smallTextStyle.fontSize,
-        fontStyle: _smallTextStyle.fontStyle,
+        fontStyle: _smallTextStyle.fontStyle
       };
       const _bigTextStyle = window.getComputedStyle(odor(INITIAL_CURRENT_ODOR));
       const bigTextStyle = {
         fontSize: _bigTextStyle.fontSize,
-        fontStyle: _bigTextStyle.fontStyle,
+        fontStyle: _bigTextStyle.fontStyle
       };
 
       const _middleStyle = window.getComputedStyle(odor(currentOdor));
       const middleStyle = {
         left: _middleStyle.left
-      }
+      };
 
-
-      const fadeTween = (odorIndex: number, newTextStyle: string) => gsap.to(`#odor-${odorIndex} .odor-caption`,
-        {
+      const fadeTween = (odorIndex: number, newTextStyle: string) =>
+        gsap.to(`#odor-${odorIndex} .odor-caption`, {
           opacity: 0.0,
           onComplete() {
-            odor(odorIndex).style.fontStyle = newTextStyle
+            odor(odorIndex).style.fontStyle = newTextStyle;
           }
-        },
-      );
+        });
 
       const slide = (direction: Direction) => {
         const nextOdorTimeline = gsap.timeline({
-          defaults: { duration: 1, ease: 'power4.out' },
+          defaults: { duration: 1, ease: 'power4.out' }
         });
         const disappearingOdor = direction === Direction.LEFT ? precedingOdor : followingOdor;
         const appearingOdor = direction === Direction.LEFT ? nextRightOdor : nextLeftOdor;
         const nextOdor = direction === Direction.LEFT ? followingOdor : precedingOdor;
 
         nextOdorTimeline
-          .fromTo(`#odor-${nextOdor} .video-container`,
+          .fromTo(
+            `#odor-${nextOdor} .video-container`,
             {
               scale: 0,
-              opacity: 0,
+              opacity: 0
             },
             {
               scale: 1,
               opacity: 1,
               duration: 0.5
-            },
+            }
           )
           .add(fadeTween(nextOdor, 'italic'), '<')
-          .to(`#background-${currentOdor}`,
+          .to(
+            `#background-${currentOdor}`,
             {
               onStart() {
-                (document.querySelector(`#background-${nextOdor}`) as HTMLElement).style.visibility = 'visible';
+                (
+                  document.querySelector(`#background-${nextOdor}`) as HTMLElement
+                ).style.visibility = 'visible';
               },
               opacity: 0.0,
-              duration: 1.5,
+              duration: 1.5
             },
             '<'
           )
-          .to(`#odor-${nextOdor}`, 
+          .to(
+            `#odor-${nextOdor}`,
             {
               left: middleStyle.left,
               duration: 1.5,
-              ease: 'power3.out',
+              ease: 'power3.out'
             },
             '<'
           )
-          .to(`#odor-${nextOdor}`,
+          .to(
+            `#odor-${nextOdor}`,
             {
               fontSize: bigTextStyle.fontSize,
-              duration: 1,
+              duration: 1
             },
             '<50%'
           )
-          .to(`#odor-${nextOdor} .odor-caption`,
+          .to(
+            `#odor-${nextOdor} .odor-caption`,
             {
               opacity: 1,
-              duration: 0.5,
+              duration: 0.5
             },
             '<10%'
           );
 
-
         const restTimeline = gsap.timeline({
-          defaults: { duration: 1, ease: 'power1.out' },
+          defaults: { duration: 1, ease: 'power1.out' }
         });
 
         restTimeline
-          .to(`#odor-${currentOdor}, #odor-${disappearingOdor}`,
+          .to(
+            `#odor-${currentOdor}, #odor-${disappearingOdor}`,
             {
               opacity: 0.0,
               duration: 0.5,
               onComplete() {
-                odor(currentOdor).style.left = `var(--odor-${direction === Direction.LEFT ? '0' : '2'})`;
+                odor(currentOdor).style.left = `var(--odor-${
+                  direction === Direction.LEFT ? '0' : '2'
+                })`;
                 odor(currentOdor, '.video-container').style.visibility = 'hidden';
               }
             },
             '<'
           )
-          .to(`#odor-${currentOdor}, #odor-${appearingOdor}`,
+          .to(
+            `#odor-${currentOdor}, #odor-${appearingOdor}`,
             {
               opacity: 1,
               delay: 1.5,
               duration: 0.5,
               onStart() {
                 odor(currentOdor).style.fontSize = smallTextStyle.fontSize;
-                odor(currentOdor).style.fontStyle = smallTextStyle.fontStyle
+                odor(currentOdor).style.fontStyle = smallTextStyle.fontStyle;
                 odor(appearingOdor).classList.remove('faded');
-                odor(appearingOdor).classList.add(direction === Direction.LEFT ? 'right-odor' : 'left-odor');
+                odor(appearingOdor).classList.add(
+                  direction === Direction.LEFT ? 'right-odor' : 'left-odor'
+                );
                 document.querySelector(`#background-${currentOdor}`)!.removeAttribute('style');
                 odor(appearingOdor).removeAttribute('style');
-                odor(currentOdor).classList.add(direction === Direction.LEFT ? 'left-odor' : 'right-odor');
+                odor(currentOdor).classList.add(
+                  direction === Direction.LEFT ? 'left-odor' : 'right-odor'
+                );
                 odor(nextOdor).removeAttribute('style');
                 odor(nextOdor, '.video-container').removeAttribute('style');
                 odor(currentOdor).removeAttribute('style');
                 odor(currentOdor, '.video-container').removeAttribute('style');
-                currentOdor = trueModulo(currentOdor + (direction === Direction.LEFT ? 1 : -1 ));
+                currentOdor = trueModulo(currentOdor + (direction === Direction.LEFT ? 1 : -1));
                 buttonsActive = true;
-              },
+              }
             },
             '<'
           );
 
         const masterTimeline = gsap.timeline({
-          onComplete() {
-          }
+          onComplete() {}
         });
 
-        masterTimeline
-          .add(nextOdorTimeline)
-          .add(restTimeline, '<');
-      }
+        masterTimeline.add(nextOdorTimeline).add(restTimeline, '<');
+      };
 
-      handleClick = (i:number) => {
+      handleClick = (i: number) => {
         if (i === currentOdor || !buttonsActive) return;
         buttonsActive = false;
         if (i === precedingOdor) {
@@ -239,11 +245,11 @@
         if (i === followingOdor) {
           slide(Direction.LEFT);
         }
-      }
+      };
     });
     return () => {
       gsapContext.revert();
-    }
+    };
   });
 </script>
 
@@ -267,41 +273,36 @@
     alt={odors[currentOdor].photoAlt}
   />
 
-  {#each odors as odor, i }
+  {#each odors as odor, i}
     <div
       key={odor.name}
-      id={ `odor-${i}` }
-      class={ 'odor ' + whichClass(i, currentOdor) }
+      id={`odor-${i}`}
+      class={'odor ' + whichClass(i, currentOdor)}
       on:click={() => handleClick(i)}
       on:keyup={() => {}}
       on:keydown={() => {}}
       aria-label={odor.name}
-      aria-selected={ i === currentOdor ? 'true' : 'false' }
-      aria-hidden={ shownOdorIndexes.includes(i) ? 'false' : 'true' }
+      aria-selected={i === currentOdor ? 'true' : 'false'}
+      aria-hidden={shownOdorIndexes.includes(i) ? 'false' : 'true'}
     >
       <div class="video-container">
-        <video
-          id={ `video-${i}` }
-          autoplay
-          muted
-          loop>
-        />
-        <div class="gradient" />
-        <source src={ `videos/${odor.videoUrl}` } type="video/mp4" />
+        <video id={`video-${i}`} autoplay muted loop>
+          />
+          <div class="gradient" />
+          <source src={`videos/${odor.videoUrl}`} type="video/mp4" />
         </video>
       </div>
-      <div class="odor-caption" >
+      <div class="odor-caption">
         {odor.name}
       </div>
     </div>
   {/each}
-
 </section>
 
 <style lang="scss">
   #section2 {
     --circle-ratio: 0.5;
-    --odor-0: calc((100vw - #{circle-size(var(--circle-ratio))})/4);
+    --odor-0: calc((100vw - #{circle-size(var(--circle-ratio))}) / 4);
     --odor-1: calc(2 * var(--odor-0) + #{circle-size(var(--circle-ratio))} / 2);
     --odor-2: calc(3 * var(--odor-0) + #{circle-size(var(--circle-ratio))});
     background-color: var(--Black);
@@ -315,7 +316,8 @@
     font-style: normal;
     @include typographic-scale(1, 0);
 
-    & .video-container, & .gradient {
+    & .video-container,
+    & .gradient {
       opacity: 0;
       transform: scale(0);
     }
@@ -327,7 +329,8 @@
     font-style: italic;
     @include typographic-scale(2, 0);
 
-    & .video-container, & .gradient {
+    & .video-container,
+    & .gradient {
       opacity: 1;
       transform: scale(1);
     }
@@ -339,7 +342,8 @@
     font-style: normal;
     @include typographic-scale(1, 0);
 
-    & .video-container, & .gradient {
+    & .video-container,
+    & .gradient {
       opacity: 0;
       transform: scale(0);
     }
@@ -376,8 +380,8 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      background: linear-gradient(215deg, #FFF 14.29%, rgba(255, 255, 255, 0.00) 69.87%); 
-      mix-blend-mode: soft-light; 
+      background: linear-gradient(215deg, #fff 14.29%, rgba(255, 255, 255, 0) 69.87%);
+      mix-blend-mode: soft-light;
     }
   }
 

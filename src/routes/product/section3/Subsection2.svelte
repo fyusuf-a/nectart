@@ -9,40 +9,38 @@
   onMount(() => {
     // hides the second couple
     couple2.style.display = 'none';
-    document.querySelectorAll('.couple2 .banner-text')
-      .forEach((el: Element) => {
-        (el as HTMLElement).style.opacity = '0';
-      });
-    
-    
+    document.querySelectorAll('.couple2 .banner-text').forEach((el: Element) => {
+      (el as HTMLElement).style.opacity = '0';
+    });
+
     const gsapContext = gsap.context(() => {
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: '#section3 .subsection2',
           pin: '#section3 .subsection2',
           invalidateOnRefresh: true,
-          scrub: true,
+          scrub: true
         }
       });
 
-      timeline.to('.couple1 .banner-text', {
-        opacity: 0,
-        onComplete: () => {
-          couple1.style.display = 'none';
-          couple2.style.display = 'flex';
-        },
-      })
+      timeline
+        .to('.couple1 .banner-text', {
+          opacity: 0,
+          onComplete: () => {
+            couple1.style.display = 'none';
+            couple2.style.display = 'flex';
+          }
+        })
         .to('.couple2 .banner-text', {
           opacity: 1,
           onReverseComplete: () => {
             couple1.style.display = 'flex';
             couple2.style.display = 'none';
-            document.querySelectorAll('.couple1 .banner-text')
-              .forEach((el: Element) => {
-                (el as HTMLElement).style.opacity = '0';
-              });
-          },
-        })
+            document.querySelectorAll('.couple1 .banner-text').forEach((el: Element) => {
+              (el as HTMLElement).style.opacity = '0';
+            });
+          }
+        });
     });
     return () => {
       gsapContext.revert();
@@ -52,8 +50,8 @@
 
 <section class="subsection2">
   <div class="section-background" />
-  <div class="background"/>
-  <div id="dialogue" bind:this={dialogue}> A dialogue between</div>
+  <div class="background" />
+  <div id="dialogue" bind:this={dialogue}>A dialogue between</div>
   <div class="banner-container">
     <div class="banner-couple couple1" bind:this={couple1}>
       <Banner
@@ -76,66 +74,61 @@
         --block-size-factor="0.96"
         --number-of-characters="12"
       />
-      <Banner
-        direction="right"
-        text="you"
-        --block-size-factor="3.1"
-        --number-of-characters="3"
-      />
+      <Banner direction="right" text="you" --block-size-factor="3.1" --number-of-characters="3" />
     </div>
   </div>
 </section>
 
 <style lang="scss">
-@import 'style.scss';
+  @import 'style.scss';
 
-.subsection2 {
-  background: #F9E5E3;
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  z-index: -2;
-}
+  .subsection2 {
+    background: #f9e5e3;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    z-index: -2;
+  }
 
-.background {
-  background-color: #bdbdbd;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -4;
-}
+  .background {
+    background-color: #bdbdbd;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -4;
+  }
 
-#dialogue {
-  @include accent;
-  
-  @include typographic-scale(2, 0);
-  color: var(--Black);
-  text-align: center;
-  z-index: 4;
-  height: calc(100vh / 4);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-}
+  #dialogue {
+    @include accent;
 
-.banner-container {
-  margin-top: calc(100vh / 10);
-  height: calc(100vh / 5 * 2);
-}
+    @include typographic-scale(2, 0);
+    color: var(--Black);
+    text-align: center;
+    z-index: 4;
+    height: calc(100vh / 4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  }
 
-.banner-couple {
-  margin-bottom: calc(100vh / 10);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 40px;
-}
+  .banner-container {
+    margin-top: calc(100vh / 10);
+    height: calc(100vh / 5 * 2);
+  }
 
-.section-background {
-  @include background;
-  background-position: 0 -100vh;
-}
+  .banner-couple {
+    margin-bottom: calc(100vh / 10);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .section-background {
+    @include background;
+    background-position: 0 -100vh;
+  }
 </style>

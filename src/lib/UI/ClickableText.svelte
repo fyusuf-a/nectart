@@ -4,22 +4,18 @@
   export let disabled: boolean = false;
 </script>
 
-<button
-  on:click={onClick}
-  class={`button${disabled ? ' disabled' : ''}`}
->
+<button on:click={onClick} class={`button${disabled ? ' disabled' : ''}`}>
   <div>
-    { text ?? '' }
+    {text ?? ''}
   </div>
   <div class="underline" />
 </button>
 
 <style lang="scss">
-@import 'src/styles/link.scss';
+  @import 'src/styles/link.scss';
 
-.button {
-  width: 100%;
-  height: 100%;
-}
+  .button {
+    width: 100%;
+    height: 100%;
+  }
 </style>
-

@@ -6,7 +6,6 @@
   import * as THREE from 'three';
   import Video from './Video.svelte';
 
-  let videoContainer: HTMLDivElement;
   let video: HTMLVideoElement;
   let timeAtLastMouseMove = 0;
   let videoRateAtLastMouseMove = 0;
@@ -53,12 +52,6 @@
   });
 </script>
 
-<Video
-  autoplay
-  muted
-  loop
-  style={videoStyle}
-  bind:video={video}
->
+<Video autoplay muted loop style={videoStyle} bind:video>
   <source src="videos/oleg-lehnitsky.mp4" type="video/mp4" />
 </Video>

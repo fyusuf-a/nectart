@@ -1,12 +1,8 @@
 <script lang="ts">
-export let video: HTMLVideoElement;
-export let customStyle: string = '';
+  export let video: HTMLVideoElement;
 </script>
 
-<video
-  preload="metadata"
-  {...$$restProps}
-  bind:this={video}
->
+<!-- svelte-ignore a11y-media-has-caption -->
+<video preload="metadata" {...$$restProps} bind:this={video}>
   <slot />
 </video>

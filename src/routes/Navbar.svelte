@@ -6,16 +6,16 @@
   const routes = [
     {
       name: 'Our product',
-      path: '/product',
+      path: '/product'
     },
     {
       name: 'Plum elixir',
-      path: '/plum-elixir',
+      path: '/plum-elixir'
     },
     {
       name: 'Contact',
-      path: '/contact',
-    },
+      path: '/contact'
+    }
   ];
 
   let navbar: HTMLElement;
@@ -34,16 +34,13 @@
     return () => {
       window.onscroll = null;
     };
-  })
+  });
 </script>
 
 <nav id="navbar" bind:this={navbar}>
   {#each routes as route}
     <div class="link">
-      <Link
-        href={route.path}
-        disabled={route.path === $page.url.pathname}
-      >
+      <Link href={route.path} disabled={route.path === $page.url.pathname}>
         {route.name}
       </Link>
     </div>

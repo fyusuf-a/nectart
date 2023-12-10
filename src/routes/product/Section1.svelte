@@ -33,10 +33,10 @@
         onEnterBack: straightBottleAnimation,
         invalidateOnRefresh: true
       });
-    })
+    });
     return () => {
       gsapContext.revert();
-    }
+    };
   });
 </script>
 
@@ -45,23 +45,16 @@
     <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
   <div id="rocks">
-    <Image
-      src="photos/rocks"
-      alt="Black rocks shining reflecting a discreet blue light"
-    />
+    <Image src="photos/rocks" alt="Black rocks shining reflecting a discreet blue light" />
   </div>
-  <div class="cta" >
-    <ClickableText
-      text={ ctaText }
-      disabled={ ctaDisabled }
-      onClick={activateUnmuted}
-    />
+  <div class="cta">
+    <ClickableText text={ctaText} disabled={ctaDisabled} onClick={activateUnmuted} />
   </div>
   <div id="black-rectangle" />
 </section>
 
 <style lang="scss">
-  @import "./style.scss";
+  @import './style.scss';
 
   #section1 {
     background-color: var(--Black);

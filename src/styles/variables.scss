@@ -52,11 +52,14 @@ $navbar-note: 0;
   $min-width: 20,
   $max-width: 100,
   $property: font-size,
-  $unit: px,
+  $unit: px
 ) {
   #{$property}: calc(
-    calc(#{$min-size}#{$unit}) + calc((#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}#{$unit}) /
-          (#{$max-width} - #{$min-width})))
+    calc(#{$min-size}#{$unit}) +
+      calc(
+        (#{$max-size} - #{$min-size}) *
+          ((100vw - #{$min-width}#{$unit}) / (#{$max-width} - #{$min-width}))
+      )
   );
 
   @media (max-width: #{$min-width}#{$unit}) {
@@ -76,10 +79,7 @@ $navbar-vertical-padding: 40px;
 $navbar-scale: 0;
 $navbar-note: 0;
 @function navbar-height() {
-  @return calc(
-    2 * #{$navbar-vertical-padding} +
-      scale($navbar-scale, $navbar-note)
-  );
+  @return calc(2 * #{$navbar-vertical-padding} + scale($navbar-scale, $navbar-note));
 }
 
 @function rest-height($ratio) {
@@ -91,5 +91,5 @@ $navbar-note: 0;
 }
 
 @function circle-size($ratio) {
-    @return calc(min(100vw, 100vh) * #{$ratio});
- }
+  @return calc(min(100vw, 100vh) * #{$ratio});
+}

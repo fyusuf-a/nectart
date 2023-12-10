@@ -3,16 +3,11 @@
   export let disabled: boolean = false;
 </script>
 
-<a
-  href={href}
-  class="button"
-  class:disabled={disabled}
->
-  <slot></slot>
+<a {href} class="button" class:disabled>
+  <slot />
   <div class="underline" />
 </a>
 
 <style lang="scss">
-@import 'src/styles/link.scss';
-
+  @import 'src/styles/link.scss';
 </style>

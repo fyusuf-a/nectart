@@ -9,7 +9,7 @@
   const bottleBlur = '10px';
 </script>
 
-<Bottle --blur={ bottleBlur } />
+<Bottle --blur={bottleBlur} />
 <Section1 />
 <Section2 />
 <Section3 />
@@ -18,7 +18,7 @@
 <div id="section6" />
 
 <style lang="scss">
-  @import "./style.scss";
+  @import './style.scss';
 
   #section6 {
     height: 100vh;

@@ -6,10 +6,6 @@
   let sensation: HTMLElement;
   let emotion: HTMLElement;
 
-  let screenWidth = 0;
-  let screenHeight = 0;
-  let navbarHeight = 0;
-
   // Pin the section
   onMount(() => {
     emotion.style.display = 'none';
@@ -40,7 +36,7 @@
           trigger: '#section3 .subsection1',
           scrub: true,
           pin: '#section3 .subsection1',
-          invalidateOnRefresh: true,
+          invalidateOnRefresh: true
         }
       });
 
@@ -52,18 +48,20 @@
       const blurHelper = { blur };
       const scaleFactor = 1.8;
 
-
-      timeline.fromTo('#bottle-centering-container', 
-        {
-          bottom: () => `${(screenHeight - navbarHeight) / 2}px`,
-        },
-        {
-          bottom: () => '50vh',
-        }
-      )
+      timeline
+        .fromTo(
+          '#bottle-centering-container',
+          {
+            bottom: () => `${(screenHeight - navbarHeight) / 2}px`
+          },
+          {
+            bottom: () => '50vh'
+          }
+        )
         .to('#bottle-container', {
-          scale: () => scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
-          duration: 2,
+          scale: () =>
+            scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
+          duration: 2
         })
         .to('#sensation', {
           autoAlpha: 0,
@@ -79,12 +77,13 @@
         })
         .to('#emotion', {
           autoAlpha: 1,
-          duration: 0.5,
+          duration: 0.5
         })
-        .to('#section3 .background-circle',
+        .to(
+          '#section3 .background-circle',
           {
             opacity: 1,
-            duration: 0.5,
+            duration: 0.5
           },
           '<'
         )
@@ -92,7 +91,7 @@
           blur: 0,
           onUpdate: () => {
             gsap.set(blurElement, {
-              'backdrop-filter': `blur(${blurHelper.blur}px)`,
+              'backdrop-filter': `blur(${blurHelper.blur}px)`
             });
           }
         });
@@ -100,14 +99,16 @@
     return () => {
       gsapContext.revert();
       window.removeEventListener('resize', getScreenSize);
-    }
+    };
   });
 </script>
 
 <section class="subsection1">
   <div class="section-background" />
-  <div class="background-circle"/>
-  <div id="sensation" bind:this={sensation}>Perfume <span class="accent">is</span><br> a sensation</div>
+  <div class="background-circle" />
+  <div id="sensation" bind:this={sensation}>
+    Perfume <span class="accent">is</span><br /> a sensation
+  </div>
   <div id="emotion" bind:this={emotion}>an emotion</div>
 </section>
 
@@ -115,7 +116,7 @@
   @import 'style.scss';
 
   .subsection1 {
-    background: #F9E5E3;
+    background: #f9e5e3;
     position: relative;
     height: 100vh;
     width: 100%;
