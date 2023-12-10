@@ -19,9 +19,7 @@ const directories = [
 const resolutions = [100, 200, 400, 800, 1000, 1400, 1800];
 
 function exploreDirectory(directory) {
-  console.log(`Exploring ${directory}`);
   fs.readdirSync(directory).forEach((file) => {
-    console.log(file);
     if (fs.lstatSync(`${directory}/${file}`).isDirectory()) {
       return;
     }
