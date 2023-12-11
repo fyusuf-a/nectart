@@ -308,7 +308,9 @@
     background-color: var(--Black);
     z-index: 3;
     height: 100vh;
+    width: 100vw;
     position: relative;
+    overflow: hidden;
   }
 
   .left-odor {
