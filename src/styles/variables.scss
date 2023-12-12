@@ -46,33 +46,22 @@ $navbar-note: 0;
   font-size: scale($octave, $note);
 }
 
-@mixin css-lock(
-  $min-size: 1,
-  $max-size: 1.4,
-  $min-width: 20,
-  $max-width: 100,
-  $property: font-size,
-  $unit: px
-) {
-  #{$property}: calc(
-    calc(#{$min-size}#{$unit}) +
-      calc(
-        (#{$max-size} - #{$min-size}) *
-          ((100vw - #{$min-width}#{$unit}) / (#{$max-width} - #{$min-width}))
-      )
-  );
-
-  @media (max-width: #{$min-width}#{$unit}) {
-    #{$property}: #{$min-size}#{$unit};
-  }
-
-  @media (min-width: #{$max-width}#{$unit}) {
-    #{$property}: #{$max-size}#{$unit};
-  }
-}
-
 :root {
-  @include css-lock(12, 25, $screen-sm-min, 3000);
+  @include sm {
+    font-size: 12px;
+  }
+
+  @include md {
+    font-size: 14px;
+  }
+
+  @include lg {
+    font-size: 16px;
+  }
+
+  @include xl {
+    font-size: 18px;
+  }
 }
 
 $navbar-vertical-padding: 40px;
