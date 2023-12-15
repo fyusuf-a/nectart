@@ -12,7 +12,7 @@
     const result = x % odors.length;
     return result < 0 ? result + odors.length : result;
   };
-  const INITIAL_CURRENT_ODOR = 1;
+  const INITIAL_CURRENT_ODOR = 3;
   let currentOdor = INITIAL_CURRENT_ODOR;
 
   enum Direction {
