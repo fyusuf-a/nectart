@@ -3,7 +3,11 @@
   export let disabled: boolean = false;
 </script>
 
-<a {href} class="button" class:disabled>
+<a
+  {href} class="button"
+  class:disabled
+  {...$$restProps}
+>
   <slot />
   <div class="underline" />
 </a>

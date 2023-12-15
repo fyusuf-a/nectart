@@ -9,10 +9,10 @@
   let pinTimeline: gsap.core.Timeline;
 
   onMount(() => {
-    const slides = document.querySelector('.slides') as HTMLElement;
-    const slideshow = new Slideshow(slides);
+    let gsapContext = gsap.context(() => {
+      const slides = document.querySelector('.slides') as HTMLElement;
+      const slideshow = new Slideshow(slides);
 
-    const gsapContext = gsap.context(() => {
       pinTimeline = gsap.timeline({
         ease: 'none',
         scrollTrigger: {
@@ -55,6 +55,7 @@
       }
     });
     return () => {
+      pinTimeline.revert();
       gsapContext.revert();
     };
   });
