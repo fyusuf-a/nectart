@@ -15,7 +15,6 @@
 <Section3 />
 <Section4 />
 <Section5 />
-<div id="section6" />
 
 <style lang="scss">
   @import './style.scss';
