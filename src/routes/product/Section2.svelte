@@ -96,21 +96,27 @@
       });
 
       // The carousel animation
-      const _smallTextStyle = window.getComputedStyle(odor(precedingOdor));
-      const smallTextStyle = {
-        fontSize: _smallTextStyle.fontSize,
-        fontStyle: _smallTextStyle.fontStyle
-      };
-      const _bigTextStyle = window.getComputedStyle(odor(INITIAL_CURRENT_ODOR));
-      const bigTextStyle = {
-        fontSize: _bigTextStyle.fontSize,
-        fontStyle: _bigTextStyle.fontStyle
+      const smallTextStyle = () => {
+        const _smallTextStyle = window.getComputedStyle(odor(precedingOdor));
+        return {
+          fontSize: _smallTextStyle.fontSize,
+          fontStyle: _smallTextStyle.fontStyle
+        }
+      }
+      const bigTextStyle = () => {
+        const _bigTextStyle = window.getComputedStyle(odor(INITIAL_CURRENT_ODOR));
+        return {
+          fontSize: _bigTextStyle.fontSize,
+          fontStyle: _bigTextStyle.fontStyle
+        }
       };
 
-      const _middleStyle = window.getComputedStyle(odor(currentOdor));
-      const middleStyle = {
-        left: _middleStyle.left
-      };
+      const middleStyle = () => {
+        const _middleStyle = window.getComputedStyle(odor(currentOdor));
+        return {
+          left: _middleStyle.left
+        }
+      }
 
       const fadeTween = (odorIndex: number, newTextStyle: string) =>
         gsap.to(`#odor-${odorIndex} .odor-caption`, {
@@ -158,7 +164,7 @@
           .to(
             `#odor-${nextOdor}`,
             {
-              left: middleStyle.left,
+              left: () => middleStyle().left,
               duration: 1.5,
               ease: 'power3.out'
             },
@@ -167,7 +173,7 @@
           .to(
             `#odor-${nextOdor}`,
             {
-              fontSize: bigTextStyle.fontSize,
+              fontSize: () => bigTextStyle().fontSize,
               duration: 1
             },
             '<50%'
@@ -207,8 +213,8 @@
               delay: 1.5,
               duration: 0.5,
               onStart() {
-                odor(currentOdor).style.fontSize = smallTextStyle.fontSize;
-                odor(currentOdor).style.fontStyle = smallTextStyle.fontStyle;
+                odor(currentOdor).style.fontSize = smallTextStyle().fontSize;
+                odor(currentOdor).style.fontStyle = smallTextStyle().fontStyle;
                 odor(appearingOdor).classList.remove('faded');
                 odor(appearingOdor).classList.add(
                   direction === Direction.LEFT ? 'right-odor' : 'left-odor'
