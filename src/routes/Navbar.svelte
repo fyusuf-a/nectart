@@ -14,7 +14,7 @@
     },
     {
       name: 'Contact',
-      path: '/contact'
+      path: 'mailto:contact@nect.art'
     }
   ];
 
