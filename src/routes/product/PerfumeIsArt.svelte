@@ -111,9 +111,13 @@
   </div>
 
   <div class="video-container" bind:this={videoContainer}>
-    <Video autoplay muted loop style={videoStyle}>
-      <source src="videos/oleg-lehnitsky.mp4" type="video/mp4" />
-    </Video>
+    <Video
+      source="videos/oleg-lehnitsky"
+      autoplay
+      muted
+      loop
+      style={videoStyle}
+    />
   </div>
 
   <svg version="1.1" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
