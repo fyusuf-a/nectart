@@ -112,7 +112,7 @@
 
   <div class="video-container" bind:this={videoContainer}>
     <Video
-      source="videos/oleg-lehnitsky"
+      src="videos/oleg-lehnitsky"
       autoplay
       muted
       loop
