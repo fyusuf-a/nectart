@@ -23,6 +23,9 @@ function exploreDirectory(directory) {
     if (fs.lstatSync(`${directory}/${file}`).isDirectory()) {
       return;
     }
+    if (file === '.gitignore') {
+      return;
+    }
 
     const fileExtension = path.extname(file);
     //ignore the file if it's already a webp
