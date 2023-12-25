@@ -28,7 +28,7 @@
         });
       };
       ScrollTrigger.create({
-        trigger: '#section1',
+        trigger: '#above-the-fold',
         onEnter: straightBottleAnimation,
         onEnterBack: straightBottleAnimation,
         invalidateOnRefresh: true
@@ -40,7 +40,7 @@
   });
 </script>
 
-<section id="section1">
+<section id="above-the-fold">
   <div class="circle">
     <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
@@ -56,7 +56,7 @@
 <style lang="scss">
   @import './style.scss';
 
-  #section1 {
+  #above-the-fold {
     background-color: var(--Black);
     width: 100vw;
     margin-top: navbar-height();

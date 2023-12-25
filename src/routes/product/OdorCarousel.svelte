@@ -77,7 +77,7 @@
     const gsapContext = gsap.context(() => {
       // Try to play the video's audio when the section is in view
       ScrollTrigger.create({
-        trigger: '#section2',
+        trigger: '#odor-carousel',
         start: 'top center',
         end: 'bottom center',
         onEnter: tryToPlay,
@@ -89,7 +89,7 @@
 
       // Pin the section
       ScrollTrigger.create({
-        trigger: '#section2',
+        trigger: '#odor-carousel',
         pin: true,
         invalidateOnRefresh: true,
         end: 'bottom 70%'
@@ -259,7 +259,7 @@
   });
 </script>
 
-<section id="section2">
+<section id="odor-carousel">
   <Image
     id={`background-${precedingOdor}`}
     style={`visibility:hidden;${backgroundStyle}`}
@@ -306,7 +306,7 @@
 </section>
 
 <style lang="scss">
-  #section2 {
+  #odor-carousel {
     --circle-ratio: 0.5;
     --odor-0: calc((100vw - #{circle-size(var(--circle-ratio))}) / 4);
     --odor-1: calc(2 * var(--odor-0) + #{circle-size(var(--circle-ratio))} / 2);

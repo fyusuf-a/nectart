@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Subsection1 from './section3/Subsection1.svelte';
-  import Subsection2 from './section3/Subsection2.svelte';
+  import Subsection1 from './perfume-is-a-sensation/Subsection1.svelte';
+  import Subsection2 from './perfume-is-a-sensation/Subsection2.svelte';
   import { onMount } from 'svelte';
   import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -22,7 +22,7 @@
       });
 
       ScrollTrigger.create({
-        trigger: '#section3',
+        trigger: '#perfume-is-a-sensation',
         onEnter: () => bouncingTimeline.play(),
         onLeave: () => bouncingTimeline.pause(),
         onEnterBack: () => bouncingTimeline.play(),
@@ -37,7 +37,7 @@
   });
 </script>
 
-<div id="section3">
+<div id="perfume-is-a-sensation">
   <Subsection1 />
   <Subsection2 />
 </div>

@@ -16,8 +16,8 @@
     const gsapContext = gsap.context(() => {
       const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: '#section3 .subsection2',
-          pin: '#section3 .subsection2',
+          trigger: '#perfume-is-a-sensation .subsection2',
+          pin: '#perfume-is-a-sensation .subsection2',
           invalidateOnRefresh: true,
           scrub: true
         }

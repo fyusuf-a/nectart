@@ -33,9 +33,9 @@
     const gsapContext = gsap.context(() => {
       const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: '#section3 .subsection1',
+          trigger: '#perfume-is-a-sensation .subsection1',
           scrub: true,
-          pin: '#section3 .subsection1',
+          pin: '#perfume-is-a-sensation .subsection1',
           invalidateOnRefresh: true
         }
       });
@@ -80,7 +80,7 @@
           duration: 0.5
         })
         .to(
-          '#section3 .background-circle',
+          '#perfume-is-a-sensation .background-circle',
           {
             opacity: 1,
             duration: 0.5

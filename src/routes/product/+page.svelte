@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Section1 from './Section1.svelte';
-  import Section2 from './Section2.svelte';
-  import Section3 from './Section3.svelte';
+  import Section1 from './AboveTheFold.svelte';
+  import Section2 from './OdorCarousel.svelte';
+  import Section3 from './PerfumeIsASensation.svelte';
   import Section4 from './PerfumeIsArt.svelte';
   import Section5 from './FleetingEmbrace.svelte';
   import Bottle from './Bottle.svelte';
