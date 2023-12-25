@@ -5,8 +5,15 @@
   export let src = '';
   export let video: HTMLVideoElement | null = null;
   export let poster: HTMLImageElement | null = null;
+  export let loaded = false;
+  export let onLoad = () => {};
   const resolutions = [1800, 1400, 1000, 800, 400, 200];
   let videoAvailable = false;
+
+  const playVideo = () => {
+      video!.play();
+      videoAvailable = true;
+  };
 
   onMount(() => {
     const screenSize = window.innerWidth;
@@ -18,10 +25,24 @@
       }
     }
     video!.src = `${src}-${videoResolution}.webm`;
-    video!.addEventListener('canplaythrough', () => {
-      video!.play();
-      videoAvailable = true;
-    });
+    video!.addEventListener('canplaythrough', playVideo);
+
+    const checkProgressTick = setInterval(() => {
+      if (video!.buffered.length !== 0) {
+        if (video!.buffered.end(0) / video!.duration > 0.9) {
+          loaded = true;
+          onLoad();
+          clearInterval(checkProgressTick);
+        }
+        return;
+      }
+    }, 500);
+
+    return () => {
+      video!.removeEventListener('canplaythrough', playVideo);
+      if (!loaded)
+        clearInterval(checkProgressTick);
+    };
   })
 </script>
 

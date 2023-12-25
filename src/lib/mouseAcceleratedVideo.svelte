@@ -10,17 +10,25 @@
   let timeAtLastMouseMove = 0;
   let videoRateAtLastMouseMove = 0;
   let targetPlaybackRate = 0.7;
+  let loaded: boolean;
+
+  type Mouse = {
+    x: number;
+    y: number;
+  };
 
   const videoStyle = `
-    width: 100%;
-    height: 100%;
     object-fit: cover;
   `;
 
   onMount(() => {
     const mouse = { x: 0, y: 0 };
     const clock = new THREE.Clock();
-    window.addEventListener('mousemove', function (event) {
+
+    const onMouseMove = (event: MouseEvent) => {
+      if (!loaded) {
+        return;
+      }
       const mouseSpeed = Math.sqrt(
         Math.pow(mouse.x - event.clientX, 2) + Math.pow(mouse.y - event.clientY, 2)
       );
@@ -33,7 +41,9 @@
         videoRateAtLastMouseMove = targetPlaybackRate;
       }
       timeAtLastMouseMove = clock.getElapsedTime();
-    });
+    }
+
+    window.addEventListener('mousemove', onMouseMove)
 
     let frame = requestAnimationFrame(function tick() {
       const elapsed = clock.getElapsedTime();
@@ -48,10 +58,19 @@
 
     return () => {
       cancelAnimationFrame(frame);
+      window.removeEventListener('mousemove', onMouseMove);
     };
   });
 </script>
 
-<Video autoplay muted loop style={videoStyle} bind:video>
-  <source src="videos/oleg-lehnitsky.mp4" type="video/mp4" />
-</Video>
+<Video
+  src="videos/oleg-lehnitsky"
+  autoplay
+  muted
+  loop
+  style={videoStyle}
+  onLoad={() => {
+    loaded = true;
+  }}
+  bind:video
+/>
