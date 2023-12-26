@@ -47,6 +47,8 @@ $navbar-note: 0;
 }
 
 :root {
+  font-size: 10px;
+
   @include sm {
     font-size: 12px;
   }
