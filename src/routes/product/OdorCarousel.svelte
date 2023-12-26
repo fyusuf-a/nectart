@@ -104,7 +104,7 @@
         }
       }
       const bigTextStyle = () => {
-        const _bigTextStyle = window.getComputedStyle(odor(INITIAL_CURRENT_ODOR));
+        const _bigTextStyle = window.getComputedStyle(odor(currentOdor));
         return {
           fontSize: _bigTextStyle.fontSize,
           fontStyle: _bigTextStyle.fontStyle
