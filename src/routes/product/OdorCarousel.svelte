@@ -303,6 +303,41 @@
       </div>
     </div>
   {/each}
+  <div
+    class="odor-carousel-indicator"
+  >
+    {#each odors as odor, i}
+    <div
+      class="dot-container"
+    >
+      <div
+        class={`dot${i === currentOdor ? ' selected' : ''}`}
+      />
+    </div>
+    {/each}
+    <div
+      on:click={() => handleClick(precedingOdor)}
+      on:keydown={(event) => {
+        if (event.key === 'Enter' || event.key === 'Space') {
+          handleClick(precedingOdor);
+        }
+      }}
+      class="go-left"
+      role="button"
+      tabindex="0"
+    />
+    <div
+      on:click={() => handleClick(followingOdor)}
+      on:keydown={(event) => {
+        if (event.key === 'Enter' || event.key === 'Space') {
+          handleClick(followingOdor);
+        }
+      }}
+      class="go-right"
+      role="button"
+      tabindex="0"
+    />
+  </div>
 </section>
 
 <style lang="scss">
@@ -328,6 +363,12 @@
     & .gradient {
       opacity: 0;
       transform: scale(0);
+    }
+    & .odor-caption {
+      display: none;
+      @include sm {
+        display: block;
+      }
     }
     z-index: 3;
   }
@@ -355,6 +396,12 @@
       opacity: 0;
       transform: scale(0);
     }
+    & .odor-caption {
+      display: none;
+      @include sm {
+        display: block;
+      }
+    }
   }
 
   .faded {
@@ -368,7 +415,10 @@
     border-radius: 50%;
     overflow: hidden;
 
-    @include md {
+    width: circle-size(0.8);
+    height: circle-size(0.8);
+
+    @include sm {
       width: circle-size(0.5);
       height: circle-size(0.5);
     }
@@ -394,7 +444,6 @@
   }
 
   .odor {
-    /* transition: all 0.5s ease-in-out; */
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -409,5 +458,61 @@
     font-family: 'Saol Display', serif;
     text-transform: none;
     color: white;
+  }
+
+  .odor-carousel-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    display: flex;
+  }
+
+  .dot-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+  }
+
+  .dot {
+    background-color:var(--White);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+
+    &.selected {
+      width: 20px;
+      height: 20px;
+    }
+    transition: all 0.5s ease-in-out;
+  }
+
+  .dot.no-color {
+    font-size: 10rem;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+  }
+
+  .go-left, .go-right {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    z-index: 10;
+  }
+
+  .go-left {
+    left: 0;
+  }
+
+  .go-right {
+    right: 0;
   }
 </style>
