@@ -21,8 +21,8 @@
         .timeline({
           scrollTrigger: {
             trigger: '#fleeting-embrace',
-            start: 'top top',
-            end: 'bottom top'
+            start: 'top +=70%',
+            end: 'bottom top',
           }
         })
         .to('.text span .char', {
@@ -86,8 +86,7 @@
   }
 
   .text-container {
-    padding: 0 5rem;
-    height: 70vh;
+    padding: 5rem 5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,10 +98,16 @@
     margin-bottom: 0;
   }
 
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4rem;
+  }
+
   .text-container span {
     display: block;
     text-align: center;
-    margin-bottom: 80px;
   }
 
   .veil {
