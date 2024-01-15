@@ -49,7 +49,7 @@
       text: 'A ripe jewel <span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">bursting with</span> sugar'
     },
     {
-      src: 'wine',
+      src: 'kym-ellis-aF1NPSnDQLw-unsplash',
       position: 1,
       text: '<span style="font-family:\'Saol Display\', serif;text-transform:none;font-style:italic">A liquid sonnet</span>'
     },
