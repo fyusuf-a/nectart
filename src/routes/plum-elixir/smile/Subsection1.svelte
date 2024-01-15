@@ -18,24 +18,24 @@
         .timeline({
           scrollTrigger: {
             trigger: '.smile:nth-child(2)',
-            start: 'top +=70%',
-            end: 'bottom top'
+            start: 'top +=80%',
+            end: 'bottom top',
           }
         })
         .to('.smile:nth-child(1)', {
-          duration: 2,
+          duration: 1.5,
           x: 0
         })
         .to(
           '.smile:nth-child(3)',
           {
-            duration: 2,
+            duration: 1.5,
             x: 0
           },
           '-=1'
         )
         .to('.smile:nth-child(2)', {
-          duration: 2,
+          duration: 1,
           opacity: 3,
           y: 0,
           ease: 'power1.inOut'
@@ -55,6 +55,7 @@
 
 <style lang="scss">
   .text-container {
+    padding-top: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
