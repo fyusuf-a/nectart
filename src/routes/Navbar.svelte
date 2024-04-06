@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Link from '$lib/UI/Link.svelte';
+  import Web3Button from './Web3Button.svelte';
   import { page } from '$app/stores';
 
   const routes = [
@@ -37,6 +38,7 @@
   });
 </script>
 
+<div>
 <nav id="navbar" bind:this={navbar}>
   {#each routes as route}
     <div class="link">
@@ -45,7 +47,10 @@
       </Link>
     </div>
   {/each}
+  <div style="background-color:red">
+  <Web3Button />
 </nav>
+</div>
 
 <style lang="scss">
   .link {
