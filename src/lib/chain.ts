@@ -23,10 +23,10 @@ export const mainnet: Chain = {
     default: { name: 'EVM Sidechain Explorer', url: 'https://evm-sidechain.xrpl.org' },
   },
   contracts: {
-    nftToken: {
+    nft: {
       address: import.meta.env.VITE_NFT_TOKEN_ADDRESS
     },
-    auctionAddress: {
+    auction: {
       address: import.meta.env.VITE_AUCTION_ADDRESS
     }
   },

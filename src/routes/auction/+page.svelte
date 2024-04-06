@@ -1,20 +1,35 @@
-<script>
+<script lang="ts">
+    import { wagmiConfig } from '$lib/chain';
+    import { readContract, writeContract } from '@wagmi/core';
+    import type { ReadContractParameters } from '@wagmi/core';
+    import auctionAbi from '../../deployments/chain-1440002/artifacts/AuctionContract.json';
+    import { formatEther } from 'viem';
+
+    const BID_ID = 0;
+    const TOKEN_ID = 2;
+
+    let highestBid = '-';
+
 	let product = {
 	  name: "Plum-Elixir",
 	  seller: "Antoine Lie",
-	  highestBid: "$100",
 	  description: "Plum Elixir capture l'essence luxueuse et envoûtante des prunes mûres cueillies à leur apogée. Cette fragrance enivrante dévoile des notes fruitées riches et sucrées de prune juteuse, harmonisées avec des nuances florales délicates et des accords boisés chauds. L'élixir de prune incarne l'élégance sophistiquée, évoquant une atmosphère de mystère et de séduction. Portez Plum Elixir pour révéler votre côté séduisant et laissez-vous envelopper par son sillage enivrant qui laisse une empreinte inoubliable partout où vous allez.",
 	  imageUrl: "/photos/bottle-400.webp"
 	};
 	let showModal = false;
   
 	// Function to handle making an offer
-	function makeOffer() {
-	  // Add your logic here
+	async function makeOffer() {
+          await writeContract(wagmiConfig, {
+            abi: auctionAbi.abi as any,
+            address: '0x0BB9569dDD9650Baf976b308165F13734596b92B',
+            functionName: 'bid',
+            args: [0, BigInt(amountInXRP) * 1_000_000_000_000_000_000n]
+          });
+	  console.log('Offer made:', amountInXRP, 'XRP');
 	}
 	
     function toggleModal() {
-	  console.log("Offer made!");
       showModal = !showModal;
     }// Variable pour stocker le montant en USD
   	let connectedWallet = ''; // Variable pour stocker l'adresse du portefeuille connecté
@@ -24,10 +39,6 @@
     	connectedWallet = 'Wallet Address'; // Exemple d'adresse de portefeuille connecté
   	}
 
-  	function confirmPayment() {
-    	// Ajoutez ici la logique pour confirmer le paiement en XRP
-    	console.log('Payment confirmed!');
-  	}
 	import { onMount } from 'svelte';
 
 	let amountInXRP = 0;
@@ -51,9 +62,19 @@
 		}
 	}
 
+        const params: ReadContractParameters = {
+          abi: auctionAbi.abi as any,
+          address: '0x0BB9569dDD9650Baf976b308165F13734596b92B',
+          functionName: 'auctions',
+          args: [0]
+        };
+
 	// Call convertXRPtoUSD on initial mount and whenever amountInXRP changes
-	onMount(convertXRPtoUSD);
-	$: convertXRPtoUSD();
+	onMount(() => {
+          readContract(wagmiConfig, params).then((result) => {
+            highestBid = formatEther(result[4]);
+          });
+        });
 </script>
 
 <div class="auction-page">
@@ -69,7 +90,7 @@
 		<h4>Description: </h4>
 		<p></p>
 		<p class="description">{product.description}</p>
-		<h3> Highest Bid : <b class="price">{product.highestBid}</b></h3>
+		<h3> Highest Bid : <b class="price">{highestBid}XRP</b></h3>
 		<button on:click={toggleModal} class="offer-button">Make an offer</button>`
 	</div>
 </div>
@@ -87,7 +108,7 @@
 		  <div class="total"><p>Total : </p><p>{amountInXRP === null ? '-' : amountInXRP} XRP <b class="usd">${amountInUSD.toFixed(2)}</b></p></div>
 	  </div>
 	  <p class="description">We will use your digital wallet to submit your offer. You will be asked to confirm your offer amount with your digital wallet.</p>
-	  <button class="bid-button" on:click={confirmPayment} disabled>Confirm Payment</button>
+	  <button class="bid-button" on:click={makeOffer}>Confirm Payment</button>
 	</div>
   </div>
 {/if}
