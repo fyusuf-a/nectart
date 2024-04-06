@@ -5,8 +5,10 @@
   import { lenis } from '../stores/lenis';
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import { gsap } from 'gsap';
-  import { http, createConfig } from '@wagmi/core';
-  import { type Chain } from 'viem';
+  import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query'
+
+  const queryClient = new QueryClient();
+  
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +19,9 @@
       lenis.destroy();
     };
   });
+
 </script>
 
-<slot />
+<QueryClientProvider client = {queryClient}>
+  <slot />
+</QueryClientProvider>
