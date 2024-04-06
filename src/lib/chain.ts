@@ -2,19 +2,8 @@ import type { Chain } from 'viem'
 import { http, createConfig } from '@wagmi/core'
 import { reconnect } from '@wagmi/core'
 import { createWeb3Modal } from '@web3modal/wagmi';
-import { getAccount, watchAccount } from '@wagmi/core';
-import { readable, writable } from 'svelte/store';
 
-const CUSTOM_WALLET = 'wc:nectart_wallet';
-
-const projectId = '0717fb8ed954b593fc73965a35a386e4';
-
-let storedCustomWallet;
-if (typeof window !== 'undefined') {
-  storedCustomWallet = localStorage.getItem(CUSTOM_WALLET);
-}
-
-const customWallets = storedCustomWallet ? [JSON.parse(storedCustomWallet)] : undefined;
+const projectId = import.meta.env.VITE_PROJECT_ID;
 
 const metadata = {
   name: 'Nectart',
@@ -34,6 +23,12 @@ export const mainnet: Chain = {
     default: { name: 'EVM Sidechain Explorer', url: 'https://evm-sidechain.xrpl.org' },
   },
   contracts: {
+    nftToken: {
+      address: import.meta.env.VITE_NFT_TOKEN_ADDRESS
+    },
+    auctionAddress: {
+      address: import.meta.env.VITE_AUCTION_ADDRESS
+    }
   },
 } as const satisfies Chain
 
@@ -45,17 +40,6 @@ export const wagmiConfig = createConfig({
 });
 reconnect(wagmiConfig);
 
-export const provider = readable<unknown | undefined>(
-	undefined,
-	(set) =>
-		watchAccount(wagmiConfig, {
-			onChange: async (account) => {
-				if (!account.connector) return set(undefined)
-				set(await account.connector?.getProvider())
-			},
-		}),
-)
-
 export const modal = createWeb3Modal({
   wagmiConfig,
   projectId,
@@ -66,21 +50,3 @@ export const modal = createWeb3Modal({
     '--w3m-border-radius-master': '0px'
   }
 });
-
-export const account = readable(getAccount(wagmiConfig), set => 
-  watchAccount(wagmiConfig, { onChange: set }),
-);
-
-export const customWallet = writable({
-  id: undefined,
-  name: undefined,
-  homepage: undefined,
-  image_url: undefined,
-  mobile_link: undefined,
-  desktop_link: undefined,
-  webapp_link: undefined,
-  app_store: undefined,
-  play_store: undefined
-})
-
-export const supported_chains = writable<string[]>([])
