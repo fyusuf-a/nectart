@@ -2,7 +2,7 @@
   import Section1 from './CeruleanSky.svelte';
   import Section2 from './Smile.svelte';
   import Section3 from './Whisper.svelte';
-  import { account, supported_chains, wagmiConfig } from '$lib/chain'
+  import { wagmiConfig } from '$lib/chain'
   import { watchAccount, getBalance } from '@wagmi/core';
   import type { GetBalanceReturnType } from '@wagmi/core';
   import { formatEther } from 'viem';
@@ -28,7 +28,6 @@
 <div style="color: #fff;background-color:red;z-index:10;margin-top:5cm">
   { balance }
 </div>
-
 <!-- <Section1 /> -->
 <!-- <Section2 /> -->
 <!-- <Section3 /> -->

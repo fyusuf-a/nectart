@@ -3,6 +3,7 @@
   import Link from '$lib/UI/Link.svelte';
   import Web3Button from './Web3Button.svelte';
   import { page } from '$app/stores';
+  import { createQuery } from '@tanstack/svelte-query';
 
   const routes = [
     {
@@ -53,7 +54,6 @@
   {/each}
   <div class="link">
     <Web3Button />
-  </div>
 </nav>
 
 <style lang="scss">
