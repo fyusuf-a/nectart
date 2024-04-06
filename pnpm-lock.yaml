@@ -35,6 +35,9 @@ dependencies:
   viem:
     specifier: ^2.9.9
     version: 2.9.9(typescript@5.3.3)
+  wagmi:
+    specifier: ^2.5.19
+    version: 2.5.19(@tanstack/react-query@5.29.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.3.3)(viem@2.9.9)
 
 devDependencies:
   '@img/sharp-linux-x64':
@@ -3399,6 +3402,15 @@ packages:
 
   /@tanstack/query-core@5.29.0:
     resolution: {integrity: sha512-WgPTRs58hm9CMzEr5jpISe8HXa3qKQ8CxewdYZeVnA54JrPY9B1CZiwsCoLpLkf0dGRZq+LcX5OiJb0bEsOFww==}
+    dev: false
+
+  /@tanstack/react-query@5.29.0(react@18.2.0):
+    resolution: {integrity: sha512-yxlhHB73jaBla6h5B6zPaGmQjokkzAhMHN4veotkPNiQ3Ac/mCxgABRZPsJJrgCTvhpcncBZcDBFxaR2B37vug==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.29.0
+      react: 18.2.0
     dev: false
 
   /@tanstack/svelte-query@5.29.0(svelte@4.2.8):
@@ -9477,6 +9489,52 @@ packages:
   /void-elements@3.1.0:
     resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /wagmi@2.5.19(@tanstack/react-query@5.29.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.3.3)(viem@2.9.9):
+    resolution: {integrity: sha512-fy6s3qTuXpfrrghhoNXuV92yqOqJI7m/9iLIejHxEYxiddVDTR8BVdkt0BuBQZzoXSAutDkyIlJbtFcpX5dfrQ==}
+    peerDependencies:
+      '@tanstack/react-query': '>=5.0.0'
+      react: '>=18'
+      typescript: '>=5.0.4'
+      viem: 2.x
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@tanstack/react-query': 5.29.0(react@18.2.0)
+      '@wagmi/connectors': 4.1.25(@wagmi/core@2.6.16)(react-native@0.73.6)(react@18.2.0)(typescript@5.3.3)(viem@2.9.9)
+      '@wagmi/core': 2.6.16(react@18.2.0)(typescript@5.3.3)(viem@2.9.9)
+      react: 18.2.0
+      typescript: 5.3.3
+      use-sync-external-store: 1.2.0(react@18.2.0)
+      viem: 2.9.9(typescript@5.3.3)
+    transitivePeerDependencies:
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@react-native-async-storage/async-storage'
+      - '@tanstack/query-core'
+      - '@types/react'
+      - '@upstash/redis'
+      - '@vercel/kv'
+      - bufferutil
+      - encoding
+      - immer
+      - ioredis
+      - react-dom
+      - react-native
+      - rollup
+      - supports-color
+      - uWebSockets.js
+      - utf-8-validate
+      - zod
     dev: false
 
   /walker@1.0.8:
