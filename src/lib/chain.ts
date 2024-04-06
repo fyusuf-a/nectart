@@ -37,5 +37,10 @@ reconnect(config);
 
 export const modal = createWeb3Modal({
   wagmiConfig: config,
-  projectId
+  projectId,
+  enableOnramp: true,
+  themeVariables: {
+    '--w3m-font-family': 'Avantt',
+    '--w3m-border-radius-master': '0px'
+  }
 });

@@ -38,7 +38,6 @@
   });
 </script>
 
-<div>
 <nav id="navbar" bind:this={navbar}>
   {#each routes as route}
     <div class="link">
@@ -47,10 +46,10 @@
       </Link>
     </div>
   {/each}
-  <div style="background-color:red">
-  <Web3Button />
+  <div class="link">
+    <Web3Button />
+  </div>
 </nav>
-</div>
 
 <style lang="scss">
   .link {
