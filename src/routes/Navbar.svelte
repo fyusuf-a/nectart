@@ -3,6 +3,16 @@
   import Link from '$lib/UI/Link.svelte';
   import Web3Button from './Web3Button.svelte';
   import { page } from '$app/stores';
+  import { createQuery } from '@tanstack/svelte-query';
+  import { readable, writable } from 'svelte/store';
+
+  const query = createQuery({
+    queryKey: ["me"],
+    queryFn: async () => {
+      return fetch('https://jsonplaceholder.typicode.com/todos/1')
+            .then(response => response.json())
+    }
+  })
 
   const routes = [
     {
@@ -48,6 +58,14 @@
   {/each}
   <div class="link">
     <Web3Button />
+
+    <div>
+    {#if $query.isLoading}
+      <p>Loading...</p>
+    {:else}
+      <p>{$query.data}</p>
+    {/if}
+    </div>
   </div>
 </nav>
 
