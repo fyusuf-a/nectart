@@ -1,10 +1,14 @@
-<script>
+<script lang="ts">
   import '../styles/global.scss';
   import { onMount } from 'svelte';
   import Lenis from '@studio-freight/lenis';
   import { lenis } from '../stores/lenis';
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import { gsap } from 'gsap';
+  import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query'
+
+  const queryClient = new QueryClient();
+  
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +19,9 @@
       lenis.destroy();
     };
   });
+
 </script>
 
-<slot />
+<QueryClientProvider client = {queryClient}>
+  <slot />
+</QueryClientProvider>
