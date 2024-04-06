@@ -15,7 +15,12 @@
     {
       name: 'Contact',
       path: 'mailto:contact@nect.art'
-    }
+    },
+	{
+		name: 'Buy',
+		path: '/auction'
+	}
+
   ];
 
   let navbar: HTMLElement;
