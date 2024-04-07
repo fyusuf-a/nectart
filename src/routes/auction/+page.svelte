@@ -87,9 +87,6 @@
 	<div class="product-details">
 		<h2>{product.name}</h2>
 		<p class="seller">by {product.seller}</p>
-		<h4>Description: </h4>
-		<p></p>
-		<p class="description">{product.description}</p>
 		<h3> Highest Bid : <b class="price">{highestBid}XRP</b></h3>
 		<button on:click={toggleModal} class="offer-button">Make an offer</button>`
 	</div>
@@ -213,29 +210,33 @@
   
   .product-image {
 	  flex: 1;
-	  max-width: 70%;
-	  padding: 20px;
+	  max-width: 50%;
+	  padding: 56px;
 	  height: 50vh;
+    margin-right: 5%;
 	  display: flex;
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
   }
   
   .product-details {
-	  flex: 1;
-	  max-width: 30%;
+    flex: 1;
+	  max-width: 50%;
 	  padding: 20px;
 	  display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
+    margin-top: 25vh;
+    height: 50vh;
+    flex-direction: column;
+    justify-content: space-evenly;
 	  border-left: black 1px solid;
   }
   
   .offer-button {
 	font-size: 20px;
     padding: 10px;
+    width: 25vw;
     background-color: #030304;
-	margin: 10px;
+	margin: 1px;
     color: #fff;
     border: none;
     cursor: pointer;
