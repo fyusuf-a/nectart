@@ -2,11 +2,21 @@
   import { disconnect, getAccount } from '@wagmi/core'
   import { wagmiConfig, modal } from '$lib/chain'
 
+  
+  let connected = 'Connect';
   function connect() {
     if (getAccount(wagmiConfig).isConnected) {
       disconnect(wagmiConfig)
+      connected = 'Connect'
     } else {
       modal.open()
+      const task = setInterval(() => {
+        if (getAccount(wagmiConfig).isConnected)
+        {
+          connected = 'Disconnect'
+          clearInterval(task);
+        }
+      }, 1000)
     }
   }
 </script>
@@ -22,15 +32,11 @@
         connect()
       }
     }}
-    on:click={() => {
-      if (getAccount(wagmiConfig).isConnected) {
-        disconnect(wagmiConfig)
-      } else {
-        modal.open()
-      }
+    on:click={async () => {
+        connect()
     }}
   >
-    { getAccount(wagmiConfig).isConnected ? 'Disconnect' : 'Connect' }
+    { connected }
     <div class="underline" />
   </span>
 </div>
