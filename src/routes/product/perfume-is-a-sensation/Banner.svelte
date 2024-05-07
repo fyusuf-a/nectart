@@ -30,7 +30,7 @@
 
   .container {
     --speed: 120s;
-    --block-size: calc(#{scale(3, 0)} / var(--block-size-factor) * var(--number-of-characters));
+    --block-size: calc(#{typographic-scale(3, 0)} / var(--block-size-factor) * var(--number-of-characters));
     --number-of-characters: 8;
   }
 

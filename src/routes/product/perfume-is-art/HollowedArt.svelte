@@ -9,7 +9,7 @@
 </svg>
 
 <style lang="scss">
-  $text-height: $impact-line-height * scale(4, 1);
+  $text-height: $impact-line-height * typographic-scale(4, 1);
 
   svg {
     height: $text-height;

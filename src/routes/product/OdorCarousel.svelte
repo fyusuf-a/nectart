@@ -458,6 +458,13 @@
     font-family: 'Saol Display', serif;
     text-transform: none;
     color: white;
+    cursor: default;
+  }
+
+  .left-odor .odor-caption:hover, .right-odor .odor-caption:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    cursor: pointer;
+    transition: transform 0.1s ease-out;
   }
 
   .odor-carousel-indicator {

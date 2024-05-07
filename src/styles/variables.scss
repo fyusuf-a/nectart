@@ -37,13 +37,13 @@ $screen-xl-min: 1200;
 }
 
 $navbar-note: 0;
-@function scale($octave: 0, $note: 0) {
+@function typographic-scale($octave: 0, $note: 0) {
   @return calc(1rem * pow(2, $octave) * pow(2, $note / 3));
 }
 
 /* https://spencermortensen.com/articles/typographic-scale/ */
 @mixin typographic-scale($octave: 0, $note: 0) {
-  font-size: scale($octave, $note);
+  font-size: typographic-scale($octave, $note);
 }
 
 :root {
@@ -70,7 +70,7 @@ $navbar-vertical-padding: 40px;
 $navbar-scale: 0;
 $navbar-note: 0;
 @function navbar-height() {
-  @return calc(2 * #{$navbar-vertical-padding} + scale($navbar-scale, $navbar-note));
+  @return calc(2 * #{$navbar-vertical-padding} + typographic-scale($navbar-scale, $navbar-note));
 }
 
 @function rest-height($ratio) {
