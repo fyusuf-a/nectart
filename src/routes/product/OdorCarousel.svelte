@@ -4,6 +4,7 @@
   import { odors } from '$lib/carousel-odors';
   import { gsap } from 'gsap';
   import Image from '$lib/Image.svelte';
+  import Video from '$lib/Video.svelte';
 
   gsap.registerPlugin(ScrollTrigger);
   let video: HTMLVideoElement;
@@ -136,7 +137,7 @@
 
         nextOdorTimeline
           .fromTo(
-            `#odor-${nextOdor} .video-container`,
+            `#odor-${nextOdor} > .video-container`,
             {
               scale: 0,
               opacity: 0
@@ -201,7 +202,7 @@
                 odor(currentOdor).style.left = `var(--odor-${
                   direction === Direction.LEFT ? '0' : '2'
                 })`;
-                odor(currentOdor, '.video-container').style.visibility = 'hidden';
+                odor(currentOdor, '> .video-container').style.visibility = 'hidden';
               }
             },
             '<'
@@ -225,9 +226,9 @@
                   direction === Direction.LEFT ? 'left-odor' : 'right-odor'
                 );
                 odor(nextOdor).removeAttribute('style');
-                odor(nextOdor, '.video-container').removeAttribute('style');
+                odor(nextOdor, '> .video-container').removeAttribute('style');
                 odor(currentOdor).removeAttribute('style');
-                odor(currentOdor, '.video-container').removeAttribute('style');
+                odor(currentOdor, '> .video-container').removeAttribute('style');
                 currentOdor = trueModulo(currentOdor + (direction === Direction.LEFT ? 1 : -1));
                 buttonsActive = true;
               }
@@ -292,11 +293,14 @@
       aria-hidden={shownOdorIndexes.includes(i) ? 'false' : 'true'}
     >
       <div class="video-container">
-        <video id={`video-${i}`} autoplay muted loop>
-          />
-          <div class="gradient" />
-          <source src={`videos/${odor.videoUrl}`} type="video/mp4" />
-        </video>
+        <Video
+          src={`videos/${odor.videoUrl}`}
+          autoplay
+          muted
+          loop
+          id={`video-${i}`}
+          bind:video
+        />
       </div>
       <div class="odor-caption">
         {odor.name}
@@ -359,7 +363,7 @@
     font-style: normal;
     @include typographic-scale(1, 0);
 
-    & .video-container,
+    & > .video-container,
     & .gradient {
       opacity: 0;
       transform: scale(0);
@@ -378,7 +382,7 @@
     font-style: italic;
     @include typographic-scale(2, 0);
 
-    & .video-container,
+    & > .video-container,
     & .gradient {
       opacity: 1;
       transform: scale(1);
@@ -391,7 +395,7 @@
     font-style: normal;
     @include typographic-scale(1, 0);
 
-    & .video-container,
+    & > .video-container,
     & .gradient {
       opacity: 0;
       transform: scale(0);
@@ -410,8 +414,6 @@
 
   .video-container {
     position: relative;
-    width: circle-size(0.45);
-    height: circle-size(0.45);
     border-radius: 50%;
     overflow: hidden;
 

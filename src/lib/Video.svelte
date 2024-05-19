@@ -48,17 +48,17 @@
 
 <!-- svelte-ignore a11y-media-has-caption -->
 <div class="video-container">
-  <Image
-    src={src}
-    image={poster ?? undefined}
-    style={$$restProps.style + (videoAvailable ? 'display: none;' : '')}
-    alt=""
-  />
   <video
     preload="metadata"
     class="video"
     bind:this={video}
     {...$$restProps}
+  />
+  <Image
+    src={src}
+    image={poster ?? undefined}
+    style={$$restProps.style + (videoAvailable ? 'display: none;' : '')}
+    alt=""
   />
 </div>
 
@@ -71,5 +71,6 @@
   .video {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 </style>
