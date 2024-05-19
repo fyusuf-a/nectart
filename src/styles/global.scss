@@ -136,6 +136,11 @@ button {
 }
 /* End of CSS reset */
 
+/* Removes overflow on body */
+body {
+  overflow: hidden;
+}
+
 /* Removes draggable and click events on images */
 img {
   user-select: none;
