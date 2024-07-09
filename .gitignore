@@ -11,3 +11,5 @@ vite.config.ts.timestamp-*
 .yarn
 .yarnrc
 .yarnrc.yml
+.vercel
+*.sqlite3
