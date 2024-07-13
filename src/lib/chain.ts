@@ -1,7 +1,7 @@
 import type { Chain } from 'viem'
 import { http, createConfig } from '@wagmi/core'
 import { reconnect } from '@wagmi/core'
-import { createWeb3Modal } from '@web3modal/wagmi';
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi';
 
 const projectId = import.meta.env.VITE_PROJECT_ID;
 
@@ -32,13 +32,26 @@ export const mainnet: Chain = {
   },
 } as const satisfies Chain
 
-export const wagmiConfig = createConfig({
+export const wagmiConfig = defaultWagmiConfig({
   chains: [mainnet],
+  projectId,
+  metadata,
   transports: {
     [mainnet.id]: http(),
+  },
+  auth: {
+    email: true,
   }
 });
 reconnect(wagmiConfig);
+
+//export const wagmiConfig = createConfig({
+  //chains: [mainnet],
+  //transports: {
+    //[mainnet.id]: http(),
+  //}
+//});
+//reconnect(wagmiConfig);
 
 export const modal = createWeb3Modal({
   wagmiConfig,
