@@ -18,7 +18,7 @@ const directories = [
 
 const resolutions = [100, 200, 400, 800, 1000, 1400, 1800];
 
-function exploreDirectory(directory) {
+async function exploreDirectory(directory) {
   fs.readdirSync(directory).forEach((file) => {
     if (fs.lstatSync(`${directory}/${file}`).isDirectory()) {
       return;
@@ -43,6 +43,7 @@ function exploreDirectory(directory) {
   });
 }
 
-directories.forEach((directory) => {
+for (const directory of directories) {
   exploreDirectory(directory);
-});
+  console.log(`Finished compressing images in ${directory}`);
+}
