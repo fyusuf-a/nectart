@@ -9,5 +9,5 @@
 </script>
 
 <Theme {theme} />
-<!-- <Navbar /> -->
+<Navbar /> 
 <slot />
