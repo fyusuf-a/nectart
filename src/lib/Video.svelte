@@ -24,7 +24,7 @@
         break;
       }
     }
-    video!.src = `${src}-${videoResolution}.webm`;
+    video!.src = `/${src}-${videoResolution}.webm`;
     video!.addEventListener('canplaythrough', playVideo);
 
     const checkProgressTick = setInterval(() => {
