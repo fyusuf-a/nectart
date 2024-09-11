@@ -58,9 +58,6 @@
   nav {
     background-color: var(--background-color);
     padding: #{$navbar-vertical-padding} 0px;
-    @include sm {
-      padding: #{$navbar-vertical-padding} 60px;
-    }
     box-sizing: border-box;
     position: fixed;
     top: 0;
@@ -71,5 +68,8 @@
     flex-direction: row;
     z-index: 100;
     transition: top 1s;
+    @include sm {
+      padding: #{$navbar-vertical-padding} 60px;
+    }
   }
 </style>

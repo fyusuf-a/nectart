@@ -362,6 +362,7 @@
     left: var(--odor-0);
     font-style: normal;
     @include typographic-scale(1, 0);
+    z-index: 3;
 
     & > .video-container,
     & .gradient {
@@ -374,20 +375,19 @@
         display: block;
       }
     }
-    z-index: 3;
   }
 
   .middle-odor {
     left: var(--odor-1);
     font-style: italic;
     @include typographic-scale(2, 0);
+    z-index: 2;
 
     & > .video-container,
     & .gradient {
       opacity: 1;
       transform: scale(1);
     }
-    z-index: 2;
   }
 
   .right-odor {
@@ -495,12 +495,12 @@
     border-radius: 50%;
     width: 10px;
     height: 10px;
+    transition: all 0.5s ease-in-out;
 
     &.selected {
       width: 20px;
       height: 20px;
     }
-    transition: all 0.5s ease-in-out;
   }
 
   .dot.no-color {
