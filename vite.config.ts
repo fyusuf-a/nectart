@@ -17,6 +17,11 @@ export default defineConfig({
     }
   },
   plugins: [sveltekit()],
+  resolve: {
+    alias: {
+      'node-fetch': 'isomorphic-fetch'
+    }
+  },
   test: {
     include: ['src/**/*.{test,spec}.{js,ts}']
   }

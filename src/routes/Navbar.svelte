@@ -13,6 +13,10 @@
       path: '/plum-elixir'
     },
     {
+      name: 'Auction',
+      path: '/auction'
+    },
+    {
       name: 'Contact',
       path: 'mailto:contact@nect.art'
     }
