@@ -88,14 +88,6 @@
         invalidateOnRefresh: true
       });
 
-      // Pin the section
-      ScrollTrigger.create({
-        trigger: '#odor-carousel',
-        pin: true,
-        invalidateOnRefresh: true,
-        end: 'bottom 70%'
-      });
-
       // The carousel animation
       const smallTextStyle = () => {
         const _smallTextStyle = window.getComputedStyle(odor(precedingOdor));
@@ -354,7 +346,8 @@
     --odor-1: calc(2 * var(--odor-0) + #{circle-size(var(--circle-ratio))} / 2);
     --odor-2: calc(3 * var(--odor-0) + #{circle-size(var(--circle-ratio))});
     background-color: var(--Black);
-    height: 100vh;
+    height: 120vh;
+    padding: 10vh 0;
     width: 100vw;
     position: relative;
     overflow: hidden;

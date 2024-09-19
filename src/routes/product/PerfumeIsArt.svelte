@@ -39,7 +39,6 @@
             trigger: '#perfume-is-art',
             start: 'top top',
             end: 'bottom top',
-            pin: true
           }
         })
         .to('html', {
@@ -134,7 +133,8 @@
 
   #perfume-is-art {
     position: relative;
-    height: 100vh;
+    height: 120vh;
+    padding: 10vh 0;
   }
 
   .top-container {
