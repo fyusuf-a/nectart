@@ -6,6 +6,10 @@
       :root {\
         --background-color: ${theme.backgroundColor};\
         --color: ${theme.color};\
+        --primary: ${theme.backgroundColor};\
+        --primary-foreground: ${theme.color};\
+        --background: ${theme.backgroundColor};\
+        --input: ${theme.backgroundColor};\
       }\
 
       body {\
@@ -16,6 +20,5 @@
 </script>
 
 <svelte:head>
-  <!-- eslint-disable -->
   {@html cssString}
 </svelte:head>

@@ -1,4 +1,5 @@
 <script>
+  import "../app.css";
   import '../styles/global.scss';
   import { onMount } from 'svelte';
   import Lenis from '@studio-freight/lenis';
