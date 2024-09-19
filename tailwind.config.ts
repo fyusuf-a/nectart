@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
@@ -11,7 +12,7 @@ const config: Config = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
   safelist: ["dark"],
         plugins: [
-          plugin(function({ addUtilities, theme }) {
+          plugin(function({ addUtilities }) {
             for (let octave = 0; octave < 5; octave++) {
               for (let note = 0; note < 4; note++) {
                 addUtilities(
