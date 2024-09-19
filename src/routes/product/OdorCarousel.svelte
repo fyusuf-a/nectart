@@ -260,7 +260,10 @@
   });
 </script>
 
-<section id="odor-carousel">
+<section
+  id="odor-carousel"
+  class="z-10"
+>
   <Image
     id={`background-${precedingOdor}`}
     style={`visibility:hidden;${backgroundStyle}`}
@@ -351,7 +354,6 @@
     --odor-1: calc(2 * var(--odor-0) + #{circle-size(var(--circle-ratio))} / 2);
     --odor-2: calc(3 * var(--odor-0) + #{circle-size(var(--circle-ratio))});
     background-color: var(--Black);
-    z-index: 3;
     height: 100vh;
     width: 100vw;
     position: relative;

@@ -44,13 +44,19 @@
   <div class="circle">
     <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
-  <div id="rocks">
+  <div
+    class="z-20"
+    id="rocks"
+  >
     <Image src="photos/rocks" alt="Black rocks shining reflecting a discreet blue light" />
   </div>
   <div class="cta">
     <ClickableText text={ctaText} disabled={ctaDisabled} onClick={activateUnmuted} />
   </div>
-  <div id="black-rectangle" />
+  <div
+    class="z-30"
+    id="black-rectangle"
+  />
 </section>
 
 <style lang="scss">
@@ -82,7 +88,6 @@
     position: absolute;
     width: circle-size-with-navbar(1.8);
     bottom: $bottom-rocks;
-    z-index: 2;
   }
 
   #black-rectangle {
@@ -91,7 +96,6 @@
     height: calc($bottom-rocks + 5px);
     width: 100vw;
     background-color: var(--Black);
-    z-index: 3;
   }
 
   .cta {

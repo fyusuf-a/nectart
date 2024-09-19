@@ -1,27 +1,29 @@
 <script>
   import Image from '$lib/Image.svelte';
-
-  const commonStyle = `
-    width: 100%;
-    height: auto;
-    z-index: 200;
-  `;
 </script>
 
-<div id="bottle-container">
-  <div id="bottle-centering-container">
-    <div id="bottle-blur" />
-    <Image
-      id="bottle-shadow"
-      src="photos/bottle"
-      alt="A bottle of water"
-      style={commonStyle + 'visibility: hidden;'}
+<div id="bottle-container"
+  class="left-[50vw] fixed top-0 bottom-0 z-10 -translate-x-1/2" 
+>
+  <div
+    id="bottle-centering-container"
+    class="absolute z-50 w-full translate-y-1/2"
+  >
+    <div
+      id="bottle-blur"
+      class="absolute z-10 top-0 left-0"
     />
     <Image
       id="bottle"
       src="photos/bottle"
       alt="A bottle of water"
-      style={commonStyle + 'position: absolute; left: 0;'}
+      class="w-full z-20 h-auto absolute top-0 left-0"
+    />
+    <Image
+      id="bottle-shadow"
+      src="photos/bottle"
+      alt="A bottle of water"
+      class="w-full invisible"
     />
   </div>
 </div>
@@ -37,33 +39,20 @@
   }
 
   #bottle-container {
-    position: fixed;
     width: circle-size-with-navbar(0.5);
-    left: 50vw;
-    top: 0;
-    bottom: 0;
-    transform: translate(-50%, 0);
-    z-index: 1;
   }
 
   #bottle-centering-container {
-    position: absolute;
-    width: 100%;
     bottom: calc(rest-height(0.5));
     height: calc(image-ratio * rest-height(0.5));
-    transform: translate(0, 50%);
   }
 
   #bottle-blur {
-    position: absolute;
-    left: 0;
-    top: 0;
     margin-top: 29%;
     margin-left: 2%;
     margin-right: 2%;
     width: 96%;
     height: 79%;
     backdrop-filter: blur(var(--blur));
-    z-index: 1;
   }
 </style>
