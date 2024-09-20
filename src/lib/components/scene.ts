@@ -29,7 +29,7 @@ export const environments: Environment[] = [
 	{
 		id: 'venice-sunset',
 		name: 'Venice Sunset',
-		path: 'https://storage.googleapis.com/donmccurdy-static/venice_sunset_1k.exr',
+		path: '/textures/sunset.exr',
 		format: '.exr',
 	},
 	{
