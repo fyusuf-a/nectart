@@ -1,8 +1,17 @@
 <script>
-  import Image from '$lib/Image.svelte';
+  // import Image from '$lib/Image.svelte';
+  import ThreeScene from '$lib/components/ThreeScene.svelte';
 </script>
 
-<div id="bottle-container"
+<div
+  id="bottle-container"
+  class="fixed z-10 text-white"
+>
+  <ThreeScene
+    scale={0.3}
+  />
+</div>
+<!--<div id="bottle-container"
   class="left-[50vw] fixed top-0 bottom-0 z-10 -translate-x-1/2" 
 >
   <div
@@ -26,7 +35,7 @@
       class="w-full invisible"
     />
   </div>
-</div>
+</div>-->
 
 <style lang="scss">
   @use 'sass:math';
