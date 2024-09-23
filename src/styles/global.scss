@@ -167,10 +167,21 @@ img {
   font-style: normal;
 }
 
+
 @font-face {
   font-family: 'Avantt';
-  src: url('/fonts/Avantt-Extrabold.woff2') format('woff2');
-  font-weight: bold;
+  src: url('/fonts/AvanttVF-Uprights.woff2') format('woff2'),
+        url('/fonts/AvanttVF-Uprights.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avantt';
+  src: url('/fonts/AvanttVF-Italics.woff2') format('woff2'),
+        url('/fonts/AvanttVF-Italics.woff') format('woff');
+  font-weight: 100 900;
+  font-style: italic;
 }
 
 /* Lenis */

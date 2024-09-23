@@ -17,10 +17,6 @@
       name: 'Contact',
       path: 'mailto:contact@nect.art'
     },
-    {
-      name: 'Components test',
-      path: '/components'
-    }
   ];
 
   let navbar: HTMLElement;

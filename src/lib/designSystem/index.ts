@@ -9,12 +9,8 @@ export let sizeClasses = [
   "text-scale-1-3",
 ];
 
-export let sizes = sizeClasses.map((sizeClass) => {
-  console.log (sizeClass.split("-")[3])
-  return ({
+export let sizes = sizeClasses.map((sizeClass) => ({
   sizeClass,
   octave: sizeClass.split("-")[2],
   note: sizeClass.split("-")[3],
-})
-});
-
+}));
