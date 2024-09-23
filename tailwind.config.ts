@@ -14,7 +14,7 @@ const config: Config = {
         plugins: [
           plugin(function({ addUtilities }) {
             for (let octave = 0; octave < 5; octave++) {
-              for (let note = 0; note < 4; note++) {
+              for (let note = 0; note < 3; note++) {
                 addUtilities(
                   {
                     [`.text-scale-${octave}-${note}`]: {
@@ -35,6 +35,10 @@ const config: Config = {
       }
     },
     extend: {
+      fontFamily: {
+        sans: ["Avantt", 'sans-serif'],
+        serif: ["Saol Display", 'serif'],
+      },
       colors: {
         border: "hsl(var(--border) / <alpha-value>)",
         input: "hsl(var(--input) / <alpha-value>)",

@@ -156,19 +156,6 @@ img {
 }
 
 @font-face {
-  font-family: 'Saol Display';
-  src: url('/fonts/SaolDisplay-LightItalic.woff2') format('woff2');
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Saol Display';
-  src: url('/fonts/SaolDisplay-Regular.ttf') format('truetype');
-  font-style: normal;
-}
-
-
-@font-face {
   font-family: 'Avantt';
   src: url('/fonts/AvanttVF-Uprights.woff2') format('woff2'),
         url('/fonts/AvanttVF-Uprights.woff') format('woff');
@@ -182,6 +169,41 @@ img {
         url('/fonts/AvanttVF-Italics.woff') format('woff');
   font-weight: 100 900;
   font-style: italic;
+}
+
+@mixin saol($file-name, $font-weight: 400, $font-style: normal) {
+  font-family: 'Saol Display', serif;
+  src: url('/fonts/#{$file-name}.woff2') format('woff2'),
+        url('/fonts/#{$file-name}.woff') format('woff');
+  font-weight: $font-weight;
+  font-style: $font-style;
+}
+
+$saol-display-file-names: (
+  300: (
+    normal: 'SaolDisplay-Light',
+    italic: 'SaolDisplay-LightItalic'
+  ),
+  400: (
+    normal: 'SaolDisplay-Regular',
+    italic: 'SaolDisplay-RegularItalic'
+  ),
+  600: (
+    normal: 'SaolDisplay-Semibold',
+    italic: 'SaolDisplay-SemiboldItalic'
+  ),
+  700: (
+    normal: 'SaolDisplay-Bold',
+    italic: 'SaolDisplay-BoldItalic'
+  )
+);
+
+@each $weight, $styles in $saol-display-file-names {
+  @each $style, $file-name in $styles {
+    @font-face {
+      @include saol($file-name, $weight, $style);
+    }
+  }
 }
 
 /* Lenis */
