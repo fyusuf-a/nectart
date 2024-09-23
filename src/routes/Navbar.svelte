@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import Link from '$lib/UI/Link.svelte';
   import { page } from '$app/stores';
+  import { navbarHeight } from '../stores/navbarHeight';
 
   const routes = [
     {
@@ -23,20 +24,31 @@
   ];
 
   let navbar: HTMLElement;
+  function updateNavbarHeight() {
+    navbarHeight.set(navbar.offsetHeight);
+  }
+
   onMount(() => {
-    const navbarHeight = () => getComputedStyle(navbar).height;
+    updateNavbarHeight();
+    window.addEventListener('resize', updateNavbarHeight);
+
+
     let prevScrollpos = window.scrollY;
-    window.onscroll = function () {
-      const currentScrollPos = window.scrollY;
-      if (prevScrollpos > currentScrollPos) {
-        navbar.style.top = '';
-      } else {
-        navbar.style.top = '-' + navbarHeight();
-      }
-      prevScrollpos = currentScrollPos;
-    };
+    const unsubscribe = navbarHeight.subscribe((height) => {
+      window.onscroll = function () {
+        const currentScrollPos = window.scrollY;
+        if (prevScrollpos > currentScrollPos) {
+          navbar.style.top = '';
+        } else {
+          navbar.style.top = '-' + height + 'px';
+        }
+        prevScrollpos = currentScrollPos;
+      };
+    });
     return () => {
       window.onscroll = null;
+      window.removeEventListener('resize', updateNavbarHeight);
+      unsubscribe();
     };
   });
 </script>
