@@ -1,27 +1,76 @@
-<script>
-  // import Image from '$lib/Image.svelte';
+<script lang="ts">
+  import Image from '$lib/Image.svelte';
   import ThreeScene from '$lib/components/ThreeScene.svelte';
-</script>
+  import WEBGL from 'three/examples/jsm/capabilities/WebGL.js';
 
-<div
-  id="bottle-container"
-  class="fixed z-10 text-white"
->
+  let bottleContainer: HTMLDivElement;
+  const isWebGLSuported = WEBGL.isWebGLAvailable();
+
+ // onMount(() => {
+ //   const gsapContext = gsap.context(() => {
+ //     let randomAngle = gsap.utils.random(-5, 5, true);
+ //     let randomTime = gsap.utils.random(3, 5, true);
+ //     const bouncingTimeline = gsap.timeline({
+ //       repeat: -1,
+ //       repeatRefresh: true,
+ //       paused: true
+ //     });
+
+ //     bouncingTimeline.to('#bottle-container', {
+ //       rotate: randomAngle,
+ //       duration: randomTime,
+ //       ease: 'easeInOut'
+ //     });
+
+ //     ScrollTrigger.create({
+ //       trigger: '#perfume-is-a-sensation',
+ //       onEnter: () => bouncingTimeline.play(),
+ //       onLeave: () => bouncingTimeline.pause(),
+ //       onEnterBack: () => bouncingTimeline.play(),
+ //       onLeaveBack: () => bouncingTimeline.pause(),
+ //       invalidateOnRefresh: true
+ //     });
+
+ //     const straightBottleAnimation = () => {
+ //       gsap.to('#bottle-container', {
+ //         rotate: 0,
+ //         duration: 1,
+ //         ease: 'easeInOut'
+ //       });
+ //     };
+ //     ScrollTrigger.create({
+ //       trigger: '#above-the-fold',
+ //       onEnter: straightBottleAnimation,
+ //       onEnterBack: straightBottleAnimation,
+ //       invalidateOnRefresh: true
+ //     });
+ //   });
+
+ //   return () => {
+ //     gsapContext.revert();
+ //   };
+ // });
+</script>
+{#if isWebGLSuported }
+<div class="h-[100vh] w-[100vw] z-10 fixed">
   <ThreeScene
-    scale={0.3}
+    objectWidth={bottleContainer?.clientWidth ?? 100}
   />
 </div>
-<!--<div id="bottle-container"
-  class="left-[50vw] fixed top-0 bottom-0 z-10 -translate-x-1/2" 
+{/if}
+<div id="bottle-container"
+  class="left-[50vw] fixed top-0 bottom-0 z-10 -translate-x-1/2 pointer-events-none" 
+  bind:this={bottleContainer}
 >
+  {#if !isWebGLSuported }
   <div
     id="bottle-centering-container"
-    class="absolute z-50 w-full translate-y-1/2"
+    class="absolute w-full translate-y-1/2"
   >
-    <div
-      id="bottle-blur"
-      class="absolute z-10 top-0 left-0"
-    />
+    <!--<div-->
+      <!--id="bottle-blur"-->
+      <!--class="absolute z-10 top-0 left-0"-->
+    <!--/>-->
     <Image
       id="bottle"
       src="photos/bottle"
@@ -35,7 +84,8 @@
       class="w-full invisible"
     />
   </div>
-</div>-->
+  {/if}
+</div>
 
 <style lang="scss">
   @use 'sass:math';

@@ -3,9 +3,6 @@
   import Image from '$lib/Image.svelte';
   import MouseAcceleratedVideo from '$lib/mouseAcceleratedVideo.svelte';
   import ClickableText from '$lib/UI/ClickableText.svelte';
-  import { gsap } from 'gsap';
-  import ScrollTrigger from 'gsap/ScrollTrigger';
-  import { onMount } from 'svelte';
 
   const easingParameters: [number, number, number, number] = [0.16, 1, 0.3, 1];
   const easingFunction = easeCubicFactory(...easingParameters);
@@ -17,27 +14,6 @@
     ctaText = 'Scroll to discover';
     ctaDisabled = true;
   };
-
-  onMount(() => {
-    const gsapContext = gsap.context(() => {
-      const straightBottleAnimation = () => {
-        gsap.to('#bottle-container', {
-          rotate: 0,
-          duration: 1,
-          ease: 'easeInOut'
-        });
-      };
-      ScrollTrigger.create({
-        trigger: '#above-the-fold',
-        onEnter: straightBottleAnimation,
-        onEnterBack: straightBottleAnimation,
-        invalidateOnRefresh: true
-      });
-    });
-    return () => {
-      gsapContext.revert();
-    };
-  });
 </script>
 
 <section id="above-the-fold">
@@ -45,7 +21,7 @@
     <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
   <div
-    class="z-20"
+    class="z-20 pointer-events-none"
     id="rocks"
   >
     <Image src="photos/rocks" alt="Black rocks shining reflecting a discreet blue light" />
