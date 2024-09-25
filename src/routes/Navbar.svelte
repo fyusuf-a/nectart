@@ -3,15 +3,24 @@
   import Link from '$lib/UI/Link.svelte';
   import { page } from '$app/stores';
   import { navbarHeight } from '../stores/navbarHeight';
+  import Theme from '$lib/style/Theme.svelte';
 
-  const routes = [
+  type Route = {
+    name: string;
+    path: string;
+    theme?: 'light' | 'dark';
+  };
+
+  const routes: Route[] = [
     {
       name: 'Our product',
-      path: '/product'
+      path: '/product',
+      theme: 'dark'
     },
     {
       name: 'Plum elixir',
-      path: '/plum-elixir'
+      path: '/plum-elixir',
+      theme: 'light'
     },
     {
       name: 'Contact',
@@ -23,6 +32,8 @@
   function updateNavbarHeight() {
     navbarHeight.set(navbar.offsetHeight);
   }
+
+  const currentTheme: 'light' | 'dark' =  routes.find((route) => route.path === $page.url.pathname)?.theme ?? "light";
 
   onMount(() => {
     updateNavbarHeight();
@@ -49,7 +60,11 @@
   });
 </script>
 
-<nav id="navbar" bind:this={navbar}>
+<Theme tag="div" theme={currentTheme} class="navbar">
+<nav
+  class="navbar"
+  bind:this={navbar}
+>
   {#each routes as route}
     <div class="link">
       <Link href={route.path} disabled={route.path === $page.url.pathname}>
@@ -58,6 +73,7 @@
     </div>
   {/each}
 </nav>
+</Theme>
 
 <style lang="scss">
   .link {
@@ -67,7 +83,7 @@
     align-items: center;
   }
 
-  nav {
+  .navbar {
     background-color: var(--background-color);
     padding: #{$navbar-vertical-padding} 0px;
     @include sm {

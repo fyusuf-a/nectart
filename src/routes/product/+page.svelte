@@ -18,9 +18,4 @@
 
 <style lang="scss">
   @import './style.scss';
-
-  #section6 {
-    height: 100vh;
-    background-color: red;
-  }
 </style>
