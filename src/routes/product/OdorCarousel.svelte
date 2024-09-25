@@ -453,6 +453,7 @@
     transform: translate(-50%, -50%);
     text-align: center;
     font-family: 'Saol Display', serif;
+    font-weight: 400;
     text-transform: none;
     color: white;
     cursor: default;

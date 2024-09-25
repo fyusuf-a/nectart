@@ -172,9 +172,8 @@ img {
 }
 
 @mixin saol($file-name, $font-weight: 400, $font-style: normal) {
-  font-family: 'Saol Display', serif;
-  src: url('/fonts/#{$file-name}.woff2') format('woff2'),
-        url('/fonts/#{$file-name}.woff') format('woff');
+  font-family: 'Saol Display';
+  src: url('/fonts/#{$file-name}.woff') format('woff');
   font-weight: $font-weight;
   font-style: $font-style;
 }

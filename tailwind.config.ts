@@ -27,6 +27,11 @@ const config: Config = {
           }),
         ],
   theme: {
+    fontFamily: {
+      sans: ["Avantt", 'sans-serif'],
+      serif: ["Saol Display", 'serif'],
+    },
+
     container: {
       center: true,
       padding: "2rem",
@@ -35,10 +40,6 @@ const config: Config = {
       }
     },
     extend: {
-      fontFamily: {
-        sans: ["Avantt", 'sans-serif'],
-        serif: ["Saol Display", 'serif'],
-      },
       colors: {
         border: "hsl(var(--border) / <alpha-value>)",
         input: "hsl(var(--input) / <alpha-value>)",
