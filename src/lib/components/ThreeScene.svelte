@@ -61,7 +61,6 @@
 
 
     canvas.addEventListener('mousemove', (event) => {
-      console.log('mousemove');
       if(!gltf) return;
      // var mousePosition = new THREE.Vector3(0, 0, 0.5);
      // mousePosition.x = 2 * (event.clientX / window.innerWidth) - 1;

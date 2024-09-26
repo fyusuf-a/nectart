@@ -2,6 +2,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
+import { resolve } from 'path';
 
 export default defineConfig({
   ssr: {
@@ -23,6 +24,7 @@ export default defineConfig({
   plugins: [sveltekit()],
   resolve: {
     alias: {
+      '@': resolve(__dirname, 'src'),
       'node-fetch': 'isomorphic-fetch'
     }
   },

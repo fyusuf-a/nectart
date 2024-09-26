@@ -4,6 +4,7 @@
   import { page } from '$app/stores';
   import { navbarHeight } from '../stores/navbarHeight';
   import Theme from '$lib/style/Theme.svelte';
+  import ConnectButton from '$lib/blockchain/ConnectButton.svelte';
 
   type Route = {
     name: string;
@@ -18,18 +19,13 @@
       theme: 'dark'
     },
     {
-      name: 'Plum elixir',
-      path: '/plum-elixir',
-      theme: 'light'
-    },
-    {
       name: 'Auction',
       path: '/auction'
     },
-    {
-      name: 'Contact',
-      path: 'mailto:contact@nect.art'
-    },
+    //{
+    //  name: 'Contact',
+    //  path: 'mailto:contact@nect.art'
+    //},
   ];
 
   let navbar: HTMLElement;
@@ -66,7 +62,7 @@
 
 <Theme tag="div" theme={currentTheme} class="navbar">
 <nav
-  class="navbar"
+  class="navbar items-center"
   bind:this={navbar}
 >
   {#each routes as route}
@@ -76,6 +72,7 @@
       </Link>
     </div>
   {/each}
+  <ConnectButton />
 </nav>
 </Theme>
 
