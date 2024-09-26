@@ -1,12 +1,22 @@
 <script lang="ts">
   import Image from '$lib/Image.svelte';
   import ThreeScene from '$lib/components/ThreeScene.svelte';
+    import { onMount } from 'svelte';
   import WEBGL from 'three/examples/jsm/capabilities/WebGL.js';
 
   let bottleContainer: HTMLDivElement;
   const isWebGLSuported = WEBGL.isWebGLAvailable();
 
- // onMount(() => {
+
+  let screenWidth = 0;
+  let screenHeight = 0;
+  let navbarHeight = 0;
+  let circleSizeWithNavbar = 0;
+  let bottleWidth = 0;
+  let bottleHeight = 0;
+
+  onMount(() => {
+ //   let emotion = document.querySelector('#emotion')!;
  //   const gsapContext = gsap.context(() => {
  //     let randomAngle = gsap.utils.random(-5, 5, true);
  //     let randomTime = gsap.utils.random(3, 5, true);
@@ -46,10 +56,90 @@
  //     });
  //   });
 
- //   return () => {
- //     gsapContext.revert();
- //   };
- // });
+    // getting dimensions to scale the bottle
+    let getScreenSize = () => {
+      screenWidth = window.innerWidth;
+      screenHeight = window.innerHeight;
+      // navbarHeight = document.querySelector('#navbar')!.clientHeight;
+      navbarHeight = 0;
+      circleSizeWithNavbar = Math.min(0.9 * screenWidth, 0.9 * (screenHeight - navbarHeight));
+      bottleWidth = 0.5 * circleSizeWithNavbar;
+      bottleHeight = 0.6561 * bottleWidth;
+    };
+    getScreenSize();
+    window.addEventListener('resize', getScreenSize);
+
+
+//    // https://gsap.com/community/forums/topic/8237-blur-filters/
+//    const blurElement: HTMLElement = document.querySelector('#bottle-blur')!;
+//    const blurStyle = window.getComputedStyle(blurElement)['backdrop-filter'];
+//
+//    const blur = Number(/[0-9]+/.exec(blurStyle)![0]);
+//    const blurHelper = { blur };
+//    const scaleFactor = 1.8;
+//
+//    const timeline = gsap.timeline({
+//      scrollTrigger: {
+//        trigger: '#perfume-is-a-sensation .subsection1',
+//        scrub: true,
+//        pin: '#perfume-is-a-sensation .subsection1',
+//        invalidateOnRefresh: true
+//      }
+//    });
+//
+//    timeline
+//      .fromTo(
+//        '#bottle-centering-container',
+//        {
+//          bottom: () => `${(screenHeight - navbarHeight) / 2}px`
+//        },
+//        {
+//          bottom: () => '50vh'
+//        }
+//      )
+//      .to('#bottle-container', {
+//        scale: () =>
+//          scaleFactor * Math.max(screenWidth / bottleWidth, screenHeight / bottleHeight),
+//        duration: 2
+//      })
+//      .to('#sensation', {
+//        autoAlpha: 0,
+//        duration: 0.5,
+//        onComplete: () => {
+//          sensation.style.display = 'none';
+//          emotion.style.display = 'flex';
+//        },
+//        onReverseComplete: () => {
+//          sensation.style.display = 'block';
+//          emotion.style.display = 'none';
+//        }
+//      })
+//      .to('#emotion', {
+//        autoAlpha: 1,
+//        duration: 0.5
+//      })
+//      .to(
+//        '#perfume-is-a-sensation .background-circle',
+//        {
+//          opacity: 1,
+//          duration: 0.5
+//        },
+//        '<'
+//      )
+//      .to(blurHelper, {
+//        blur: 0,
+//        onUpdate: () => {
+//          gsap.set(blurElement, {
+//            'backdrop-filter': `blur(${blurHelper.blur}px)`
+//          });
+//        }
+//      });
+
+   return () => {
+     window.removeEventListener('resize', getScreenSize);
+     // gsapContext.revert();
+   };
+ });
 </script>
 {#if isWebGLSuported }
 <div class="h-[100vh] w-[100vw] z-10 fixed">
