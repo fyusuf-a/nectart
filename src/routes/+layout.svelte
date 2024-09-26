@@ -1,5 +1,7 @@
 <script>
   import '../styles/site-wide.scss';
+  import "../app.css";
+  import '../styles/global.scss';
   import { onMount } from 'svelte';
   import Lenis from '@studio-freight/lenis';
   import { lenis } from '../stores/lenis';

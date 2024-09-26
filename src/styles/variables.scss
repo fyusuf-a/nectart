@@ -3,12 +3,14 @@ $impact-line-height: 0.75;
   font-family: 'Avantt', sans-serif;
   text-transform: uppercase;
   line-height: $impact-line-height;
+  font-weight: 800;
 }
 
 @mixin accent {
   font-family: 'Saol Display', serif;
   font-style: italic;
   text-transform: none;
+  font-weight: 300;
 }
 
 $screen-sm-min: 576;

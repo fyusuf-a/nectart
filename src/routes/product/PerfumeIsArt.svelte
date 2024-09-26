@@ -4,6 +4,7 @@
   import { onMount } from 'svelte';
   import SplitType from 'split-type';
   import Video from '$lib/Video.svelte';
+  import Theme from '$lib/style/Theme.svelte';
 
   let section: HTMLElement;
   let sentenceStart: HTMLElement;
@@ -39,7 +40,6 @@
             trigger: '#perfume-is-art',
             start: 'top top',
             end: 'bottom top',
-            pin: true
           }
         })
         .to('html', {
@@ -96,45 +96,48 @@
   });
 </script>
 
-<section id="perfume-is-art" bind:this={section}>
-  <div class="top-container">
-    <div class="sentence-start" bind:this={sentenceStart}>Perfume is</div>
-  </div>
-
-  <div class="hollowed-art-container">
-    <div class="hollowed-art" bind:this={firstChild}>
-      <HollowedArt />
+<Theme theme="dark">
+  <section id="perfume-is-art" bind:this={section}>
+    <div class="top-container">
+      <div class="sentence-start" bind:this={sentenceStart}>Perfume is</div>
     </div>
-    <div class="hollowed-art" bind:this={secondChild}>
-      <HollowedArt />
+
+    <div class="hollowed-art-container">
+      <div class="hollowed-art" bind:this={firstChild}>
+        <HollowedArt />
+      </div>
+      <div class="hollowed-art" bind:this={secondChild}>
+        <HollowedArt />
+      </div>
     </div>
-  </div>
 
-  <div class="video-container" bind:this={videoContainer}>
-    <Video
-      src="videos/oleg-lehnitsky"
-      autoplay
-      muted
-      loop
-      style={videoStyle}
-    />
-  </div>
+    <div class="video-container" bind:this={videoContainer}>
+      <Video
+        src="videos/oleg-lehnitsky"
+        autoplay
+        muted
+        loop
+        style={videoStyle}
+      />
+    </div>
 
-  <svg version="1.1" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <clipPath id="svgTextPath">
-        <text x="50vw" text-anchor="middle"> Art </text>
-      </clipPath>
-    </defs>
-  </svg>
-</section>
+    <svg version="1.1" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="svgTextPath">
+          <text x="50vw" text-anchor="middle"> Art </text>
+        </clipPath>
+      </defs>
+    </svg>
+  </section>
+</Theme>
 
 <style lang="scss">
   $text-height: $impact-line-height * typographic-scale(4, 1);
 
   #perfume-is-art {
     position: relative;
-    height: 100vh;
+    height: 120vh;
+    padding: 10vh 0;
   }
 
   .top-container {

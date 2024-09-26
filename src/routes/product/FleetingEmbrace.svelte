@@ -69,7 +69,10 @@
     <div class="text" bind:this={text}>
       <span>It's ephemeral</span>
       <span>a dance</span>
-      <span>A fleeting embrace that captures moments in time</span>
+      <span>A fleeting embrace</span>
+      <span>that</span>
+      <span>captures</span>
+      <span>moments in time</span>
     </div>
   </div>
   <div class="grid">
