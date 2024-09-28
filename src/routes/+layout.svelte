@@ -8,8 +8,7 @@
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import { gsap } from 'gsap';
   import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
-  import { wallet } from '@/stores/wallet';
-  import type { SolanaConnect } from 'solana-connect';
+  import WalletProvider from '@/lib/blockchain/WalletProvider.svelte';
 
   const queryClient = new QueryClient();
 
@@ -17,7 +16,6 @@
 
   onMount(() => {
     lenis.initialize(new Lenis());
-    wallet.set(new (window as any).SolanaConnect() as SolanaConnect);
     return () => {
       window.onscroll = null;
       lenis.destroy();
@@ -25,10 +23,8 @@
   });
 </script>
 
-<svelte:head>
-  <!-- Solana connect will not be packaged by vite -->
-  <script src="https://www.unpkg.com/solana-connect"></script>
-</svelte:head>
 <QueryClientProvider client={queryClient}>
-  <slot />
+  <WalletProvider>
+    <slot />
+  </WalletProvider>
 </QueryClientProvider>

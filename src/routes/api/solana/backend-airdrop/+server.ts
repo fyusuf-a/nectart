@@ -1,4 +1,4 @@
-import { txConfig, umi } from '$lib/blockchain/umi';
+import { txConfig, umi } from '$lib/blockchain/backendUmi';
 import { sol } from '@metaplex-foundation/umi';
 import { json } from '@sveltejs/kit';
 

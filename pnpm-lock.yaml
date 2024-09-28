@@ -53,9 +53,6 @@ importers:
       nacl:
         specifier: ^0.1.3
         version: 0.1.3
-      solana-connect:
-        specifier: ^0.1.10
-        version: 0.1.10(@solana/web3.js@1.95.3(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bs58@4.0.1)
       split-type:
         specifier: ^0.3.4
         version: 0.3.4
@@ -135,6 +132,9 @@ importers:
       sharp:
         specifier: ^0.33.0
         version: 0.33.0
+      solana-connect:
+        specifier: ^0.1.10
+        version: 0.1.10(@solana/web3.js@1.95.3(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bs58@4.0.1)
       sqlite3:
         specifier: ^5.1.7
         version: 5.1.7
