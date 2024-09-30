@@ -2,15 +2,15 @@
   import { twMerge } from "tailwind-merge";
 
   export let tag = 'div';
-  export let theme: 'light' | 'dark' | 'transparent' = 'light';
-  const color = ['light', 'transparent'].includes(theme) ? 'var(--Black)' : 'var(--White)';
-  const backgroundColor = theme === 'light'
+  export let theme = 'light';
+  $: color = ['light', 'transparent'].includes(theme) ? 'var(--Black)' : 'var(--White)';
+  $: backgroundColor = theme === 'light'
     ? 'var(--White)'
     : theme === 'dark'
       ? 'var(--Black)'
       : 'transparent';
 
-  const themeStyle = `
+  $: themeStyle = `
     --foreground: ${color};\
     --background-color: ${backgroundColor};\
     --color: ${color};\

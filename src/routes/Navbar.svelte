@@ -3,24 +3,27 @@
   import Link from '$lib/UI/Link.svelte';
   import { page } from '$app/stores';
   import { navbarHeight } from '../stores/navbarHeight';
-  import Theme from '$lib/style/Theme.svelte';
+  import Theme from '@/lib/style/Theme.svelte';
   import ConnectButton from '$lib/blockchain/ConnectButton.svelte';
+  import { themeStore } from '@/stores/theme';
+
+  export let theme: 'light' | 'dark' | 'transparent' = 'light';
 
   type Route = {
     name: string;
     path: string;
-    theme?: 'light' | 'dark';
+    theme?: 'light' | 'dark' | 'transparent';
   };
 
   const routes: Route[] = [
     {
-      name: 'Our product',
+      name: 'Home',
       path: '/product',
       theme: 'dark'
     },
     {
-      name: 'Auction',
-      path: '/auction'
+      name: 'Projects',
+      path: '/projects'
     },
     //{
     //  name: 'Contact',
@@ -33,7 +36,10 @@
     navbarHeight.set(navbar.offsetHeight);
   }
 
-  const currentTheme: 'light' | 'dark' =  routes.find((route) => route.path === $page.url.pathname)?.theme ?? "light";
+  $: {
+    theme = routes.find((route) => route.path === $page.url.pathname)?.theme ?? "light";
+    themeStore.set(theme);
+  };
 
   onMount(() => {
     updateNavbarHeight();
@@ -60,7 +66,7 @@
   });
 </script>
 
-<Theme tag="div" theme={currentTheme} class="navbar">
+<Theme tag="div" theme={theme} class="navbar">
 <nav
   class="navbar items-center"
   bind:this={navbar}

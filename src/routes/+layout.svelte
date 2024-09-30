@@ -9,6 +9,14 @@
   import { gsap } from 'gsap';
   import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
   import WalletProvider from '@/lib/blockchain/WalletProvider.svelte';
+  import Navbar from './Navbar.svelte';
+  import Theme from '@/lib/style/Theme.svelte';
+  import { themeStore } from '@/stores/theme';
+
+  let theme: 'light' | 'dark' | 'transparent' = 'light';
+  themeStore.subscribe((value) => {
+    theme = value;
+  });
 
   const queryClient = new QueryClient();
 
@@ -25,6 +33,9 @@
 
 <QueryClientProvider client={queryClient}>
   <WalletProvider>
-    <slot />
+    <Theme tag="div" theme={theme}>
+      <Navbar theme={theme} />
+      <slot />
+    </Theme>
   </WalletProvider>
 </QueryClientProvider>

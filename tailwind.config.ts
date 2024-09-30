@@ -13,15 +13,58 @@ const config: Config = {
   safelist: ["dark"],
         plugins: [
           plugin(function({ addUtilities }) {
-            for (let octave = 0; octave < 5; octave++) {
+            for (let octave = -5; octave < 10; octave++) {
               for (let note = 0; note < 3; note++) {
                 addUtilities(
                   {
                     [`.text-scale-${octave}-${note}`]: {
                       fontSize: typographicScale(octave, note),
                     },
+                    [`.w-scale-${octave}-${note}`]: {
+                      width: typographicScale(octave, note),
+                    },
+                    [`.h-scale-${octave}-${note}`]: {
+                      height: typographicScale(octave, note),
+                    },
+                    [`.gap-scale-${octave}-${note}`]: {
+                      gap: typographicScale(octave, note),
+                    },
+                    [`.p-scale-${octave}-${note}`]: {
+                      padding: typographicScale(octave, note),
+                    },
+                    [`.m-scale-${octave}-${note}`]: {
+                      margin: typographicScale(octave, note),
+                    },
                   },
                 );
+                for (const side of ["t", "r", "b", "l"]) {
+                  const sideName = side === "t" ? "top" : side === "r" ? "right" : side === "b" ? "bottom" : "left";
+                  addUtilities(
+                    {
+                      [`.m${side}-scale-${octave}-${note}`]: {
+                        [`margin-${sideName}`]: typographicScale(octave, note),
+                      },
+                      [`.p${side}-scale-${octave}-${note}`]: {
+                        [`padding-${sideName}`]: typographicScale(octave, note),
+                      },
+                    },
+                  );
+                }
+                for (const side of ["x", "y"]) {
+                  const sideNames = side === "x" ? ["left", "right"] : ["top", "bottom"];
+                  addUtilities(
+                    {
+                      [`.m${side}-scale-${octave}-${note}`]: {
+                        [`margin-${sideNames[0]}`]: typographicScale(octave, note),
+                        [`margin-${sideNames[1]}`]: typographicScale(octave, note),
+                      },
+                      [`.p${side}-scale-${octave}-${note}`]: {
+                        [`padding-${sideNames[0]}`]: typographicScale(octave, note),
+                        [`padding-${sideNames[1]}`]: typographicScale(octave, note),
+                      },
+                    },
+                  );
+                }
               }
             }
           }),
