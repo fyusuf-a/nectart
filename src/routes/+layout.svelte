@@ -27,6 +27,7 @@
     return () => {
       window.onscroll = null;
       lenis.destroy();
+      queryClient.unmount();
     };
   });
 </script>
