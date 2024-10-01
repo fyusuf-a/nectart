@@ -25,6 +25,7 @@ onMount(() => {
 
 <Button
   on:click={openMenu}
+  variant="outline"
 >
   {#if address === null}
     Connect
