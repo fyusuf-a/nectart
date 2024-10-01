@@ -17,6 +17,7 @@
 
   svg text {
     @include impact;
+    text-transform: uppercase;
     @include typographic-scale(4, 1);
     transform: translate(0, $text-height);
     stroke-width: 1px;
