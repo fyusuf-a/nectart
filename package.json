@@ -7,6 +7,8 @@
     "compress": "node scripts/compress.js",
     "build": "pnpm run compress && vite build",
     "preview": "vite preview",
+    "setup:blochain": "bash scripts/setup-local-environment.sh",
+    "mint": "pnpm run setup:blochain && eval $(cat .env | grep -v '^#' | sed 's/^/export /') && tsx scripts/mint.ts",
     "test": "npm run test:integration && npm run test:unit",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -72,6 +74,7 @@
     "tailwind-variants": "^0.2.1",
     "three": "^0.157.0",
     "tweetnacl": "^1.0.3",
+    "uuid": "^10.0.0",
     "zod": "^3.23.8"
   }
 }
