@@ -3,6 +3,8 @@
   import ProjectCard from "@/lib/projects/ProjectCard.svelte";
   import { twMerge } from "tailwind-merge";
   import { navbarHeight } from "@/stores/navbarHeight";
+  import Title from "@/lib/components/Title.svelte";
+  import { goto } from "$app/navigation";
 
   let paddingTop = 0;
   navbarHeight.subscribe((value) => {
@@ -14,15 +16,13 @@
   style="padding-top: {paddingTop}px"
   class="flex flex-col px-scale-0-0"
 >
-  <div class="w-full flex justify-center">
-    <div class="flex flex-col">
-      <h1 class="text-scale-4-0 font-serif font-light italic normal-case">Projects
-      </h1>
-      <div class="flex self-end">
-        <Button>Add yours</Button>
-      </div>
-    </div>
-  </div>
+  <Title title="Projects">
+    <Button
+      on:click={() => goto("/projects/add")}
+    >
+      Add yours
+    </Button>
+  </Title>
 
   <div class="px-scale-0-0 pt-scale-0-0 columns-2 gap-scale-3-0 xl:gap-scale-1-0 md:columns-2 xl:columns-3 xl:gap-scale-1-0">
     {#each Array.from({ length: 30 }, (_, index) => index) as number }
