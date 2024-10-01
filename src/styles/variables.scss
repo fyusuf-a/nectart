@@ -49,10 +49,10 @@ $navbar-note: 0;
 }
 
 :root {
-  font-size: 10px;
+  font-size: 6px;
 
   @include sm {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   @include md {
