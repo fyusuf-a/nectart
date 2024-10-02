@@ -1,4 +1,10 @@
-solana program dump -u d CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d core.so
+mkdir -p bin
+
+solana program dump -um CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d bin/core.so
+
+solana program dump -um CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J bin/candy_machine_core.so
+
+solana program dump -um CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ bin/candy_guard.so
 
 VITE_BACKEND_PRIVATE_KEY=$(grep "VITE_BACKEND_PRIVATE_KEY" .env | cut -d '=' -f2)
 

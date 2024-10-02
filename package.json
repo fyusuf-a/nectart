@@ -8,7 +8,8 @@
     "build": "pnpm run compress && vite build",
     "preview": "vite preview",
     "setup:blochain": "bash scripts/setup-local-environment.sh",
-    "mint": "pnpm run setup:blochain && eval $(cat .env | grep -v '^#' | sed 's/^/export /') && tsx scripts/mint.ts",
+    "validator": "pnpm run setup:blochain && bash scripts/solana-test-validator.sh",
+    "mint": "eval $(cat .env | grep -v '^#' | sed 's/^/export /') && tsx scripts/mint.ts",
     "test": "npm run test:integration && npm run test:unit",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -52,6 +53,7 @@
   "dependencies": {
     "@felte/validator-zod": "^1.0.17",
     "@metaplex-foundation/mpl-core": "^1.1.1",
+    "@metaplex-foundation/mpl-core-candy-machine": "^0.2.3",
     "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
     "@metaplex-foundation/umi": "^0.9.2",
     "@metaplex-foundation/umi-bundle-defaults": "^0.9.2",
