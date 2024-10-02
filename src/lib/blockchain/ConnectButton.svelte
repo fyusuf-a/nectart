@@ -5,7 +5,11 @@ import { addressStore } from "@/stores/wallet";
 import { get } from "svelte/store";
 import { onMount } from "svelte";
 import type { PublicKey } from "@metaplex-foundation/umi";
+import type { ButtonProps } from "$lib/components/ui/button/index.js";
 
+export let variant: ButtonProps["variant"] = "outline";
+export let titleIfConnected = "Connect";
+export let titleIfDisconnected;
 
 const openMenu = async() => {
   const walletInstance = get(wallet);
@@ -25,11 +29,11 @@ onMount(() => {
 
 <Button
   on:click={openMenu}
-  variant="outline"
+  {variant}
 >
   {#if address === null}
-    Connect
+    { titleIfConnected }
   {:else}
-    Disconnect wallet { address ? address : "" }
+    { titleIfDisconnected ?? `Disconnect wallet ${ address ? address : "" }` }
   {/if}
 </Button>

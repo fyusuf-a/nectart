@@ -5,10 +5,16 @@
   import { createForm } from "felte";
   import Button from "@/lib/components/ui/button/button.svelte";
   import { FormField } from "@/lib/components/ui/form";
-  import { umiStore } from "@/stores/wallet";
+  import { addressStore, umiStore } from "@/stores/wallet";
   import type { Umi } from "@metaplex-foundation/umi";
   import OlfactiveNotesSelect from "@/lib/components/OlfactiveNotesSelect.svelte";
   import { Textarea } from "$lib/components/ui/textarea";
+    import ConnectButton from "@/lib/blockchain/ConnectButton.svelte";
+
+  let address: string | null;
+  addressStore.subscribe((value) => {
+    address = value;
+  });
 
   let umi: Umi;
   umiStore.subscribe((value) => {
@@ -37,7 +43,6 @@
 </script>
 
 <div class="flex flex-col items-center">
-{ JSON.stringify(data) }
 <form class="w-scale-5-2 flex flex-col gap-scale-0-0" use:form>
   <FormField
     title="Name of the project"
@@ -83,11 +88,19 @@
       name="baseNotes"
     />
   </FormField>
-  <Button
-    type="submit"
-    class="mt-scale-1-0"
-  >
-    Submit
-  </Button>
+  {#if address}
+    <Button
+      type="submit"
+      class="mt-scale-1-0"
+    >
+      Submit
+    </Button>
+  {:else}
+    <ConnectButton
+      variant="default"
+      titleIfConnected="Submit"
+      titleIfDisconnected="Submit"
+    />
+  {/if}
 </form>
 </div>
