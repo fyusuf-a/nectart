@@ -4,18 +4,41 @@
   import { formSchema } from "./schema";
   import { createForm } from "felte";
   import Button from "@/lib/components/ui/button/button.svelte";
-  import { FormField, FormLabel } from "@/lib/components/ui/form";
- 
-  const { form, errors, isSubmitting } = createForm({
+  import { FormField } from "@/lib/components/ui/form";
+  import { umiStore } from "@/stores/wallet";
+  import type { Umi } from "@metaplex-foundation/umi";
+  import OlfactiveNotesSelect from "@/lib/components/OlfactiveNotesSelect.svelte";
+  import { Textarea } from "$lib/components/ui/textarea";
+
+  let umi: Umi;
+  umiStore.subscribe((value) => {
+    umi = value;
+  });
+
+  const { form, errors, data } = createForm({
     onSubmit: async (values) => {
-      console.log(values);
+      const newData = {
+        ...values,
+        topNotes: data.topNotes,
+        heartNotes: data.heartNotes,
+        baseNotes: data.baseNotes,
+      };
+      console.log(newData);
     },
     extend: validator({ schema: formSchema }),
+    initialValues: {
+      name: "",
+      description: "",
+      topNotes: [],
+      heartNotes: [],
+      baseNotes: [],
+    },
   });
 </script>
 
 <div class="flex flex-col items-center">
-<form class="w-scale-5-2 flex flex-col gap-scale--1-2" use:form>
+{ JSON.stringify(data) }
+<form class="w-scale-5-2 flex flex-col gap-scale-0-0" use:form>
   <FormField
     title="Name of the project"
     name="name"
@@ -24,21 +47,41 @@
     <Input id="name" name="name" />
   </FormField>
   <FormField
-    title="Email"
-    name="email"
+    title="Description"
+    name="description"
     {errors}
   >
-    <Input type="email" id="email" name="email" />
+    <Textarea id="description" name="description" />
   </FormField>
   <FormField
-    title="Password"
-    name="password"
+    title="Top notes"
+    name="topNotes"
     {errors}
   >
-    <Input id="password" type="password" name="password" />
-  {#if $errors.password?.length}
-    <p>{$errors.password[0]}</p>
-  {/if}
+    <OlfactiveNotesSelect
+      bind:selectedNotes={data.topNotes}
+      name="topNotes"
+    />
+  </FormField>
+  <FormField
+    title="Middle notes"
+    name="heartNotes"
+    {errors}
+  >
+    <OlfactiveNotesSelect
+      bind:selectedNotes={data.heartNotes}
+      name="heartNotes"
+    />
+  </FormField>
+  <FormField
+    title="Base notes"
+    name="baseNotes"
+    {errors}
+  >
+    <OlfactiveNotesSelect
+      bind:selectedNotes={data.baseNotes}
+      name="baseNotes"
+    />
   </FormField>
   <Button
     type="submit"

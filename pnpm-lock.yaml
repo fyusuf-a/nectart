@@ -68,6 +68,9 @@ importers:
       split-type:
         specifier: ^0.3.4
         version: 0.3.4
+      svelte-multiselect:
+        specifier: ^10.3.0
+        version: 10.3.0
       svelte-query:
         specifier: ^0.0.1-alpha1
         version: 0.0.1-alpha1
@@ -3022,6 +3025,9 @@ packages:
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
 
+  svelte-multiselect@10.3.0:
+    resolution: {integrity: sha512-Pyvlcn4TK3dB2WWo6hDEeNH+x2O/DP82UuUf61PQFX8KMB3cm1Cam+zTKrcrOoRRVI2SwH/8dPF8hSTfJFaMmA==}
+
   svelte-preprocess@5.1.4:
     resolution: {integrity: sha512-IvnbQ6D6Ao3Gg6ftiM5tdbR6aAETwjhHV+UKGf5bHGYR69RQvF1ho0JKPcbUON4vy4R7zom13jPjgdOWCQ5hDA==}
     engines: {node: '>= 16.0.0'}
@@ -3061,6 +3067,10 @@ packages:
 
   svelte-query@0.0.1-alpha1:
     resolution: {integrity: sha512-nkC1sbYr6iYYRQv9gXRgIjA5CKYDlgB/0suEq4HeJn/ksEZ8eQ8nyOawuttx0K4bbzjfui8mBHRAiOsDvltQZg==}
+
+  svelte@4.2.12:
+    resolution: {integrity: sha512-d8+wsh5TfPwqVzbm4/HCXC783/KPHV60NvwitJnyTA5lWn1elhXMNWhXGCJ7PwPa8qFUnyJNIyuIRt2mT0WMug==}
+    engines: {node: '>=16'}
 
   svelte@4.2.19:
     resolution: {integrity: sha512-IY1rnGr6izd10B0A8LqsBfmlT5OILVuZ7XsI0vdGPEvuonFV7NYEUK4dAkm9Zg2q0Um92kYjTpS1CAP3Nh/KWw==}
@@ -6460,6 +6470,10 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
+  svelte-multiselect@10.3.0:
+    dependencies:
+      svelte: 4.2.12
+
   svelte-preprocess@5.1.4(postcss-load-config@4.0.2(postcss@8.4.47))(postcss@8.4.47)(sass@1.79.4)(svelte@4.2.19)(typescript@5.6.2):
     dependencies:
       '@types/pug': 2.0.10
@@ -6475,6 +6489,23 @@ snapshots:
       typescript: 5.6.2
 
   svelte-query@0.0.1-alpha1: {}
+
+  svelte@4.2.12:
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@jridgewell/sourcemap-codec': 1.5.0
+      '@jridgewell/trace-mapping': 0.3.25
+      '@types/estree': 1.0.6
+      acorn: 8.12.1
+      aria-query: 5.3.2
+      axobject-query: 4.1.0
+      code-red: 1.0.4
+      css-tree: 2.3.1
+      estree-walker: 3.0.3
+      is-reference: 3.0.2
+      locate-character: 3.0.0
+      magic-string: 0.30.11
+      periscopic: 3.1.0
 
   svelte@4.2.19:
     dependencies:
