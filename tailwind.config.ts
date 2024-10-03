@@ -17,6 +17,9 @@ const config: Config = {
               for (let note = 0; note < 3; note++) {
                 addUtilities(
                   {
+                    [`.border-scale-${octave}-${note}`]: {
+                      borderWidth: typographicScale(octave, note),
+                    },
                     [`.text-scale-${octave}-${note}`]: {
                       fontSize: typographicScale(octave, note),
                     },
