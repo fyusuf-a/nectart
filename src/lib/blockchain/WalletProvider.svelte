@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { wallet } from '@/stores/wallet';
-  import type { SolanaConnect } from 'solana-connect';
+  import { walletStore } from '@/stores/wallet';
   import { onMount } from 'svelte';
 
-  onMount(() => wallet.set(new (window as any).SolanaConnect() as SolanaConnect));
+  onMount(() => {
+    walletStore.initialize();
+  });
 </script>
 
 

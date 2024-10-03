@@ -4,7 +4,7 @@
   import { page } from '$app/stores';
   import { navbarHeight } from '../stores/navbarHeight';
   import Theme from '@/lib/style/Theme.svelte';
-  import ConnectButton from '$lib/blockchain/ConnectButton.svelte';
+  //import ConnectButton from '$lib/blockchain/ConnectButton.svelte';
   import { themeStore } from '@/stores/theme';
 
   export let theme: 'light' | 'dark' | 'transparent' = 'light';
@@ -78,7 +78,7 @@
       </Link>
     </div>
   {/each}
-  <ConnectButton />
+  <!--<ConnectButton />-->
 </nav>
 </Theme>
 

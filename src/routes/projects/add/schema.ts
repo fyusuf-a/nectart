@@ -9,3 +9,4 @@ export const formSchema = z.object({
 });
 
 export type FormSchema = typeof formSchema;
+export type FormSchemaType = z.infer<typeof formSchema>;

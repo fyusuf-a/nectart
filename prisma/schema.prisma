@@ -11,7 +11,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NONPOOLING")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
@@ -19,4 +19,16 @@ model User {
   address   String   @unique
 
   @@map("user")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  baseNotes   String[]  @default([]) @map("base_notes")
+  middleNotes String[]  @default([]) @map("middle_notes") 
+  topNotes    String[]  @default([]) @map("top_notes")
+  budgetInUSD Int       @default(30000) @map("budget_in_usd")
+
+  @@map("project")
 }
