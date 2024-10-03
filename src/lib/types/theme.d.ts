@@ -1,4 +1,1 @@
-export type Theme = {
-  backgroundColor: string;
-  color: string;
-};
+export type Theme = 'light' | 'dark' | 'transparent';

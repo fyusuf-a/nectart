@@ -3,8 +3,8 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 
-function typographicScale(octave = 0, note = 0) {
-  return `calc(1rem * ${Math.pow(2, octave)} * ${Math.pow(2, note / 3)})`;
+function typographicScale(octave = 0, note = 0, negative = false) {
+  return `calc(${negative ? '-' : ''}1rem * ${Math.pow(2, octave)} * ${Math.pow(2, note / 3)})`;
 }
 
 const config: Config = {
@@ -17,6 +17,9 @@ const config: Config = {
               for (let note = 0; note < 3; note++) {
                 addUtilities(
                   {
+                    [`.bottom-scale-${octave}-${note}`]: {
+                      bottom: typographicScale(octave, note, true),
+                    },
                     [`.border-scale-${octave}-${note}`]: {
                       borderWidth: typographicScale(octave, note),
                     },

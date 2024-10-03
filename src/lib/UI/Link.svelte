@@ -1,17 +1,25 @@
 <script lang="ts">
+  import { twMerge } from "tailwind-merge";
+
   export let href: string;
   export let disabled: boolean = false;
 </script>
 
 <a
-  {href} class="button"
-  class:disabled
+  {href}
   {...$$restProps}
+  class={ twMerge(
+    $$restProps.class,
+    'uppercase relative',
+  )}
 >
   <slot />
-  <div class="underline" />
+  <div class="absolute bottom-scale--1-0 w-full h-[1px] z-20 underline" />
 </a>
 
 <style lang="scss">
-  @import 'src/styles/link.scss';
+ a:hover > div {
+    background-color: var(--color);
+  }
+  /* @import 'src/styles/link.scss'; */
 </style>

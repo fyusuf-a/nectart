@@ -4,10 +4,12 @@
   import { page } from '$app/stores';
   import { navbarHeight } from '../stores/navbarHeight';
   import Theme from '@/lib/style/Theme.svelte';
-  //import ConnectButton from '$lib/blockchain/ConnectButton.svelte';
+  import type { Theme as ThemeType } from '$lib/types/theme.d';
   import { themeStore } from '@/stores/theme';
+    import Logo from '@/lib/components/Logo.svelte';
 
-  export let theme: 'light' | 'dark' | 'transparent' = 'light';
+  export let theme: ThemeType = 'light' as ThemeType;
+
 
   type Route = {
     name: string;
@@ -15,21 +17,26 @@
     theme?: 'light' | 'dark' | 'transparent';
   };
 
-  const routes: Route[] = [
+  const routesLeft: Route[] = [
     {
-      name: 'Home',
-      path: '/product',
+      name: 'Boutique',
+      path: '/boutique',
       theme: 'dark'
-    },
-    {
-      name: 'Projects',
-      path: '/projects'
-    },
+    }
     //{
     //  name: 'Contact',
     //  path: 'mailto:contact@nect.art'
     //},
   ];
+
+  const routesRight: Route[] = [
+    {
+      name: 'Projects',
+      path: '/projects'
+    },
+  ];
+
+  const routes = [...routesLeft, { name: 'Home', path: '/product', theme: 'dark' }, ...routesRight];
 
   let navbar: HTMLElement;
   function updateNavbarHeight() {
@@ -68,26 +75,32 @@
 
 <Theme tag="div" theme={theme} class="navbar">
 <nav
-  class="navbar items-center"
+  class="flex navbar items-center"
   bind:this={navbar}
 >
-  {#each routes as route}
-    <div class="link">
+  {#each routesLeft as route}
+    <div class="flex-1 flex justify-center">
       <Link href={route.path} disabled={route.path === $page.url.pathname}>
         {route.name}
       </Link>
     </div>
   {/each}
-  <!--<ConnectButton />-->
+  <a class="flex-1" href="/product">
+    <Logo class="h-scale-1-0" />
+  </a>
+  {#each routesRight as route}
+    <div class="flex-1 flex justify-center">
+      <Link href={route.path} disabled={route.path === $page.url.pathname}>
+        {route.name}
+      </Link>
+    </div>
+  {/each}
 </nav>
 </Theme>
 
 <style lang="scss">
-  .link {
-    width: 10em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  svg path {
+    fill: var(--color);
   }
 
   .navbar {
