@@ -27,7 +27,7 @@ model Project {
   name        String
   description String
   baseNotes   String[]  @default([]) @map("base_notes")
-  middleNotes String[]  @default([]) @map("middle_notes") 
+  heartNotes  String[]  @default([]) @map("middle_notes") 
   topNotes    String[]  @default([]) @map("top_notes")
   budgetInUSD Int       @default(30000) @map("budget_in_usd")
   user        User      @relation(fields: [userId], references: [id])

@@ -5,7 +5,7 @@ export const formSchema = z.object({
   description: z.string().min(1).max(500),
   topNotes: z.array(z.string()).optional().default([]),
   baseNotes: z.array(z.string()).optional().default([]),
-  middleNotes: z.array(z.string()).optional().default([]),
+  heartNotes: z.array(z.string()).optional().default([]),
 });
 
 export type FormSchema = typeof formSchema;

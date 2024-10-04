@@ -32,7 +32,7 @@ export const POST: RequestHandler = async({ request, locals }) => {
       description: result.description,
       topNotes: result.topNotes,
       baseNotes: result.baseNotes,
-      middleNotes: result.middleNotes,
+      heartNotes: result.heartNotes,
       userId: locals.user.id,
     },
   });
