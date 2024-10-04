@@ -7,8 +7,10 @@
   import type { Project } from "@prisma/client";
   import { capitalizeFirstLetter } from "@metaplex-foundation/mpl-core/dist/src/utils";
   import { twMerge } from "tailwind-merge";
+  import OlfactiveNote from "$lib/components/OlfactiveNote.svelte";
+  import { olfactiveNotes } from "$lib/olfactive-notes.js";
 
-  export let project: Project;
+  export let project: Project & { user: { address: string } };
 </script>
 
 <Card.Root
@@ -26,6 +28,14 @@
       { capitalizeFirstLetter(project.name) }
     </Card.Title>
     <Card.Description>{ project.description }</Card.Description>
+    <Card.Description class="mt-2 text-sm text-gray-500">
+      Creator: { project.user.address }
+    </Card.Description>
+    <div class="flex mt-4">
+      {#each olfactiveNotes.slice(0, 2) as note}
+        <OlfactiveNote label={note.label} />
+      {/each}
+    </div>
   </Card.Header>
  rueqoiuper ureoiuquroiuiqwer uroiuoiqweru riuoiqr uqwer iruoiuqweri uqroip
  rueqoiuper ureoiuquroiuiqwer uroiuoiqweru riuoiqr uqwer iruoiuqweri uqroip
