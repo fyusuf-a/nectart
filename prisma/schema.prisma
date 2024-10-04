@@ -17,6 +17,7 @@ datasource db {
 model User {
   id        String   @id @default(cuid())
   address   String   @unique
+  Projects  Project[]
 
   @@map("user")
 }
@@ -29,6 +30,8 @@ model Project {
   middleNotes String[]  @default([]) @map("middle_notes") 
   topNotes    String[]  @default([]) @map("top_notes")
   budgetInUSD Int       @default(30000) @map("budget_in_usd")
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String    @map("user_id")
 
   @@map("project")
 }
