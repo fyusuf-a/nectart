@@ -18,7 +18,7 @@
 </script>
  
 <div
-  class="flex flex-col px-scale-0-0 pt-scale-2-2"
+  class="flex flex-col px-scale-0-0 pt-scale-2-2 pb-scale-1-2"
 >
   <Title title="Projects">
     <Button

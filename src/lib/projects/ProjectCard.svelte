@@ -74,8 +74,12 @@
 </Card.Root>
 
 <style>
+  :global(.project-root > img, .project-root > .title) {
+    opacity: 1;
+    transition: opacity 1s;
+  }
   :global(.project-root:hover > img, .project-root:hover .title ) {
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 1s;
   }
 </style>
