@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite dev",
     "compress": "node scripts/compress.js",
-    "build": "pnpm run compress && vite build",
+    "build": "pnpm run compress && prisma generate && vite build",
     "preview": "vite preview",
     "setup:blochain": "bash scripts/setup-local-environment.sh",
     "validator": "pnpm run setup:blochain && bash scripts/solana-test-validator.sh",
