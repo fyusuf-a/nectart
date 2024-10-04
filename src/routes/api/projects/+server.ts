@@ -8,6 +8,9 @@ export const GET: RequestHandler = async() => {
     include: {
       user: true,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
   return json(projects, { status: 200 });
 }

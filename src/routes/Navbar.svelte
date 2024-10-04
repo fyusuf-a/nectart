@@ -6,7 +6,7 @@
   import Theme from '@/lib/style/Theme.svelte';
   import type { Theme as ThemeType } from '$lib/types/theme.d';
   import { themeStore } from '@/stores/theme';
-    import Logo from '@/lib/components/Logo.svelte';
+  import Logo from '@/lib/components/Logo.svelte';
 
   export let theme: ThemeType = 'light' as ThemeType;
 
@@ -75,7 +75,7 @@
 
 <Theme tag="div" theme={theme} class="navbar">
 <nav
-  class="flex navbar items-center"
+  class="bg-[var(--background-color)] h-scale-2-2 flex navbar items-center"
   bind:this={navbar}
 >
   {#each routesLeft as route}
@@ -104,13 +104,10 @@
   }
 
   .navbar {
-    background-color: var(--background-color);
-    padding: #{$navbar-vertical-padding} 0px;
     box-sizing: border-box;
     position: fixed;
     top: 0;
     width: 100vw;
-    height: navbar-height();
     display: flex;
     justify-content: space-around;
     flex-direction: row;

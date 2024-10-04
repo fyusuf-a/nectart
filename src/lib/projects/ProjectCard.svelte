@@ -28,7 +28,7 @@
     </Card.Description>
     <Card.Description>{ project.description }</Card.Description>
     <Card.Content>
-    {#if project.topNotes}
+    {#if project?.topNotes.length > 0}
       <div class="relative flex mt-4">
           {#each project.topNotes as note}
             <OlfactiveNote label={note} />
@@ -36,7 +36,7 @@
           <div class="flex items-end rotate-90 w-scale-1-2 h-scale-1-2 font-sans uppercase font-light">Top</div>
       </div>
     {/if}
-    {#if project.heartNotes}
+    {#if project?.heartNotes.length > 0}
     <div class="flex">
       <div class="flex items-end w-scale-1-2 h-scale-1-2 -rotate-90 font-sans uppercase font-light">Heart</div>
       {#each project.heartNotes as note}
@@ -44,7 +44,7 @@
       {/each}
     </div>
     {/if}
-    {#if project.baseNotes}
+    {#if project?.baseNotes.length > 0}
     <div class="flex">
       {#each project.baseNotes as note}
         <OlfactiveNote label={note} />

@@ -15,6 +15,7 @@
   import { walletStore } from "@/stores/wallet";
   import { get } from "svelte/store";
   import { signMessage } from "@/lib/crypto";
+  import { goto } from "$app/navigation";
 
   let umi: Umi;
   umiStore.subscribe((value) => {
@@ -32,6 +33,7 @@
           'X-Public-Key': umi.identity.publicKey
         }
       });
+      goto("/projects");
     }
   });
   let mutation: any;
