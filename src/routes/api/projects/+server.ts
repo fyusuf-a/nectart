@@ -3,6 +3,15 @@ import { formSchema, FormSchemaType } from '@/routes/projects/add/schema';
 import { ZodError } from 'zod';
 import { prisma } from '@/lib/api/prisma';
 
+export const GET: RequestHandler = async() => {
+  const projects = await prisma.project.findMany({
+    include: {
+      user: true,
+    },
+  });
+  return json(projects, { status: 200 });
+}
+
 export const POST: RequestHandler = async({ request, locals }) => {
   let result: FormSchemaType;
   try {

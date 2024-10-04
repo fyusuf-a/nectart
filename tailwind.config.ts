@@ -20,6 +20,9 @@ const config: Config = {
                     [`.bottom-scale-${octave}-${note}`]: {
                       bottom: typographicScale(octave, note, true),
                     },
+                    [`.top-scale-${octave}-${note}`]: {
+                      top: typographicScale(octave, note),
+                    },
                     [`.border-scale-${octave}-${note}`]: {
                       borderWidth: typographicScale(octave, note),
                     },
