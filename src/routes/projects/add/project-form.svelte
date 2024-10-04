@@ -40,7 +40,7 @@
   });
 
 
-  const { form, errors, data } = createForm({
+  const { form, errors, setFields } = createForm({
     onSubmit: async (values) => {
       mutation.mutate(values);
     },
@@ -80,17 +80,17 @@
       {errors}
     >
       <OlfactiveNotesSelect
-        bind:selectedNotes={data.topNotes}
+        on:input={(e) => setFields('topNotes', e.detail)}
         name="topNotes"
       />
     </FormField>
     <FormField
-      title="Middle notes"
+      title="Heart notes"
       name="heartNotes"
       {errors}
     >
       <OlfactiveNotesSelect
-        bind:selectedNotes={data.heartNotes}
+        on:input={(e) => setFields('heartNotes', e.detail)}
         name="heartNotes"
       />
     </FormField>
@@ -100,7 +100,7 @@
       {errors}
     >
       <OlfactiveNotesSelect
-        bind:selectedNotes={data.baseNotes}
+        on:input={(e) => setFields('baseNotes', e.detail)}
         name="baseNotes"
       />
     </FormField>

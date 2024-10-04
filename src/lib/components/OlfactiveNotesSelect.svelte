@@ -7,14 +7,7 @@
 
   let selected: { label: string, url: string }[] = [];
 
-  export let selectedNotes: string[] = [];
-
   const dispatch = createEventDispatcher();
-
-  $: {
-    selectedNotes = selected.map((s) => s.label);
-    dispatch("input", selectedNotes);
-  }
 </script>
 
 <MultiSelect
@@ -23,6 +16,10 @@
   removeAllTitle="Remove all foods"
   closeDropdownOnSelect={false}
   {name}
+  on:change={() => {
+    const selectedNotes = selected.map((s) => s.label);
+    dispatch("input", selectedNotes);
+  }}
 >
   <div let:option slot="option" class="flex items-center">
     <img src={option.url} alt={option.label} style="width: 20px; height: 20px; margin-right: 8px;" />
