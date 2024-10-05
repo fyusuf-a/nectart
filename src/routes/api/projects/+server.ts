@@ -2,11 +2,16 @@ import { error, json, RequestHandler } from '@sveltejs/kit';
 import { formSchema, FormSchemaType } from '@/routes/projects/add/schema';
 import { ZodError } from 'zod';
 import { prisma } from '@/lib/api/prisma';
+import { del, put } from '@vercel/blob';
+import { Project } from '@prisma/client';
 
 export const GET: RequestHandler = async() => {
   const projects = await prisma.project.findMany({
     include: {
       user: true,
+      images: {
+        take: 1,
+      },
     },
     orderBy: {
       createdAt: 'desc',
@@ -33,15 +38,32 @@ export const POST: RequestHandler = async({ request, locals }) => {
     throw error(400, 'Invalid body');
   }
 
-  const project = await prisma.project.create({
-    data: {
-      name: result.name,
-      description: result.description,
-      topNotes: result.topNotes,
-      baseNotes: result.baseNotes,
-      heartNotes: result.heartNotes,
-      userId: locals.user.id,
-    },
-  });
+  let project: Project | null = null;
+  try {
+    await prisma.$transaction(async (tx) => {
+      project = await prisma.project.create({
+        data: {
+          name: result.name,
+          description: result.description,
+          topNotes: result.topNotes,
+          baseNotes: result.baseNotes,
+          heartNotes: result.heartNotes,
+          userId: locals.user.id,
+        },
+      });
+      const { url } = await put(`projects/${project.id}/1`, result.picture, { access: 'public' });
+      await tx.image.create({
+        data: {
+          url,
+          projectId: project.id,
+        },
+      });
+    });
+  } catch (e) {
+    if (project) {
+      await del(`projects/${(project as Project).id}/1`);
+    }
+    throw e;
+  }
   return json(project, { status: 200 });
 }

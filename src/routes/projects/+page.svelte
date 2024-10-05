@@ -41,6 +41,7 @@
       {#each $query.data as project }
         <div class="mb-scale-1-0">
           <ProjectCard
+            imgUrl={project.images.length > 0 ? project.images[0].url : undefined}
             project={project}
             class="p-scale-1-2 break-inside-avoid"
           />

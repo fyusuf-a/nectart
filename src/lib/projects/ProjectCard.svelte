@@ -7,6 +7,7 @@
   import OlfactiveNote from "$lib/components/OlfactiveNote.svelte";
 
   export let project: Project & { user: { address: string } };
+  export let imgUrl: string;
 </script>
 
 <Card.Root
@@ -58,7 +59,7 @@
     <Button variant="outline">Discover</Button>
   </Card.Footer>
 
-  <img class="absolute top-0 left-0 w-full h-full object-cover z-40" src={ `https://picsum.photos/800?random=${ Math.floor(Math.random() * 100) }` } alt="Project" />
+  <img class="absolute top-0 left-0 w-full h-full object-cover z-40" src={ imgUrl ?? `https://picsum.photos/800?random=${ Math.floor(Math.random() * 100) }` } alt="Project" />
   <div
     class="title tracking-tight font-serif text-5xl font-bold italic absolute left-scale-1-0 top-scale-1-2 z-50 text-white"
     style="mix-blend-mode: color;"
