@@ -25,12 +25,23 @@
   const mutationStore = createMutation({
     mutationFn: async (data: FormSchemaType) => {
       await walletStore.connect();
+      const dataField = {
+        name: data.name,
+        description: data.description,
+        topNotes: data.topNotes,
+        heartNotes: data.heartNotes,
+        baseNotes: data.baseNotes,
+      };
+      const form = new FormData();
+      form.append("picture", data.picture);
+      form.append("data", JSON.stringify(dataField));
       const umi = get(umiStore);
-      const signature = await signMessage(umi, JSON.stringify(data));
-      axios.post("/api/projects", data, {
+      const signature = await signMessage(umi, JSON.stringify(dataField));
+      await axios.post("/api/projects", form, {
         headers: {
           'X-Signature': signature,
-          'X-Public-Key': umi.identity.publicKey
+          'X-Public-Key': umi.identity.publicKey,
+          'Content-Type': 'multipart/form-data'
         }
       });
       goto("/projects");
@@ -53,15 +64,23 @@
       topNotes: [],
       heartNotes: [],
       baseNotes: [],
+      picture: null,
     },
   });
+
+  let formElement: HTMLFormElement | null;
 </script>
 
 <div class="flex flex-col items-center">
 {#if $mutationStore.isPending}
   <Spinner />
 {:else}
-  <form class="w-scale-5-2 flex flex-col gap-scale-0-0" use:form>
+  <form
+    class="w-scale-5-2 flex flex-col gap-scale-0-0"
+    use:form
+    enctype="multipart/form-data"
+    bind:this={formElement}
+  >
     <FormField
       title="Name of the project"
       name="name"
@@ -104,6 +123,17 @@
       <OlfactiveNotesSelect
         on:input={(e) => setFields('baseNotes', e.detail)}
         name="baseNotes"
+      />
+    </FormField>
+    <FormField
+      title="Picture"
+      name="picture"
+      {errors}
+    >
+      <Input
+        id="picture"
+        type="file"
+        on:input={(e) => setFields('picture', e.target.files[0])}
       />
     </FormField>
     <Button

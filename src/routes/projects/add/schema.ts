@@ -6,6 +6,7 @@ export const formSchema = z.object({
   topNotes: z.array(z.string()).optional().default([]),
   baseNotes: z.array(z.string()).optional().default([]),
   heartNotes: z.array(z.string()).optional().default([]),
+  picture: z.instanceof(File),
 });
 
 export type FormSchema = typeof formSchema;

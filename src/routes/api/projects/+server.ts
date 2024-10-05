@@ -18,8 +18,12 @@ export const GET: RequestHandler = async() => {
 export const POST: RequestHandler = async({ request, locals }) => {
   let result: FormSchemaType;
   try {
-    const jsonBody = await request.json();
-    result = formSchema.parse(jsonBody);
+    const body = await request.formData();
+    const data = JSON.parse(body.get('data') as string);
+    result = formSchema.parse({
+      ...data,
+      picture: body.get('picture'),
+    });
   } catch (e) {
     if (e instanceof ZodError) {
       const firstError = e.errors[0];

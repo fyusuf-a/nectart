@@ -12,7 +12,6 @@ const signedRoutes = [
 
 export async function handle({ event, resolve }) {
   const url = new URL(event.request.url);
-  console.log(url.pathname);
   const isSignedRoute = signedRoutes.some(({ route, method }) => {
     return url.pathname === route && event.request.method === method;
   });
@@ -22,14 +21,25 @@ export async function handle({ event, resolve }) {
   }
 
   const { request } = event;
-  const clonedRequest = new Request(request);
+  const clonedRequest = request.clone();
 
-  const rawBody = await clonedRequest.text();
-  const encodedMessage = new TextEncoder().encode(rawBody);
+  let toBeEncoded: string;
+
+  if (event.request.headers.get('Content-Type')!.startsWith('multipart/form-data')) {
+    const formData = await clonedRequest.formData();
+    toBeEncoded = formData.get('data') as string;
+  }
+  else {
+    const rawBody = await clonedRequest.text();
+    toBeEncoded = rawBody;
+  }
+  const encodedMessage = new TextEncoder().encode(toBeEncoded);
+
   const signature = clonedRequest.headers.get('X-Signature');
   if (!signature) {
     return new Response('Unauthorized', { status: 401 });
   }
+
   const publicKeyString = clonedRequest.headers.get('X-Public-Key');
   if (!publicKeyString) {
     return new Response('Unauthorized', { status: 401 });
@@ -53,15 +63,5 @@ export async function handle({ event, resolve }) {
     address: publicKey.toBase58(),
   };
 
-
-  const newRequest = new Request(request, {
-    body: rawBody,
-    headers: request.headers,
-    method: request.method,
-  });
-
-  return resolve({
-    ...event,
-    request: newRequest,
-  });
+  return resolve(event);
 }
