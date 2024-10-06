@@ -33,6 +33,7 @@
         topNotes: data.topNotes,
         heartNotes: data.heartNotes,
         baseNotes: data.baseNotes,
+        tokenNumber: data.tokenNumber,
       };
       const form = new FormData();
       form.append("picture", data.picture);
