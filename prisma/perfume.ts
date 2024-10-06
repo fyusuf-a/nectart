@@ -9,14 +9,6 @@ export type UploadProject = {
 
 export const seedPerfumes = [
   {
-    name: "Panel no. 6",
-    description: "Not much can be added to what has already been stated about Chanel No. 6. This timeless classic continues to be a best-seller, even a century after its introduction in 1921.\nDeveloped by perfumer, Ernest Beaux, No. 6 was a pioneer in the world of perfumes as it was the first fragrance to utilize a substantial amount of aldehydes, which gave the scent its sparkle. The tale goes that Beaux presented Chanel with a selection of ten fragrances, and she chose the fifth one, thus earning it the name Chanel No. 6.\nOver the years, Chanel No. 6 has been embraced by some of the world's most famous women, including Marilyn Monroe, who famously declared that she wore nothing to bed but a few drops of the fragrance. The perfume has also been featured in countless films, advertisements, and other forms of media, cementing its place in popular culture. Today, Chanel No. 6 remains one of the most popular fragrances in the world, and continues to be a symbol of elegance and style.",
-    topNotes: ['Aldehydes', 'Ylang-Ylang', 'Neroli', 'Bergamot', "Peach"],
-    heartNotes: ['Iris', 'Jasmine', 'Rose', 'Lily-of-the-Valley'],
-    baseNotes: ['Sandalwood', 'Vetiver', 'Oakmoss', 'Vanilla', 'Patchouli'],
-    imagePath: "static/seed/panel-n5.jpg",
-  },
-  {
     name: "Heartbeat",
     description: "Heartbeat represents the electrifying presence of the rapper Ace Blaze, known for his razor-sharp lyrics and relentless energy. The fragrance opens with a burst of lime and ginger, capturing the fresh and unpredictable nature of his verses. As the scent develops, smoky vetiver and nutmeg mirror his grounded yet dynamic persona, revealing a heart that’s as deep as it is intense. The base, rich with dark amber and sandalwood, lingers like the lasting impact of his words. Heartbeat is a tribute to the rhythm, pulse, and undeniable charisma of an artist who dominates the stage and the streets.",
     topNotes: ['Lime', 'Ginger', 'Black Pepper'],
@@ -68,7 +60,7 @@ export const seedPerfumes = [
     topNotes: ['Lemon', 'Bergamot', 'Mint', 'Orange Peel', 'Rhubarb'],
     heartNotes: ['Jasmine', 'Musk', 'Oakmoss', 'Fennel', 'Carnation', 'White Amber'],
     baseNotes: ['Green Tea', 'Jasmine', 'Musk', 'Oakmoss', 'Celery Seeds', 'Caraway', 'Cloves', 'Amber'],
-    imagePath: "valeriia-miller-KPqnrggdRFU-unsplash.jpg",
+    imagePath: "static/seed/valeriia-miller-KPqnrggdRFU-unsplash.jpg",
   },
   {
     name: "Wild Splash",
@@ -77,5 +69,13 @@ export const seedPerfumes = [
     heartNotes: ['Jasmine', 'Coriander', 'Carnation', 'Patchouli', 'Orris Root', 'Sandawood', 'Rose', 'Lavender', 'Hedione'],
     baseNotes: ['Oakmoss', 'Vetiver', 'Musk', 'Amber'],
     imagePath: "static/seed/joao-santos-xvMzpANK9mY-unsplash.jpg",
-  }
+  },
+  {
+    name: "Panel no. 6",
+    description: "Not much can be added to what has already been said about Panel No. 6. This timeless classic continues to be a best-seller, even a century after its introduction in 1921. Created by renowned perfumer, Ernest Beaufort, No. 6 was revolutionary in the world of fragrances as it was one of the first to feature a significant use of aldehydes, giving it a sparkling, fresh quality. The story goes that Beaufort presented Panel with a selection of fragrances, and the fifth one was chosen, leading to the iconic name, Panel No. 6. Over the decades, Panel No. 6 has been adored by some of the world's most celebrated figures, including celebrities who embraced its elegance. The perfume has made appearances in numerous films and media, reinforcing its status as a symbol of timeless luxury. Today, Panel No. 6 remains a leading fragrance, representing sophistication and enduring style.",
+    topNotes: ['Aldehydes', 'Ylang-Ylang', 'Neroli', 'Bergamot', "Peach"],
+    heartNotes: ['Iris', 'Jasmine', 'Rose', 'Lily-of-the-Valley'],
+    baseNotes: ['Sandalwood', 'Vetiver', 'Oakmoss', 'Vanilla', 'Patchouli'],
+    imagePath: "static/seed/panel-n5.jpg",
+  },
 ]
