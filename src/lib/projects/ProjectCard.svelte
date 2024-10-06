@@ -5,6 +5,7 @@
   import { abbreviateAddress, capitalizeFirstLetter } from "$lib/style/utils.js";
   import { twMerge } from "tailwind-merge";
   import OlfactiveNote from "$lib/components/OlfactiveNote.svelte";
+  import OlfactivePyramid from "../components/OlfactivePyramid.svelte";
 
   export let project: Project & { user?: { address: string } };
   export let imgUrl: string | null = null;
@@ -34,30 +35,11 @@
     {/if}
     <Card.Description>{ project.description }</Card.Description>
     <Card.Content>
-    {#if project?.topNotes.length > 0}
-      <div class="relative flex mt-4">
-          {#each project.topNotes as note}
-            <OlfactiveNote label={note} />
-          {/each}
-          <div class="flex items-end rotate-90 w-scale-1-2 h-scale-1-2 font-sans uppercase font-light">Top</div>
-      </div>
-    {/if}
-    {#if project?.heartNotes.length > 0}
-    <div class="flex">
-      <div class="flex items-end w-scale-1-2 h-scale-1-2 -rotate-90 font-sans uppercase font-light">Heart</div>
-      {#each project.heartNotes as note}
-        <OlfactiveNote label={note} />
-      {/each}
-    </div>
-    {/if}
-    {#if project?.baseNotes.length > 0}
-    <div class="flex">
-      {#each project.baseNotes as note}
-        <OlfactiveNote label={note} />
-      {/each}
-      <div class="flex items-end rotate-90 w-scale-1-2 h-scale-1-2 font-sans uppercase font-light">Base</div>
-    </div>
-    {/if}
+      <OlfactivePyramid
+        topNotes={project.topNotes}
+        heartNotes={project.heartNotes}
+        baseNotes={project.baseNotes}
+      />
     </Card.Content>
   </Card.Header>
   <Card.Footer>

@@ -6,7 +6,7 @@
   export let label: string;
 
   $: note = olfactiveNotes.find(note => note.label === label);
-  $: url = note ? note.url : '';
+  $: url = `/images/olfactive-notes/${note?.slashUrl ?? (note?.tinyUrl ?? "")}`
 </script>
 
 <Tooltip.Root>
