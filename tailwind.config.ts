@@ -82,6 +82,7 @@ const config: Config = {
     fontFamily: {
       sans: ["Avantt", 'sans-serif'],
       serif: ["Saol Display", 'serif'],
+      body: ["Avantt", 'sans-serif'],
     },
 
     container: {

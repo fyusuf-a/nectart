@@ -4,8 +4,8 @@
   import type { Project } from "@prisma/client";
   import { abbreviateAddress, capitalizeFirstLetter } from "$lib/style/utils.js";
   import { twMerge } from "tailwind-merge";
-  import OlfactiveNote from "$lib/components/OlfactiveNote.svelte";
   import OlfactivePyramid from "../components/OlfactivePyramid.svelte";
+  import { goto } from "$app/navigation";
 
   export let project: Project & { user?: { address: string } };
   export let imgUrl: string | null = null;
@@ -43,7 +43,14 @@
     </Card.Content>
   </Card.Header>
   <Card.Footer>
-    <Button variant="outline">Discover</Button>
+    <Button
+      variant="outline"
+      on:click={() => {
+        goto(`/projects/${project.id}`);
+      }}
+    >
+      Discover
+    </Button>
   </Card.Footer>
 
   {#if !uncovered}

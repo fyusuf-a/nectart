@@ -4,6 +4,7 @@
   import { twMerge } from 'tailwind-merge';
 
   export let label: string;
+  export let labelStyle: string;
 
   $: note = olfactiveNotes.find(note => note.label === label);
   $: url = `/images/olfactive-notes/${note?.slashUrl ?? (note?.tinyUrl ?? "")}`
