@@ -18,6 +18,9 @@
     "test:integration": "playwright test",
     "test:unit": "vitest"
   },
+  "prisma" : {
+    "seed": "tsx prisma/seed.ts"
+  },
   "devDependencies": {
     "@img/sharp-linux-x64": "^0.33.0",
     "@playwright/test": "^1.28.1",
