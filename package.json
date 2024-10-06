@@ -18,7 +18,7 @@
     "test:integration": "playwright test",
     "test:unit": "vitest"
   },
-  "prisma" : {
+  "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "devDependencies": {
@@ -63,6 +63,7 @@
     "@solana/web3.js": "^1.95.3",
     "@studio-freight/lenis": "^1.0.27",
     "@tanstack/svelte-query": "^5.56.1",
+    "@vercel/blob": "^0.24.1",
     "axios": "^1.7.7",
     "bits-ui": "^0.21.15",
     "bs58": "^6.0.0",
