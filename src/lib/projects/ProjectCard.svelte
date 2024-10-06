@@ -6,15 +6,18 @@
   import { twMerge } from "tailwind-merge";
   import OlfactiveNote from "$lib/components/OlfactiveNote.svelte";
 
-  export let project: Project & { user: { address: string } };
-  export let imgUrl: string;
+  export let project: Project & { user?: { address: string } };
+  export let imgUrl: string | null = null;
+  export let uncovered: boolean = false;
+  export let bordered: boolean = false;
 </script>
 
 <Card.Root
   class={
     twMerge(
       $$props.class,
-      "project-root relative"
+      "flex-1 project-root relative",
+      bordered && "border border-[var(--color)] border-solid"
     )
   }
 >
@@ -24,9 +27,11 @@
     >
       { capitalizeFirstLetter(project.name) }
     </Card.Title>
+    {#if project.user}
     <Card.Description class="mb-scale-1-0 text-scale-0-2 italic">
       { abbreviateAddress(project.user.address) }
     </Card.Description>
+    {/if}
     <Card.Description>{ project.description }</Card.Description>
     <Card.Content>
     {#if project?.topNotes.length > 0}
@@ -59,6 +64,7 @@
     <Button variant="outline">Discover</Button>
   </Card.Footer>
 
+  {#if !uncovered}
   <img class="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover z-40" src={ imgUrl ?? `https://picsum.photos/800?random=${ Math.floor(Math.random() * 100) }` } alt="Project" />
   <div
     class="title tracking-tight font-serif text-5xl font-bold italic absolute left-scale-1-0 top-scale-1-2 z-50 text-white"
@@ -72,6 +78,7 @@
   >
       { capitalizeFirstLetter(project.name) }
   </div>
+  {/if}
 </Card.Root>
 
 <style>

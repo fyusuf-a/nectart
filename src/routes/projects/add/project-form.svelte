@@ -16,6 +16,8 @@
   import { get } from "svelte/store";
   import { signMessage } from "@/lib/crypto";
   import { goto } from "$app/navigation";
+  import ProjectCard from "@/lib/projects/ProjectCard.svelte";
+  import type { Project } from "@prisma/client";
 
   let umi: Umi;
   umiStore.subscribe((value) => {
@@ -53,13 +55,21 @@
   });
 
 
-  const { form, errors, setFields } = createForm({
+  const { form, data, errors, setFields } = createForm({
     onSubmit: async (values) => {
       mutation.mutate(values);
     },
     extend: validator({ schema: formSchema }),
+    placeholder: {
+      name: "Perfume name",
+      description: "",
+      topNotes: [],
+      heartNotes: [],
+      baseNotes: [],
+      picture: null,
+    },
     initialValues: {
-      name: "",
+      name: "Name",
       description: "",
       topNotes: [],
       heartNotes: [],
@@ -68,7 +78,34 @@
     },
   });
 
+  let coverImage: string | null = null;
+  function handleFileChange(e) {
+    const selectedFile = e.target?.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target) coverImage = e.target.result as string;
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  }
+
   let formElement: HTMLFormElement | null;
+  const budgetInUSD = 30000;
+  let project: Project & { user?: { address: string } };
+  data.subscribe((value) => {
+    project = {
+      name: value.name ?? "",
+      description: value.description ?? "",
+      topNotes: value.topNotes ?? [],
+      heartNotes: value.heartNotes ?? [],
+      baseNotes: value.baseNotes ?? [],
+      budgetInUSD,
+      user: {
+        address: '0x1234567890',
+      },
+    };
+  });
 </script>
 
 <div class="flex flex-col items-center">
@@ -81,23 +118,43 @@
     enctype="multipart/form-data"
     bind:this={formElement}
   >
+    <div class="flex justify-between gap-scale-0-2 mb-scale-2-0">
+      <ProjectCard
+        project={project}
+        class="p-scale-1-2 break-inside-avoid hidden md:block"
+        imgUrl={coverImage}
+      />
+      <ProjectCard
+        project={project}
+        class="p-scale-1-2 break-inside-avoid"
+        uncovered
+        bordered
+      />
+    </div>
     <FormField
       title="Name of the project"
       name="name"
       {errors}
     >
-      <Input id="name" name="name" />
+      <Input
+        id="name"
+        name="name"
+      />
     </FormField>
     <FormField
       title="Description"
       name="description"
       {errors}
     >
-      <Textarea id="description" name="description" />
+      <Textarea
+        id="description"
+        name="description"
+      />
     </FormField>
     <FormField
       title="Top notes"
       name="topNotes"
+      on:input={(e) => setFields('topNotes', e.detail)}
       {errors}
     >
       <OlfactiveNotesSelect
@@ -133,7 +190,10 @@
       <Input
         id="picture"
         type="file"
-        on:input={(e) => setFields('picture', e.target.files[0])}
+        on:input={(e) => {
+         setFields('picture', e.target.files[0]);
+         handleFileChange(e);
+        }}
       />
     </FormField>
     <Button

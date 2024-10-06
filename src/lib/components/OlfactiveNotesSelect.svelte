@@ -12,9 +12,9 @@
 
 <MultiSelect
   bind:selected
-  inputStyle="padding: 7px 10.5px 7px 10.5px;border-radius: 0px;"
+  style="padding: 7px 10.5px 7px 10.5px;border-radius: 0px"
   options={ olfactiveNotes }
-  removeAllTitle="Remove all foods"
+  removeAllTitle="Remove all notes"
   closeDropdownOnSelect={false}
   {name}
   on:change={() => {
