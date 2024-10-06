@@ -36,7 +36,7 @@ export const seedPerfumes = [
     name: "Fluides Magnifiques",
     description: "Like the pulse of raw emotions—blood, sweat, and passion— Fluides Magnifiques captures the primal essence of human desire. This fragrance pushes boundaries, evoking the intense sensations of physical intimacy, where desire overwhelms reason. It opens with a rush of sharp aldehydic notes, mimicking the rush of adrenaline that surges through the body. The fragrance quickly unveils a metallic edge, cold and precise, like the tension between unfulfilled longing and raw sensuality. As the scent deepens, musk and sandalwood merge with the salty undertone of skin, evoking a visceral reaction. This provocative, polarizing scent leaves no one indifferent—it's a love-or-hate experience, designed for those who embrace extremes.",
     heartNotes: ['Seaweed', 'Milk', 'Coconut', 'Iris', 'Opoponax', 'Sandalwood'],
-    imagePath: "static/seed/danny-lines--tWqp0URd88-unsplash.jpg",
+    imagePath: "static/seed/pawel-czerwinski-9iyhomrPcOM-unsplash.jpg",
   },
   {
     name: "Opulent Veil",
@@ -68,7 +68,7 @@ export const seedPerfumes = [
     topNotes: ['Lemon', 'Bergamot', 'Mint', 'Orange Peel', 'Rhubarb'],
     heartNotes: ['Jasmine', 'Musk', 'Oakmoss', 'Fennel', 'Carnation', 'White Amber'],
     baseNotes: ['Green Tea', 'Jasmine', 'Musk', 'Oakmoss', 'Celery Seeds', 'Caraway', 'Cloves', 'Amber'],
-    imagePath: "static/seed/yannick-apollon-FkqLj6m9D6s-unsplash.jpg",
+    imagePath: "valeriia-miller-KPqnrggdRFU-unsplash.jpg",
   },
   {
     name: "Wild Splash",
