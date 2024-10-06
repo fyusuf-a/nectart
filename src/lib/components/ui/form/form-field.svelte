@@ -2,7 +2,7 @@
   import FormLabel from "./form-label.svelte";
 
   export let name;
-  export let errors;
+  export let errors = null;
   export let title: string;
 </script>
 
@@ -14,7 +14,7 @@
     { title }
   </FormLabel>
   <slot />
-  {#if $errors[name]?.length}
+  {#if errors && $errors[name]?.length}
     <p class="red-100">{$errors[name][0]}</p>
   {/if}
 </div>

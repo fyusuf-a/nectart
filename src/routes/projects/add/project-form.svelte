@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Input } from "$lib/components/ui/input";
   import { validator } from "@felte/validator-zod";
-  import { formSchema, type FormSchemaType } from "./schema";
+  import { formSchema, type FormSchemaType, BUDGET_IN_SOL } from "./schema";
   import { createForm } from "felte";
   import Button from "@/lib/components/ui/button/button.svelte";
   import { FormField } from "@/lib/components/ui/form";
@@ -60,14 +60,6 @@
       mutation.mutate(values);
     },
     extend: validator({ schema: formSchema }),
-    placeholder: {
-      name: "Perfume name",
-      description: "",
-      topNotes: [],
-      heartNotes: [],
-      baseNotes: [],
-      picture: null,
-    },
     initialValues: {
       name: "Name",
       description: "",
@@ -75,6 +67,7 @@
       heartNotes: [],
       baseNotes: [],
       picture: null,
+      tokenNumber: null,
     },
   });
 
@@ -91,7 +84,6 @@
   }
 
   let formElement: HTMLFormElement | null;
-  const budgetInUSD = 30000;
   let project: Project & { user?: { address: string } };
   data.subscribe((value) => {
     project = {
@@ -100,7 +92,8 @@
       topNotes: value.topNotes ?? [],
       heartNotes: value.heartNotes ?? [],
       baseNotes: value.baseNotes ?? [],
-      budgetInUSD,
+      tokenNumber: value.tokenNumber ?? 100,
+      budgetInSol: BUDGET_IN_SOL,
       user: {
         address: '0x1234567890',
       },
@@ -194,6 +187,37 @@
          setFields('picture', e.target.files[0]);
          handleFileChange(e);
         }}
+      />
+    </FormField>
+    <FormField
+      title="Token number"
+      name="tokenNumber"
+      {errors}
+    >
+      <Input
+        name="tokenNumber"
+        type="number"
+      />
+    </FormField>
+    <FormField
+      title="Budget (SOL)"
+      name="budget"
+    >
+      <Input
+        id="budget"
+        type="number"
+        value={BUDGET_IN_SOL}
+        readonly
+      />
+    </FormField>
+    <FormField
+      title="Price per token (SOL)"
+      name="pricePerToken"
+    >
+      <Input
+        type="number"
+        value={BUDGET_IN_SOL / $data.tokenNumber}
+        readonly
       />
     </FormField>
     <Button
