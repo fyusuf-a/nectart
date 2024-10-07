@@ -14,35 +14,33 @@
 </script>
 
 <Card.Root
+  bordered={bordered}
   class={
     twMerge(
       $$props.class,
       "flex-1 project-root relative",
-      bordered && "border border-[var(--color)] border-solid"
     )
   }
 >
   <Card.Header>
-    <Card.Title
-      class="font-serif text-5xl font-bold italic"
-    >
-      { capitalizeFirstLetter(project.name) }
+    <Card.Title >
+      { project.name }
+      <div slot="subtitle">
+      {#if project?.user?.address}
+        { abbreviateAddress(project.user.address) }
+      {/if}
+      </div>
     </Card.Title>
-    {#if project.user}
-    <Card.Description class="mb-scale-1-0 text-scale-0-2 italic">
-      { abbreviateAddress(project.user.address) }
-    </Card.Description>
-    {/if}
     <Card.Description>{ project.description }</Card.Description>
-    <Card.Content>
-      <OlfactivePyramid
-        topNotes={project.topNotes}
-        heartNotes={project.heartNotes}
-        baseNotes={project.baseNotes}
-        noteClass="h-scale-2-0 w-scale-2-0"
-      />
-    </Card.Content>
   </Card.Header>
+  <Card.Content>
+    <OlfactivePyramid
+      topNotes={project.topNotes}
+      heartNotes={project.heartNotes}
+      baseNotes={project.baseNotes}
+      noteClass="h-scale-2-0 w-scale-2-0"
+    />
+  </Card.Content>
   <Card.Footer>
     <Button
       variant="outline"
