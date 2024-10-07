@@ -13,7 +13,11 @@
 <section class="subsection1">
   <div class="section-background" />
   <div class="background-circle" />
-  <div id="sensation" bind:this={sensation}>
+  <div
+    id="sensation"
+    class="uppercase"
+    bind:this={sensation}
+  >
     Perfume <span class="accent">is</span><br /> a sensation
   </div>
   <div id="emotion" bind:this={emotion}>an emotion</div>

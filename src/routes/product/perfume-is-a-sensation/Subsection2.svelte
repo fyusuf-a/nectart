@@ -52,7 +52,7 @@
   <div class="section-background" />
   <div class="background" />
   <div id="dialogue" bind:this={dialogue}>A dialogue between</div>
-  <div class="banner-container">
+  <div class="banner-container uppercase">
     <div class="banner-couple couple1" bind:this={couple1}>
       <Banner
         direction="left"
@@ -67,7 +67,7 @@
         --number-of-characters="10"
       />
     </div>
-    <div class="banner-couple couple2" bind:this={couple2}>
+    <div class="banner-couple couple2 uppercase" bind:this={couple2}>
       <Banner
         direction="left"
         text="the perfumer"

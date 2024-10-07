@@ -32,18 +32,18 @@
     let video = document.getElementById(`video-${currentOdor}`) as HTMLVideoElement;
     video.volume = 0.3;
     video.muted = false;
-    video
-      .play()
-      .then(() => {
-        // Autoplay started!
-      })
-      .catch((error) => {
-        video.muted = true;
-        video.play();
-        console.log(error);
-        // Autoplay was prevented.
-        // Show a "Play" button so that user can start playback.
-      });
+    // video
+    //   .play()
+    //   .then(() => {
+    //     // Autoplay started!
+    //   })
+    //   .catch((error) => {
+    //     video.muted = true;
+    //     video.play();
+    //     console.log(error);
+    //     // Autoplay was prevented.
+    //     // Show a "Play" button so that user can start playback.
+    //   });
   };
 
   const mute = () => {

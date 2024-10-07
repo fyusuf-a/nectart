@@ -11,6 +11,7 @@
   import Navbar from './Navbar.svelte';
   import Theme from '@/lib/style/Theme.svelte';
   import { themeStore } from '@/stores/theme';
+  import { page } from '$app/stores';
 
   let theme: 'light' | 'dark' | 'transparent' = 'light';
   themeStore.subscribe((value) => {
@@ -33,9 +34,14 @@
 
 <QueryClientProvider client={queryClient}>
   <WalletProvider>
-    <Theme tag="div" theme={theme}>
-      <Navbar theme={theme} />
+    {#if $page.url.pathname === '/product'}
+      <Navbar theme="dark" />
       <slot />
-    </Theme>
+    {:else}
+      <Theme tag="div" theme={theme}>
+        <Navbar theme={theme} />
+        <slot />
+      </Theme>
+    {/if}
   </WalletProvider>
 </QueryClientProvider>

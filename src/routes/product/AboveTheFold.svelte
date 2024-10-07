@@ -16,7 +16,10 @@
   };
 </script>
 
-<section id="above-the-fold">
+<section
+  class="h-screen pt-scale-2-2"
+  id="above-the-fold"
+>
   <div class="circle">
     <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
   </div>
@@ -41,8 +44,6 @@
   #above-the-fold {
     background-color: var(--Black);
     width: 100vw;
-    margin-top: navbar-height();
-    height: rest-height(1);
     display: flex;
     justify-content: center;
     align-items: center;
