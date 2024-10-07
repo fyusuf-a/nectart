@@ -1,4 +1,5 @@
 import { error, json, RequestHandler } from '@sveltejs/kit';
+import { BUDGET_IN_SOL } from '$lib/constants';
 import { formSchema, FormSchemaType } from '@/routes/projects/add/schema';
 import { ZodError } from 'zod';
 import { prisma } from '@/lib/api/prisma';
@@ -49,6 +50,7 @@ export const POST: RequestHandler = async({ request, locals }) => {
           baseNotes: result.baseNotes,
           heartNotes: result.heartNotes,
           userId: locals.user.id,
+          budgetInSol: BUDGET_IN_SOL,
         },
       });
       const { url } = await put(`projects/${project.id}/1`, result.picture, { access: 'public' });

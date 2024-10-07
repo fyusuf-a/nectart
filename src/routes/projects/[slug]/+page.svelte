@@ -1,10 +1,17 @@
-<script>
+<script lang="ts">
   import OlfactivePyramid from '@/lib/components/OlfactivePyramid.svelte';
   import Title from "@/lib/components/Title.svelte";
-  import ProjectCard from '@/lib/projects/ProjectCard.svelte';
+  import Button from '@/lib/components/ui/button/button.svelte';
+  import * as Card from "$lib/components/ui/card/index.js";
+  import Slider from '@/lib/components/ui/slider/slider.svelte';
+  import { sol, amountToString, multiplyAmount } from '@metaplex-foundation/umi';
+
+  let value = [10];
 
   export let data;
   $: project = data.props.project;
+
+  $: tokenPrice = project?.budgetInSol ? sol(project.budgetInSol / project.tokenNumber) : undefined;
 </script>
 
 <div
@@ -48,9 +55,50 @@
     </div>
     </div>
 
-    <ProjectCard
-      project={project}
-      class="p-scale-1-2 break-inside-avoid"
-    />
+  {#if tokenPrice}
+  <div class="flex justify-center pt-scale-2-2">
+    <Card.Root
+      bordered
+    >
+      <Card.Header>
+        <Card.Title>
+          Pledge
+          <div slot="subtitle">
+            { project.tokenNumber - project.boughtTokens } tokens available / { project.tokenNumber}
+
+          </div>
+        </Card.Title>
+        <Card.Description>
+          <div class="grid grid-cols-2 gap-y-2">
+            <p>
+              Token price
+            </p>
+            <p>
+              { Number(amountToString(tokenPrice)) } SOL
+            </p>
+            <div>
+              Number of tokens
+            </div>
+            <div>{project.tokenNumber}</div>
+        </Card.Description>
+      </Card.Header>
+      <Card.Content class="w-scale-5-0">
+          <Slider
+            bind:value={value}
+            max={100}
+            min={1}
+            step={1}
+            class="mt-scale-1-0"
+          />
+      </Card.Content>
+      <Card.Footer class="Footer">
+        <Button class="w-1/2">
+          Get { value } token{ value[0] > 1 ? 's' : '' } ({ Number(amountToString(multiplyAmount(tokenPrice, value[0]))) } SOL)
+        </Button>
+      </Card.Footer>
+    </Card.Root>
+  </div>
+  {/if}
+
   {/if}
 </div>

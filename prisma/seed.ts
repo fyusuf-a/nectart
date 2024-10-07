@@ -3,6 +3,7 @@ import { umi } from "../src/lib/blockchain/backendUmi";
 import { del, list, put } from '@vercel/blob';
 import fs from 'fs';
 import { seedPerfumes, UploadProject } from "./perfume";
+import { BUDGET_IN_SOL } from "../src/lib/constants";
 
 const prisma = new PrismaClient();
 
@@ -23,6 +24,8 @@ const uploadProject = async (uploadProject: UploadProject) => {
       heartNotes: uploadProject.heartNotes,
       topNotes: uploadProject.topNotes,
       userId: creator.id,
+      budgetInSol: BUDGET_IN_SOL,
+      tokenNumber: 500,
     }
   });
   const file = fs.readFileSync(uploadProject.imagePath);

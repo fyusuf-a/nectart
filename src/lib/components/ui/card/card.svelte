@@ -3,7 +3,7 @@
   import { cn } from "$lib/utils.js";
   import { twMerge } from "tailwind-merge";
 
-  type $$Props = HTMLAttributes<HTMLDivElement>;
+  type $$Props = HTMLAttributes<HTMLDivElement> & { bordered?: boolean };
 
   let className: $$Props["class"] = undefined;
   export { className as class };

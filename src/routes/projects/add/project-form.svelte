@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Input } from "$lib/components/ui/input";
   import { validator } from "@felte/validator-zod";
-  import { formSchema, type FormSchemaType, BUDGET_IN_SOL } from "./schema";
+  import { BUDGET_IN_SOL } from "$lib/constants";
+  import { formSchema, type FormSchemaType } from "./schema";
   import { createForm } from "felte";
   import Button from "@/lib/components/ui/button/button.svelte";
   import { FormField } from "@/lib/components/ui/form";

@@ -43,7 +43,7 @@
           <ProjectCard
             imgUrl={project.images.length > 0 ? project.images[0].url : undefined}
             project={project}
-            class="p-scale-1-2 break-inside-avoid"
+            class="break-inside-avoid"
           />
         </div>
       {/each}

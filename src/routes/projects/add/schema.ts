@@ -1,6 +1,6 @@
 import { z } from 'zod';
+import { BUDGET_IN_SOL } from '@/lib/constants';
 
-export const BUDGET_IN_SOL = 200;
 export const SOL_IN_LAMPORTS = 100_0000_000;
 
 export const formSchema = z.object({
