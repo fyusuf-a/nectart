@@ -5,6 +5,7 @@
   import * as Card from "$lib/components/ui/card/index.js";
   import Slider from '@/lib/components/ui/slider/slider.svelte';
   import { sol, amountToString, multiplyAmount } from '@metaplex-foundation/umi';
+  import MintButton from '@/lib/components/blockchain/MintButton.svelte';
 
   let value = [10];
 
@@ -12,6 +13,8 @@
   $: project = data.props.project;
 
   $: tokenPrice = project?.budgetInSol ? sol(project.budgetInSol / project.tokenNumber) : undefined;
+
+  $: remainingTokens = project ? project?.tokenNumber - project?.boughtTokens : undefined;
 </script>
 
 <div
@@ -58,7 +61,7 @@
         <Card.Title>
           Pledge
           <div slot="subtitle">
-            { project.tokenNumber - project.boughtTokens } tokens available / { project.tokenNumber}
+            { remainingTokens } tokens available / { project.tokenNumber}
 
           </div>
         </Card.Title>
@@ -79,16 +82,18 @@
       <Card.Content class="w-scale-5-0">
           <Slider
             bind:value={value}
-            max={100}
+            max={remainingTokens}
             min={1}
             step={1}
             class="mt-scale-1-0"
           />
       </Card.Content>
       <Card.Footer class="Footer">
-        <Button class="w-1/2">
-          Mint { value } token{ value[0] > 1 ? 's' : '' } ({ Number(amountToString(multiplyAmount(tokenPrice, value[0]))) } SOL)
-        </Button>
+        <MintButton
+          price={ tokenPrice }
+          wantedTokens={ value[0] }
+          projectId={ project.id }
+        />
       </Card.Footer>
     </Card.Root>
   </div>

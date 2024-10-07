@@ -7,7 +7,7 @@ import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-ad
 import type { PublicKey } from "@metaplex-foundation/umi";
 import { sol } from "@metaplex-foundation/umi";
 
-export const umi = readable<Umi | null>(null);
+export const umiStore = readable<Umi | null>(null);
 
 const createWallet = () => {
   const { subscribe, set, update } = writable<SolanaConnect | null>(null);
