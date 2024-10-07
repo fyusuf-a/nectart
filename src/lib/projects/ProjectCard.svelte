@@ -39,6 +39,7 @@
         topNotes={project.topNotes}
         heartNotes={project.heartNotes}
         baseNotes={project.baseNotes}
+        noteClass="h-scale-2-0 w-scale-2-0"
       />
     </Card.Content>
   </Card.Header>

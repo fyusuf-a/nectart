@@ -1,9 +1,11 @@
 <script lang="ts">
-    import { twMerge } from "tailwind-merge";
+  import { twMerge } from "tailwind-merge";
   import OlfactiveNote from "./OlfactiveNote.svelte";
   export let topNotes: string[] | null;
   export let heartNotes: string[] | null;
   export let baseNotes: string[] | null;
+  export let labelClass: string = "";
+  export let noteClass: string = "";
 
 </script>
 
@@ -21,8 +23,8 @@ Top notes
         <OlfactiveNote
           class={
             twMerge(
-              "h-scale-2-2 w-scale-2-2",
-              $$props.noteClass
+              // TODO, customize tailwind-merge -> "h-scale-2-2 w-scale-2-2",
+              noteClass,
             )
           }
           label={note}
@@ -34,7 +36,7 @@ Top notes
 <div class={
   twMerge(
     "font-body uppercase font-light text-scale-0-0 h-scale-0-2 flex items-end",
-    $$props.labelClass
+    labelClass
   )}
 >
 Heart notes
@@ -45,8 +47,8 @@ Heart notes
       <OlfactiveNote
         class={
           twMerge(
-            "h-scale-2-2 w-scale-2-2",
-            $$props.noteClass
+            // TODO, customize tailwind-merge -> "h-scale-2-2 w-scale-2-2",
+            noteClass
           )
         }
         label={note}
@@ -55,11 +57,11 @@ Heart notes
   {/each}
 </div>
 {/if}
-{#if heartNotes && heartNotes.length > 0}
+{#if baseNotes && baseNotes.length > 0}
 <div class={
   twMerge(
     "font-body uppercase font-light text-scale-0-0 h-scale-0-2 flex items-end",
-    $$props.labelClass
+    labelClass
   )}
 >
   Base notes
@@ -70,8 +72,8 @@ Heart notes
       <OlfactiveNote
         class={
           twMerge(
-            "h-scale-2-2 w-scale-2-2",
-            $$props.noteClass
+            // TODO, customize tailwind-merge -> "h-scale-2-2 w-scale-2-2",
+            noteClass
           )
         }
         label={note}
