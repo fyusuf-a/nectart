@@ -15,7 +15,7 @@
 </script>
 
 <div
-  class="flex flex-col px-scale-0-0 pt-scale-2-2 pb-scale-1-2"
+  class="flex flex-col px-scale-1-0 pt-scale-2-2 pb-scale-1-2"
 >
   {#if !project}
     <Title
@@ -30,16 +30,10 @@
     <img
       src={ project.images[0].url }
       alt={ project.name }
-      class="mt-scale-1-1 w-scale-5-0 h-scale-5-0 object-cover float-end"
+      class="ml-scale--1-0 mb-scale--1-0 w-scale-5-0 h-scale-5-0 object-cover float-end"
     />
-    <div class="text-scale-1-2 font-light mt-scale-1-1">
+    <div class="break-normal text-scale-1-2 font-light mb-scale-1-1">
       { project.description }
-
-      <!--<div-->
-        <!--class="font-serif text-scale-2-0"-->
-      <!-->-->
-        <!--Olfactive pyramid-->
-      <!--</div>-->
     </div>
 
     <div
@@ -93,7 +87,7 @@
       </Card.Content>
       <Card.Footer class="Footer">
         <Button class="w-1/2">
-          Get { value } token{ value[0] > 1 ? 's' : '' } ({ Number(amountToString(multiplyAmount(tokenPrice, value[0]))) } SOL)
+          Mint { value } token{ value[0] > 1 ? 's' : '' } ({ Number(amountToString(multiplyAmount(tokenPrice, value[0]))) } SOL)
         </Button>
       </Card.Footer>
     </Card.Root>

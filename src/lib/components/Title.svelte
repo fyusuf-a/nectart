@@ -7,7 +7,7 @@
 <div
   class={
     twMerge(
-      "w-full flex justify-center text-scale-4-0 font-serif font-light italic normal-case",
+      "w-full flex justify-center text-scale-4-0 font-serif font-light italic normal-case mb-scale-1-0",
       $$props.class
     )
   }
