@@ -42,7 +42,7 @@ export const POST: RequestHandler = async({ request, locals }) => {
   let project: Project | null = null;
   try {
     await prisma.$transaction(async (tx) => {
-      project = await prisma.project.create({
+      project = await tx.project.create({
         data: {
           name: result.name,
           description: result.description,

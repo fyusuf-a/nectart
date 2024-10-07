@@ -1,13 +1,13 @@
 <script lang="ts">
   import OlfactivePyramid from '@/lib/components/OlfactivePyramid.svelte';
   import Title from "@/lib/components/Title.svelte";
-  import Button from '@/lib/components/ui/button/button.svelte';
   import * as Card from "$lib/components/ui/card/index.js";
   import Slider from '@/lib/components/ui/slider/slider.svelte';
-  import { sol, amountToString, multiplyAmount } from '@metaplex-foundation/umi';
+  import { sol, amountToString } from '@metaplex-foundation/umi';
   import MintButton from '@/lib/components/blockchain/MintButton.svelte';
 
   let value = [10];
+  let tokensOwned = 0; // TODO: get from wallet
 
   export let data;
   $: project = data.props.project;
@@ -77,6 +77,10 @@
               Number of tokens
             </div>
             <div>{project.tokenNumber}</div>
+            <div>
+              Owned by you
+            </div>
+            <div>{tokensOwned}</div>
         </Card.Description>
       </Card.Header>
       <Card.Content class="w-scale-5-0">
@@ -93,6 +97,7 @@
           price={ tokenPrice }
           wantedTokens={ value[0] }
           projectId={ project.id }
+          bind:tokensOwned
         />
       </Card.Footer>
     </Card.Root>
