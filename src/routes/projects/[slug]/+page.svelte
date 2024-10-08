@@ -5,12 +5,29 @@
   import Slider from '@/lib/components/ui/slider/slider.svelte';
   import { sol, amountToString } from '@metaplex-foundation/umi';
   import MintButton from '@/lib/components/blockchain/MintButton.svelte';
+  import { createQuery } from '@tanstack/svelte-query';
+  import { page } from '$app/stores';
+  import axios from 'axios';
+  import type { Project } from '@prisma/client';
+  import Spinner from '@/lib/components/ui/spinner/Spinner.svelte';
 
-  let value = [10];
+  let value = [20];
   let tokensOwned = 0; // TODO: get from wallet
 
   export let data;
-  $: project = data.props.project;
+  //$: project = data.props.project;
+
+  const query = createQuery({
+    queryKey: ["projects", $page.params.slug],
+    queryFn: async () => {
+      const res = await axios(`/api/projects/${$page.params.slug}`);
+      console.log(res.data);
+      return res.data as Project;
+    },
+  });
+
+  $: project = $query.data;
+
 
   $: tokenPrice = project?.budgetInSol ? sol(project.budgetInSol / project.tokenNumber) : undefined;
 
@@ -20,12 +37,15 @@
 <div
   class="flex flex-col px-scale-1-0 pt-scale-2-2 pb-scale-1-2"
 >
-  {#if !project}
+  {#if $query.isLoading}
+    <div class="flex justify-center m-scale-2-0">
+      <Spinner />
+    </div>
+  {:else if $query.isError}
     <Title
       class="font-sans font-extralight uppercase"
       title="Not found"
     />
-
   {:else}
     <Title title={ project.name } />
 
@@ -47,7 +67,7 @@
         heartNotes={ project.heartNotes }
         baseNotes={ project.baseNotes }
         noteClass="w-scale-3-2 h-scale-3-2"
-        labelClass="text-scale-1-2 h-scale-2-0 font-extralight"
+        labelClass="text-scale-1-2 h-scale-2-2 font-extralight"
       />
     </div>
     </div>
@@ -103,6 +123,5 @@
     </Card.Root>
   </div>
   {/if}
-
   {/if}
 </div>

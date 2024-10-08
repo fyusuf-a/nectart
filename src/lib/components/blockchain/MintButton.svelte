@@ -8,12 +8,17 @@
   import { base58 } from '@metaplex-foundation/umi/serializers';
   import axios from 'axios';
   import Spinner from '../ui/spinner/Spinner.svelte';
+  import { useQueryClient } from '@tanstack/svelte-query';
+  import { invalidate } from '$app/navigation';
 
   export let projectId: string;
   export let price: SolAmount;
   export let wantedTokens: number;
   export let tokensOwned: number;
+
   let loading = false;
+
+  const queryClient = useQueryClient();
 
   $: totalPrice = multiplyAmount(price, wantedTokens);
   let umi: Umi;
@@ -36,6 +41,10 @@
         transactionSignature,
       });
       tokensOwned += res2.data.amount;
+      queryClient.invalidateQueries({
+        queryKey: ["projects", projectId]
+      });
+      invalidate(`/projects/${projectId}`);
     } finally {
       loading = false;
     }
