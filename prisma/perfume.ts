@@ -14,7 +14,7 @@ export const seedPerfumes = [
     topNotes: ['Lime', 'Ginger', 'Pepper'],
     heartNotes: ['Vetiver', 'Nutmeg', 'Tobacco'],
     baseNotes: ['Amberwood', 'Tonka Bean', 'Mysore Sandalwood'],
-    imagePath: "static/seed/curtis-potvin-XBqp-UxhCVs-unsplash.jpg",
+    imagePath: "static/seed/curtis-potvin-XBqp-UxhCVs-unsplash-1800.webp",
   },
   {
     name: "J'aime",
@@ -22,13 +22,13 @@ export const seedPerfumes = [
     topNotes: ['Pear', 'Melon', 'Magnolia', 'Peach', 'Mandarin Orange', 'Bergamot'],
     heartNotes: ['Jasmine', 'Lily-of-the-Valley', 'Tuberose', 'Freesia', 'Rose', 'Orchid', 'Plum', 'Violet'],
     baseNotes: ['Blackberry', 'Musk', 'Vanilla', 'Cedar'],
-    imagePath: "static/seed/tevei-renvoye-oTlkBFUU0p8-unsplash.jpg",
+    imagePath: "static/seed/tevei-renvoye-oTlkBFUU0p8-unsplash-1800.webp",
   },
   {
     name: "Fluides Magnifiques",
     description: "Like the pulse of raw emotions—blood, sweat, and passion— Fluides Magnifiques captures the primal essence of human desire. This fragrance pushes boundaries, evoking the intense sensations of physical intimacy, where desire overwhelms reason. It opens with a rush of sharp aldehydic notes, mimicking the rush of adrenaline that surges through the body. The fragrance quickly unveils a metallic edge, cold and precise, like the tension between unfulfilled longing and raw sensuality. As the scent deepens, musk and sandalwood merge with the salty undertone of skin, evoking a visceral reaction. This provocative, polarizing scent leaves no one indifferent—it's a love-or-hate experience, designed for those who embrace extremes.",
     heartNotes: ['Seaweed', 'Milk', 'Coconut', 'Iris', 'Opoponax', 'Sandalwood'],
-    imagePath: "static/seed/pawel-czerwinski-9iyhomrPcOM-unsplash.jpg",
+    imagePath: "static/seed/pawel-czerwinski-9iyhomrPcOM-unsplash-1800.webp",
   },
   {
     name: "Opulent Veil",
@@ -36,7 +36,7 @@ export const seedPerfumes = [
     topNotes: ['Mandarin Orange', 'Bergamot', 'Lily-of-the-Valley'],
     heartNotes: ['Jasmine', 'Myrrh'],
     baseNotes: ['Amber', 'Patchouli', 'Vanilla', 'Opoponax'],
-    imagePath: "static/seed/hanna-postova-KQyVT50pO74-unsplash.jpg",
+    imagePath: "static/seed/hanna-postova-KQyVT50pO74-unsplash-1800.webp",
   },
   {
     name: "Whisper Petals",
@@ -44,7 +44,7 @@ export const seedPerfumes = [
     topNotes: ['Rose', 'Hawthorn', 'Black Currant', 'Mandarin Orange'],
     heartNotes: ['Violet', 'Rose', 'Opoponax', 'Jasmine'],
     baseNotes: ['Vanilla', 'Musk', 'Incense'],
-    imagePath: "static/seed/johannes-plenio-CfKPPOgI-uI-unsplash.jpg",
+    imagePath: "static/seed/johannes-plenio-CfKPPOgI-uI-unsplash-1800.webp",
   },
   {
     name: "Emperor's Crest",
@@ -52,7 +52,7 @@ export const seedPerfumes = [
     topNotes: ['Bergamot', 'Black Currant', 'Apple', 'Lemon', 'Pink Pepper'],
     heartNotes: ['Pineapple', 'Patchouli', 'Jasmine'],
     baseNotes: ['Birch', 'Musk', 'Oakmoss', 'Ambroxan', 'Cedar'],
-    imagePath: "static/seed/jack-hamilton-AUgTvvQxDhg-unsplash.jpg",
+    imagePath: "static/seed/jack-hamilton-AUgTvvQxDhg-unsplash-1800.webp",
   },
   {
     name: "Crystalline Aura",
@@ -60,7 +60,7 @@ export const seedPerfumes = [
     topNotes: ['Lemon', 'Bergamot', 'Mint', 'Orange', 'Rhubarb'],
     heartNotes: ['Jasmine', 'Musk', 'Oakmoss', 'Fennel', 'Carnation', 'Amber'],
     baseNotes: ['Assam Tea', 'Jasmine', 'Musk', 'Oakmoss', 'Celery Seeds', 'Caraway', 'Cloves', 'Amber'],
-    imagePath: "static/seed/valeriia-miller-KPqnrggdRFU-unsplash.jpg",
+    imagePath: "static/seed/valeriia-miller-KPqnrggdRFU-unsplash-1800.webp",
   },
   {
     name: "Wild Splash",
@@ -68,7 +68,7 @@ export const seedPerfumes = [
     topNotes: ['Lemon', 'Bergamot', 'Basil', 'Rosemary', 'Caraway', 'Fruity Notes'],
     heartNotes: ['Jasmine', 'Coriander', 'Carnation', 'Patchouli', 'Orris Root', 'Sandalwood', 'Rose', 'Lavender', 'Hedione'],
     baseNotes: ['Oakmoss', 'Vetiver', 'Musk', 'Amber'],
-    imagePath: "static/seed/joao-santos-xvMzpANK9mY-unsplash.jpg",
+    imagePath: "static/seed/joao-santos-xvMzpANK9mY-unsplash-1800.webp",
   },
   {
     name: "Panel no. 6",
@@ -76,6 +76,6 @@ export const seedPerfumes = [
     topNotes: ['Aldehydes', 'Ylang-Ylang', 'Neroli', 'Bergamot', "Peach"],
     heartNotes: ['Iris', 'Jasmine', 'Rose', 'Lily-of-the-Valley'],
     baseNotes: ['Sandalwood', 'Vetiver', 'Oakmoss', 'Vanilla', 'Patchouli'],
-    imagePath: "static/seed/panel-n5.jpg",
+    imagePath: "static/seed/panel-n5-1800.webp",
   },
 ]

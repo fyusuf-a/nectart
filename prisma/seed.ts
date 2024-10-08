@@ -4,6 +4,9 @@ import { del, list, put } from '@vercel/blob';
 import fs from 'fs';
 import { seedPerfumes, UploadProject } from "./perfume";
 import { BUDGET_IN_SOL } from "../src/lib/constants";
+import { exploreDirectory } from "../scripts/utils";
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 const prisma = new PrismaClient();
 
@@ -41,6 +44,9 @@ const uploadProject = async (uploadProject: UploadProject) => {
 }
 
 async function main() {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  await exploreDirectory(`${__dirname}/../static/seed`, [1800]);
   while (true) {
     const blobList = await list();
     for (const blob of blobList.blobs) {
@@ -54,7 +60,6 @@ async function main() {
   for (const seedPerfume of seedPerfumes) {
     await uploadProject(seedPerfume);
   }
-  
 }
 
 
