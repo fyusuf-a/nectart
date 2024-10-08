@@ -1,50 +1,50 @@
 <script lang="ts">
   import Button from '@/lib/components/ui/button/button.svelte';
-  import { type SolAmount, amountToString, type Umi, multiplyAmount } from '@metaplex-foundation/umi';
-  import { sendAndConfirmTransaction } from '@/lib/blockchain/utils';
+  import { type SolAmount, amountToString, type Umi, multiplyAmount, transactionBuilder, generateSigner, some, type PublicKey } from '@metaplex-foundation/umi';
   import { walletStore, umiStore } from "@/stores/wallet";
-  import { transferSol } from '@metaplex-foundation/mpl-toolbox';
-  import { umi as backendUmi } from '$lib/blockchain/backendUmi';
-  import { base58 } from '@metaplex-foundation/umi/serializers';
-  import axios from 'axios';
+  import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox';
   import Spinner from '../ui/spinner/Spinner.svelte';
   import { useQueryClient } from '@tanstack/svelte-query';
-  import { invalidate } from '$app/navigation';
+  import type { ProjectWithCandyMachine } from '$lib/types/project';
+  import { mintV1 } from '@metaplex-foundation/mpl-core-candy-machine';
 
-  export let projectId: string;
+  export let project: ProjectWithCandyMachine;
   export let price: SolAmount;
-  export let wantedTokens: number;
   export let tokensOwned: number;
 
   let loading = false;
 
   const queryClient = useQueryClient();
 
-  $: totalPrice = multiplyAmount(price, wantedTokens);
   let umi: Umi;
   umiStore.subscribe((value) => {
     umi = value;
   });
 
-  let transactionSignature: string = '';
+  const mint= async () => {
+    await transactionBuilder()
+      .add(mintV1(umi, {
+        candyMachine: project.candyMachineAddress as PublicKey,
+        asset: generateSigner(umi),
+        collection: project.collectionAddress as PublicKey,
+        mintArgs: {
+          solPayment: some({ destination: project.treasuryAddress as PublicKey }),
+        },
+      }))
+      .sendAndConfirm(umi);
+    tokensOwned += 1;
+    queryClient.invalidateQueries({
+      queryKey: ["projects", project.id]
+    });
+  }
+
   const mutate = async () => {
     try {
       loading = true;
       await walletStore.connect();
-      const tx = transferSol(umi, {
-        destination: backendUmi.identity.publicKey,
-        amount: totalPrice,
-      });
-      const res = await sendAndConfirmTransaction(umi, tx);
-      transactionSignature = base58.deserialize(res.signature)[0];
-      const res2 = await axios.post(`/api/projects/${projectId}/mint`, {
-        transactionSignature,
-      });
-      tokensOwned += res2.data.amount;
-      queryClient.invalidateQueries({
-        queryKey: ["projects", projectId]
-      });
-      invalidate(`/projects/${projectId}`);
+      await mint();
+    } catch (e) {
+      console.error(e);
     } finally {
       loading = false;
     }
@@ -58,6 +58,6 @@
   class="w-1/2"
   on:click={mutate}
 >
-  Mint { wantedTokens } token{ wantedTokens > 1 ? 's' : '' } ({Number(amountToString(multiplyAmount(price, wantedTokens)))} SOL)
+  Mint ({Number(amountToString(price))} SOL)
 </Button>
 {/if}

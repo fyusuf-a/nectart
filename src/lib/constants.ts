@@ -1,1 +1,1 @@
-export const BUDGET_IN_SOL = 200;
+export const BUDGET_IN_SOL = 20;

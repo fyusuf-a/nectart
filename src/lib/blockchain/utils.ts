@@ -1,5 +1,6 @@
 import { setComputeUnitPrice } from '@metaplex-foundation/mpl-toolbox';
 import { TransactionBuilder, type Umi } from '@metaplex-foundation/umi';
+import { Keypair } from '@solana/web3.js';
 
 export class BigIntError extends Error {
   constructor(message: string) {
@@ -49,4 +50,9 @@ export const convertBigIntToNumberOrThrow = (bigInt: bigint) => {
     throw new BigIntError("BigInt is too small to convert to number");
   }
   return Number(bigInt);
+}
+
+export const getPublicKey = (storedPrivateKey: string) => {
+  const privateKey = Uint8Array.from(storedPrivateKey.split(',').map(Number));
+  return Keypair.fromSecretKey(privateKey).publicKey.toBase58();
 }

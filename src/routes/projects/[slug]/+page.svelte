@@ -3,15 +3,21 @@
   import Title from "@/lib/components/Title.svelte";
   import * as Card from "$lib/components/ui/card/index.js";
   import Slider from '@/lib/components/ui/slider/slider.svelte';
-  import { sol, amountToString } from '@metaplex-foundation/umi';
+  import { sol, amountToString, type Umi, type PublicKey } from '@metaplex-foundation/umi';
   import MintButton from '@/lib/components/blockchain/MintButton.svelte';
   import { createQuery } from '@tanstack/svelte-query';
   import { page } from '$app/stores';
   import axios from 'axios';
-  import type { Project } from '@prisma/client';
+  import type { ProjectWithCandyMachine } from '$lib/types/project';
   import Spinner from '@/lib/components/ui/spinner/Spinner.svelte';
+  import { fetchCandyMachine, type CandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
+  import { umiStore } from '@/stores/frontendUmi.js';
 
-  let value = [20];
+  let umi: Umi;
+  umiStore.subscribe((value) => {
+    if (value) umi = value;
+  });
+
   let tokensOwned = 0; // TODO: get from wallet
 
   export let data;
@@ -21,8 +27,7 @@
     queryKey: ["projects", $page.params.slug],
     queryFn: async () => {
       const res = await axios(`/api/projects/${$page.params.slug}`);
-      console.log(res.data);
-      return res.data as Project;
+      return res.data as ProjectWithCandyMachine;
     },
   });
 
@@ -32,6 +37,13 @@
   $: tokenPrice = project?.budgetInSol ? sol(project.budgetInSol / project.tokenNumber) : undefined;
 
   $: remainingTokens = project ? project?.tokenNumber - project?.boughtTokens : undefined;
+
+  let candyMachine: CandyMachine | undefined;
+  $: (async () => {
+    if (umi && project?.candyMachineAddress) {
+      candyMachine = project?.candyMachineAddress ? await fetchCandyMachine(umi, project.candyMachineAddress as PublicKey) : undefined;
+    }
+  })();
 </script>
 
 <div
@@ -47,6 +59,7 @@
       title="Not found"
     />
   {:else}
+    {#if project}
     <Title title={ project.name } />
 
     <div>
@@ -81,47 +94,38 @@
         <Card.Title>
           Pledge
           <div slot="subtitle">
-            { remainingTokens } tokens available / { project.tokenNumber}
+            { project.itemsAvailable } tokens available / { project.itemsTotal}
 
           </div>
         </Card.Title>
         <Card.Description>
-          <div class="grid grid-cols-2 gap-y-2">
+          <div class="grid grid-cols-2 gap-y-scale--1-0 gap-x-scale-2-0">
             <p>
               Token price
             </p>
-            <p>
+            <p class="text-end">
               { Number(amountToString(tokenPrice)) } SOL
             </p>
             <div>
               Number of tokens
             </div>
-            <div>{project.tokenNumber}</div>
+            <div class="text-end">{project.itemsAvailable}</div>
             <div>
               Owned by you
             </div>
-            <div>{tokensOwned}</div>
+            <p class="text-end">{tokensOwned}</div>
         </Card.Description>
       </Card.Header>
-      <Card.Content class="w-scale-5-0">
-          <Slider
-            bind:value={value}
-            max={remainingTokens}
-            min={1}
-            step={1}
-            class="mt-scale-1-0"
-          />
-      </Card.Content>
       <Card.Footer class="Footer">
         <MintButton
           price={ tokenPrice }
-          wantedTokens={ value[0] }
-          projectId={ project.id }
+          project={ project }
           bind:tokensOwned
         />
       </Card.Footer>
     </Card.Root>
   </div>
+  {/if}
   {/if}
   {/if}
 </div>

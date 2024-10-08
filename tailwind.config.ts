@@ -38,6 +38,12 @@ const config: Config = {
                     [`.gap-scale-${octave}-${note}`]: {
                       gap: typographicScale(octave, note),
                     },
+                    [`.gap-x-scale-${octave}-${note}`]: {
+                      'column-gap': typographicScale(octave, note),
+                    },
+                    [`.gap-y-scale-${octave}-${note}`]: {
+                      'row-gap': typographicScale(octave, note),
+                    },
                     [`.p-scale-${octave}-${note}`]: {
                       padding: typographicScale(octave, note),
                     },

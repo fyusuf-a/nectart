@@ -4,6 +4,7 @@ import type { SolanaConnect } from 'solana-connect';
 import type { Adapter } from "@solana/wallet-adapter-base";
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
+import { mplCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 
 export const umiStore = readable<Umi | null>(null);
 
@@ -14,7 +15,9 @@ const createWallet = () => {
       value.onWalletChange((adapter: Adapter | null) => {
         if (adapter) {
           const umi = createUmi(import.meta.env.VITE_RPC_ENDPOINT)
-          umi.use(walletAdapterIdentity(adapter))
+          umi
+            .use(walletAdapterIdentity(adapter))
+            .use(mplCandyMachine());
           return;
         }
       });

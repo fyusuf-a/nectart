@@ -12,8 +12,9 @@ import { sendAndConfirmTransaction } from '@/lib/blockchain/utils';
 import { createCollectionV1 } from '@metaplex-foundation/mpl-core';
 
 const loadCandyMachine = async (candyMachinePublicKey: PublicKey, tokenNumber: number, projectId: string) => {
-  for (let i = 0; i < tokenNumber;) {
-    const arrayLength = i < tokenNumber - 20 ? 20 : tokenNumber % 20;
+  const transactions = [];
+  for (let i = 0; i < tokenNumber; i += 20) {
+    const arrayLength = i <= tokenNumber - 20 ? 20 : tokenNumber % 20;
     const configLines = Array.from({ length: arrayLength }, (_, j) => ({
       uri: `${projectId}.json`,
       name: `${i + j}`,
@@ -23,9 +24,9 @@ const loadCandyMachine = async (candyMachinePublicKey: PublicKey, tokenNumber: n
       index: i,
       configLines,
     });
-    await sendAndConfirmTransaction(umi, configLinesTransaction);
-    i += arrayLength;
+    transactions.push(configLinesTransaction);
   }
+  await Promise.all(transactions.map(async (transaction) => sendAndConfirmTransaction(umi, transaction)));
 }
 
 export const GET: RequestHandler = async() => {
@@ -124,7 +125,7 @@ export const POST: RequestHandler = async({ request, locals }) => {
       await loadCandyMachine(candyMachine.publicKey, result.tokenNumber, project.id);
     },
     {
-      timeout: 120000,
+      timeout: 240 * 1_000,
     });
   } catch (e) {
     console.error(e);
