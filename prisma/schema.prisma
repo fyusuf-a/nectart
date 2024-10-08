@@ -72,6 +72,18 @@ model Project {
   updatedAt     DateTime        @default(now()) @updatedAt @map("updated_at")
   images        Image[]
   projectBacker ProjectBacker[]
+  candyMachine  CandyMachine?
 
   @@map("projects")
+}
+
+model CandyMachine {
+  id                String   @id @default(cuid())
+  project           Project  @relation(fields: [projectId], references: [id])
+  projectId         String   @map("project_id") @unique
+  collectionKey     String   @map("collection_key")
+  key               String
+  treasuryKey       String   @map("treasury_key")
+
+  @@map("candy_machines")
 }
