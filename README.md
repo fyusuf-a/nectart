@@ -42,3 +42,8 @@ Complete the environment variables in the `.env` file
 pnpm run dev
 ```
 
+Reset and seed the database
+```bash
+pnpx prisma migrate reset
+```
+
