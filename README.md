@@ -1,4 +1,8 @@
-# Prerequisites
+# Nectart
+
+https://nect.art (deployed on the devnet)
+
+## Prerequisites
 
 - Install [node: .js](https://nodejs.org/en/download/).
 - Install [pnpm](https://pnpm.io/installation).
@@ -6,7 +10,7 @@
 - Install [git lfs](https://git-lfs.com/)
 - Install [solana-cli](https://docs.solanalabs.com/cli/install)
 
-# Getting started
+## Getting started
 
 ```bash
 If you have not setup `solana-cli` yet
