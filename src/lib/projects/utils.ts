@@ -30,8 +30,8 @@ const loadCandyMachine = async (candyMachinePublicKey: PublicKey, tokenNumber: n
 }
 
 
-export const createProject = async (result: FormSchemaType, locals: { user: { id: string; } }) => {
-  await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
+export const createProject = async (result: FormSchemaType, locals: { user: { id: string; } }, budget?: number) => {
+  //await umi.rpc.airdrop(umi.identity.publicKey, sol(1));
   let project: Project | null = null;
   try {
     return await prisma.$transaction(async (tx) => {
@@ -43,7 +43,7 @@ export const createProject = async (result: FormSchemaType, locals: { user: { id
           baseNotes: result.baseNotes,
           heartNotes: result.heartNotes,
           userId: locals.user.id,
-          budgetInSol: BUDGET_IN_SOL,
+          budgetInSol: budget ?? BUDGET_IN_SOL,
           tokenNumber: result.tokenNumber,
         },
       });

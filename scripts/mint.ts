@@ -7,9 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 async function main() {
   console.log('--- Checking balance of backend');
   const balance: SolAmount = await umi.rpc.getBalance(umi.identity.publicKey);
-  if (isLessThanAmount(balance, sol(2))) {
+  if (isLessThanAmount(balance, sol(1))) {
     console.log('--- Airdropping to: ', umi.identity.publicKey);
-    await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
+    //await umi.rpc.airdrop(umi.identity.publicKey, sol(1));
   }
   const newBalance = await umi.rpc.getBalance(umi.identity.publicKey);
   console.log(`Balance is ${displayAmount(newBalance)}`);

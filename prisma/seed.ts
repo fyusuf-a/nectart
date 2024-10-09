@@ -5,7 +5,7 @@ import { seedPerfumes, UploadProject } from "./perfume";
 import { exploreDirectory } from "../scripts/utils";
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { createProject } from "../src/routes/api/projects/+server";
+import { createProject } from "../src/lib/projects/utils";
 import { FormSchemaType } from '../src/routes/projects/add/schema';
 import { PrismaClient } from "@prisma/client";
 import dotenv from 'dotenv';
@@ -13,7 +13,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const prisma = new PrismaClient();
 
-const uploadProject = async (uploadProject: UploadProject, tokenNumber = 40) => {
+const uploadProject = async (uploadProject: UploadProject, tokenNumber = 40, budget?: number) => {
   const keypair = umi.eddsa.generateKeypair();
   const publicKey = keypair.publicKey.toString();
 
@@ -32,8 +32,7 @@ const uploadProject = async (uploadProject: UploadProject, tokenNumber = 40) => 
     picture: fileBlob,
     tokenNumber,
   }
-  await createProject(formSchema, { user: { id: user.id } });
-  console.log(`Created project ${uploadProject.name}`);
+  await createProject(formSchema, { user: { id: user.id } }, budget);
 }
 
 async function main() {
@@ -51,7 +50,7 @@ async function main() {
   }
 
   for (let i = 0; i < seedPerfumes.length; i++) {
-    await uploadProject(seedPerfumes[i], i % 3 === 0 ? 1 : 30);
+    await uploadProject(seedPerfumes[i]);
   }
 }
 
