@@ -1,46 +1,39 @@
-import { PrismaClient } from "@prisma/client";
 import { umi } from "../src/lib/blockchain/backendUmi";
-import { del, list, put } from '@vercel/blob';
+import { del, list } from '@vercel/blob';
 import fs from 'fs';
 import { seedPerfumes, UploadProject } from "./perfume";
-import { BUDGET_IN_SOL } from "../src/lib/constants";
 import { exploreDirectory } from "../scripts/utils";
 import { fileURLToPath } from 'url';
 import path from 'path';
+import { createProject } from "../src/routes/api/projects/+server";
+import { FormSchemaType } from '../src/routes/projects/add/schema';
+import { PrismaClient } from "@prisma/client";
+import dotenv from 'dotenv';
 
+dotenv.config();
 const prisma = new PrismaClient();
 
-const uploadProject = async (uploadProject: UploadProject) => {
+const uploadProject = async (uploadProject: UploadProject, tokenNumber = 40) => {
   const keypair = umi.eddsa.generateKeypair();
   const publicKey = keypair.publicKey.toString();
-  const creator = await prisma.user.create({
-    data: {
+
+  const user = await prisma.user.upsert({
+    where: { address: publicKey },
+    update: {},
+    create: {
       address: publicKey,
     },
   });
 
-  const project = await prisma.project.create({
-    data: {
-      name: uploadProject.name,
-      description: uploadProject.description,
-      baseNotes: uploadProject.baseNotes,
-      heartNotes: uploadProject.heartNotes,
-      topNotes: uploadProject.topNotes,
-      userId: creator.id,
-      budgetInSol: BUDGET_IN_SOL,
-      tokenNumber: 500,
-    }
-  });
   const file = fs.readFileSync(uploadProject.imagePath);
   const fileBlob = new Blob([file]);
-  const { url } = await put(`projects/${project.id}/1`, fileBlob, { access: 'public' });
-
-  await prisma.image.create({
-    data: {
-      url,
-      projectId: project.id,
-    },
-  });
+  let formSchema: FormSchemaType = {
+    ...uploadProject,
+    picture: fileBlob,
+    tokenNumber,
+  }
+  await createProject(formSchema, { user: { id: user.id } });
+  console.log(`Created project ${uploadProject.name}`);
 }
 
 async function main() {
@@ -57,8 +50,8 @@ async function main() {
     }
   }
 
-  for (const seedPerfume of seedPerfumes) {
-    await uploadProject(seedPerfume);
+  for (let i = 0; i < seedPerfumes.length; i++) {
+    await uploadProject(seedPerfumes[i], i % 3 === 0 ? 1 : 30);
   }
 }
 

@@ -36,8 +36,6 @@
 
   $: tokenPrice = project?.budgetInSol ? sol(project.budgetInSol / project.tokenNumber) : undefined;
 
-  $: remainingTokens = project ? project?.tokenNumber - project?.boughtTokens : undefined;
-
   let candyMachine: CandyMachine | undefined;
   $: (async () => {
     if (umi && project?.candyMachineAddress) {

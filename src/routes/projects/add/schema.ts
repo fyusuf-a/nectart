@@ -3,13 +3,15 @@ import { BUDGET_IN_SOL } from '@/lib/constants';
 
 export const SOL_IN_LAMPORTS = 100_0000_000;
 
+const File = typeof global !== "undefined" && global.File ? global.File : class MockFile {};
+
 export const formSchema = z.object({
   name: z.string().min(1).max(30),
   description: z.string().min(1).max(500),
   topNotes: z.array(z.string()).optional().default([]),
   baseNotes: z.array(z.string()).optional().default([]),
   heartNotes: z.array(z.string()).optional().default([]),
-  picture: z.instanceof(File),
+  picture: z.instanceof(File).or(z.instanceof(Blob)),
   tokenNumber: z.number().int().positive()
 }).refine(data => {
     return Number.isInteger(BUDGET_IN_SOL * SOL_IN_LAMPORTS / data.tokenNumber);
