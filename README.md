@@ -2,6 +2,8 @@
 
 https://nect.art (deployed on the devnet)
 
+This project presented for the Solana Radar Hackathon uses a project that was coded before. We have been authorized to do so by an email from nate@colosseum.org sent on September 10, 2024, as long as the project has "some sort of Solana integration", which we implemented.
+
 ## Prerequisites
 
 - Install [node: .js](https://nodejs.org/en/download/).
