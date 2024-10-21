@@ -6,7 +6,7 @@ This project presented for the Solana Radar Hackathon uses a project that was co
 
 ## Prerequisites
 
-- Install [node: .js](https://nodejs.org/en/download/).
+- Install [node.js](https://nodejs.org/en/download/).
 - Install [pnpm](https://pnpm.io/installation).
 - Set up a private key for Github
 - Install [git lfs](https://git-lfs.com/)
@@ -14,9 +14,8 @@ This project presented for the Solana Radar Hackathon uses a project that was co
 
 ## Getting started
 
-```bash
 If you have not setup `solana-cli` yet
-```
+```bash
 solana-keygen new
 ```
 
