@@ -18,7 +18,7 @@
   let bottleHeight = 0;
 
   onMount(() => {
-    let emotion = document.querySelector('#emotion')!;
+    let emotion = document.querySelector('#emotion')! as HTMLElement;
     const sensation = document.querySelector('#sensation')! as HTMLElement;
     const gsapContext = gsap.context(() => {
       let randomAngle = gsap.utils.random(-5, 5, true);
@@ -63,8 +63,7 @@
     let getScreenSize = () => {
       screenWidth = window.innerWidth;
       screenHeight = window.innerHeight;
-      // navbarHeight = document.querySelector('#navbar')!.clientHeight;
-      navbarHeight = 0;
+      navbarHeight = document.querySelector('nav')!.clientHeight;
       circleSizeWithNavbar = Math.min(0.9 * screenWidth, 0.9 * (screenHeight - navbarHeight));
       bottleWidth = 0.5 * circleSizeWithNavbar;
       bottleHeight = 0.6561 * bottleWidth;
