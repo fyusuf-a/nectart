@@ -1,30 +1,26 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import Image from "./Image.svelte";
+  import { onMount } from 'svelte';
 
   export let src = '';
   export let video: HTMLVideoElement | null = null;
-  export let poster: HTMLImageElement | null = null;
-  export let loaded = false;
+  export let poster: string = `/${src}-200.webp`;
   export let onLoad = () => {};
   const resolutions = [1800, 1400, 1000, 800, 400, 200];
-  let videoAvailable = false;
+  let videoAvailable = true;
+  let loaded = false;
 
   const playVideo = () => {
       video!.play();
       videoAvailable = true;
+      console.log('videoAvailable', videoAvailable);
+  };
+
+  const setVideoUnavailable = () => {
+    videoAvailable = false;
   };
 
   onMount(() => {
-    const screenSize = window.innerWidth;
-    let videoResolution;
-    for (let i = 0; i < resolutions.length; i++) {
-      videoResolution = resolutions[i];
-      if (resolutions[i] < screenSize) {
-        break;
-      }
-    }
-    video!.src = `/${src}-${videoResolution}.webm`;
+    document.addEventListener('DOMContentLoaded', setVideoUnavailable);
     video!.addEventListener('canplaythrough', playVideo);
 
     const checkProgressTick = setInterval(() => {
@@ -40,6 +36,7 @@
 
     return () => {
       video!.removeEventListener('canplaythrough', playVideo);
+      document.removeEventListener('DOMContentLoaded', setVideoUnavailable);
       if (!loaded)
         clearInterval(checkProgressTick);
     };
@@ -52,14 +49,17 @@
     preload="metadata"
     class="video"
     bind:this={video}
+    poster={poster}
+    style={$$restProps.style + (videoAvailable ? 'display: block;' : 'display: none;')}
     {...$$restProps}
-  />
-  <Image
-    src={src}
-    image={poster ?? undefined}
-    style={$$restProps.style + (videoAvailable ? 'display: none;' : '')}
-    alt=""
-  />
+  >
+    {#each resolutions as resolution, i }
+      <source
+        src={`/${src}-${resolution}.webm`}
+        {...(i < resolutions.length - 1 ? { media: `(min-width: ${resolutions[i + 1]}px)` } : {})}
+      />
+    {/each}
+  </video>
 </div>
 
 <style lang="scss">
