@@ -3,6 +3,9 @@
   import Image from '$lib/Image.svelte';
   import MouseAcceleratedVideo from '$lib/mouseAcceleratedVideo.svelte';
   import ClickableText from '$lib/UI/ClickableText.svelte';
+  import Shader from '@/lib/Shader.svelte';
+  import { onMount } from 'svelte';
+  import WEBGL from 'three/examples/jsm/capabilities/WebGL.js';
 
   const easingParameters: [number, number, number, number] = [0.16, 1, 0.3, 1];
   const easingFunction = easeCubicFactory(...easingParameters);
@@ -14,6 +17,12 @@
     ctaText = 'Scroll to discover';
     ctaDisabled = true;
   };
+
+  let isWebGLSupported: boolean = false;
+
+  onMount(() => {
+    isWebGLSupported = WEBGL.isWebGLAvailable();
+  });
 </script>
 
 <section
@@ -21,7 +30,14 @@
   id="above-the-fold"
 >
   <div class="circle">
-    <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
+    {#if isWebGLSupported}
+      <Shader
+        src="/shaders/nectart.glsl"
+        class="w-full h-full"
+      />
+    {:else}
+      <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
+    {/if}
   </div>
   <div
     class="z-20 pointer-events-none"
