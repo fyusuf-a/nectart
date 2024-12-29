@@ -5,6 +5,11 @@ import tailwindcss from 'tailwindcss';
 import { resolve } from 'path';
 
 export default defineConfig({
+  server: {
+    fs: {
+      allow: ['./tailwind.config.ts']
+    }
+  },
   ssr: {
     noExternal: ['gsap', '@gsap/ScrollTrigger']
   },

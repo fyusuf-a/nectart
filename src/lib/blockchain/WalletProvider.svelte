@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { walletStore } from '@/stores/wallet';
+ // import { walletStore } from '@/stores/wallet';
   import { onMount } from 'svelte';
 
-  onMount(() => {
-    walletStore.initialize();
-  });
+//  onMount(() => {
+//    walletStore.initialize();
+//  });
 </script>
 
 
