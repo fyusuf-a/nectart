@@ -2,18 +2,16 @@
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import { onMount } from 'svelte';
   import { odors } from '$lib/carousel-odors';
+  import { trueModulo } from '$lib/utils';
   import { gsap } from 'gsap';
   import Image from '$lib/Image.svelte';
   import Video from '$lib/Video.svelte';
+  import { twMerge } from 'tailwind-merge';
 
   gsap.registerPlugin(ScrollTrigger);
   let video: HTMLVideoElement;
 
-  const trueModulo = (x: number) => {
-    const result = x % odors.length;
-    return result < 0 ? result + odors.length : result;
-  };
-  const INITIAL_CURRENT_ODOR = 3;
+  const INITIAL_CURRENT_ODOR = 2;
   let currentOdor = INITIAL_CURRENT_ODOR;
 
   enum Direction {
@@ -21,12 +19,14 @@
     RIGHT
   }
 
-  $: shownOdorIndexes = [trueModulo(currentOdor - 1), currentOdor, trueModulo(currentOdor + 1)];
+  const l = odors.length;
 
-  $: precedingOdor = trueModulo(currentOdor - 1);
-  $: nextLeftOdor = trueModulo(currentOdor - 2);
-  $: followingOdor = trueModulo(currentOdor + 1);
-  $: nextRightOdor = trueModulo(currentOdor + 2);
+  $: shownOdorIndexes = [trueModulo(currentOdor - 1, l), currentOdor, trueModulo(currentOdor + 1, l)];
+
+  $: leftOdor = trueModulo(currentOdor - 1, l);
+  $: nextLeftOdor = trueModulo(currentOdor - 2, l);
+  $: rightOdor = trueModulo(currentOdor + 1, l);
+  $: nextRightOdor = trueModulo(currentOdor + 2, l);
 
   const tryToPlay = () => {
     let video = document.getElementById(`video-${currentOdor}`) as HTMLVideoElement;
@@ -53,8 +53,8 @@
 
   const whichClass = (i: number, currentOdor: number) => {
     if (i === currentOdor) return 'middle-odor';
-    if (i === trueModulo(currentOdor - 1)) return 'left-odor';
-    if (i === trueModulo(currentOdor + 1)) return 'right-odor';
+    if (i === leftOdor) return 'left-odor pointer-events-none sm:pointer-events-auto';
+    if (i === rightOdor) return 'right-odor pointer-events-none sm:pointer-events-auto';
     return 'faded';
   };
 
@@ -90,7 +90,7 @@
 
       // The carousel animation
       const smallTextStyle = () => {
-        const _smallTextStyle = window.getComputedStyle(odor(precedingOdor));
+        const _smallTextStyle = window.getComputedStyle(odor(leftOdor));
         return {
           fontSize: _smallTextStyle.fontSize,
           fontStyle: _smallTextStyle.fontStyle
@@ -123,9 +123,11 @@
         const nextOdorTimeline = gsap.timeline({
           defaults: { duration: 1, ease: 'power4.out' }
         });
-        const disappearingOdor = direction === Direction.LEFT ? precedingOdor : followingOdor;
+        const disappearingOdor = direction === Direction.LEFT ? leftOdor : rightOdor;
         const appearingOdor = direction === Direction.LEFT ? nextRightOdor : nextLeftOdor;
-        const nextOdor = direction === Direction.LEFT ? followingOdor : precedingOdor;
+        const nextOdor = direction === Direction.LEFT ? rightOdor : leftOdor;
+        const dotWidth = gsap.getProperty('#dots :first-child', 'width');
+        const amountTranslated = direction === Direction.LEFT ? -dotWidth : dotWidth as number;
 
         nextOdorTimeline
           .fromTo(
@@ -221,29 +223,104 @@
                 odor(nextOdor, '> .video-container').removeAttribute('style');
                 odor(currentOdor).removeAttribute('style');
                 odor(currentOdor, '> .video-container').removeAttribute('style');
-                currentOdor = trueModulo(currentOdor + (direction === Direction.LEFT ? 1 : -1));
-                buttonsActive = true;
+                currentOdor = trueModulo(currentOdor + (direction === Direction.LEFT ? 1 : -1), l);
               }
             },
             '<'
           );
 
+        const dotTimeline = gsap.timeline({
+          defaults: { duration: 0.5, ease: 'power1.out' }
+        })
+          .to(
+            '#dots',
+            {
+              x: amountTranslated,
+            },
+            '<'
+          )
+          .to(
+            {},
+            {
+              duration: 0.5,
+              onStart() {
+                const dots = document.querySelectorAll('#dots .bg-white')!;
+                const biggerDot = dots[2] as HTMLElement;
+                biggerDot.classList.remove('bigger');
+                const nextBiggerDot = dots[direction === Direction.LEFT ? 3 : 1] as HTMLElement;
+                nextBiggerDot.classList.add('bigger');
+              },
+            },
+            '<'
+          )
+          .to(
+            '#dots',
+            {
+              duration: .001,
+              onStart() {
+                const dots = document.querySelector('#dots') as HTMLElement;
+                const dot = dots.children[0];
+                
+                let newDot: HTMLElement;
+
+
+                if (direction === Direction.LEFT) {
+                  dots.appendChild(dot.cloneNode(true));
+                  newDot = dots.children[dots.children.length - 1] as HTMLElement;
+                } else {
+                  dots.insertBefore(dot.cloneNode(true), dot);
+                  newDot = dots.children[0] as HTMLElement;
+                }
+                newDot.style.opacity = '0';
+                gsap.set(dots, { x: amountTranslated / 2 });
+                gsap.to(newDot, {
+                  opacity: 1,
+                  duration: 0.25,
+                  delay: 0.1,
+                });
+              }
+            },
+          )
+          .to(
+            `#dots >  :${direction === Direction.LEFT ? 'first' : 'last'}-child`,
+            {
+              opacity: 1,
+              duration: 0.25,
+            },
+            '0.1'
+          )
+          .to(
+            `#dots > :${direction === Direction.LEFT ? 'first' : 'last'}-child`,
+            {
+              opacity: 0,
+              duration: .001,
+              onComplete() {
+                const dots = document.querySelector('#dots') as HTMLElement;
+                if (direction === Direction.LEFT) {
+                  dots.removeChild(dots.children[0]);
+                } else {
+                  dots.removeChild(dots.children[dots.children.length - 1]);
+                }
+                gsap.set(dots, { x: 0 });
+              },
+            },
+          );
+            
+          
+
         const masterTimeline = gsap.timeline({
-          onComplete() {}
+          onComplete() {
+            buttonsActive = true;
+          }
         });
 
-        masterTimeline.add(nextOdorTimeline).add(restTimeline, '<');
+        masterTimeline.add(nextOdorTimeline).add(restTimeline, '<').add(dotTimeline, '<');
       };
 
       handleClick = (i: number) => {
-        if (i === currentOdor || !buttonsActive) return;
+        if ((i !== leftOdor && i !== rightOdor) || !buttonsActive) return;
         buttonsActive = false;
-        if (i === precedingOdor) {
-          slide(Direction.RIGHT);
-        }
-        if (i === followingOdor) {
-          slide(Direction.LEFT);
-        }
+        slide(i === leftOdor ? Direction.RIGHT : Direction.LEFT);
       };
     });
     return () => {
@@ -254,19 +331,19 @@
 
 <section
   id="odor-carousel"
-  class="z-10"
+  class="relative z-10 h-screen w-screen overflow-hidden text-black"
 >
   <Image
-    id={`background-${precedingOdor}`}
+    id={`background-${leftOdor}`}
     style={`visibility:hidden;${backgroundStyle}`}
-    src={`photos/carousel/${odors[precedingOdor].photo}`}
-    alt={odors[precedingOdor].photoAlt}
+    src={`photos/carousel/${odors[leftOdor].photo}`}
+    alt={odors[leftOdor].photoAlt}
   />
   <Image
-    id={`background-${followingOdor}`}
+    id={`background-${rightOdor}`}
     style={`visibility:hidden;${backgroundStyle}`}
-    src={`photos/carousel/${odors[followingOdor].photo}`}
-    alt={odors[followingOdor].photoAlt}
+    src={`photos/carousel/${odors[rightOdor].photo}`}
+    alt={odors[rightOdor].photoAlt}
   />
   <Image
     style={`${backgroundStyle}`}
@@ -275,9 +352,9 @@
     alt={odors[currentOdor].photoAlt}
   />
 
+  <div>
   {#each odors as odor, i}
     <div
-      key={odor.name}
       id={`odor-${i}`}
       class={'odor ' + whichClass(i, currentOdor)}
       on:click={() => handleClick(i)}
@@ -302,40 +379,54 @@
       </div>
     </div>
   {/each}
-  <div
-    class="odor-carousel-indicator"
-  >
-    {#each odors as odor, i}
+
+  <div class="bottom-scale-4-2 absolute left-0 flex w-full items-center justify-center sm:hidden sm:bottom-scale-4-0">
     <div
-      class="dot-container"
+      id="dots"
+      class="flex" 
     >
+      {#each odors as _, i}
       <div
-        class={`dot${i === currentOdor ? ' selected' : ''}`}
-      />
+        class={
+          twMerge(
+            'flex items-center justify-center w-44 h-44'
+          )
+        }
+      >
+        <div
+          class={
+            twMerge(
+              'bg-white w-scale-1-1 h-scale-1-1 rounded-full transition-all ease-in-out duration-500',
+              i === 2 && 'bigger'
+              //i === currentOdor && 'w-scale-2-0 h-scale-2-0'
+            )
+          }
+        ></div>
+      </div>
+      {/each}
     </div>
-    {/each}
-    <div
-      on:click={() => handleClick(precedingOdor)}
+    <button
+      aria-label="Previous"
+      on:click={() => handleClick(leftOdor)}
       on:keydown={(event) => {
         if (event.key === 'Enter' || event.key === 'Space') {
-          handleClick(precedingOdor);
+          handleClick(leftOdor);
         }
       }}
-      class="go-left"
-      role="button"
+      class="absolute left-0 z-10 h-full w-1/2"
       tabindex="0"
-    />
-    <div
-      on:click={() => handleClick(followingOdor)}
+    ></button>
+    <button
+      aria-label="Next"
+      on:click={() => handleClick(rightOdor)}
       on:keydown={(event) => {
         if (event.key === 'Enter' || event.key === 'Space') {
-          handleClick(followingOdor);
+          handleClick(rightOdor);
         }
       }}
-      class="go-right"
-      role="button"
+      class="absolute right-0 z-10 h-full w-1/2"
       tabindex="0"
-    />
+    ></button>
   </div>
 </section>
 
@@ -347,10 +438,7 @@
     --odor-2: calc(3 * var(--odor-0) + #{circle-size(var(--circle-ratio))});
     background-color: var(--Black);
     height: 120vh;
-    padding: 10vh 0;
-    width: 100vw;
-    position: relative;
-    overflow: hidden;
+    padding: 0;
   }
 
   .left-odor {
@@ -359,8 +447,7 @@
     @include typographic-scale(1, 0);
     z-index: 3;
 
-    & > .video-container,
-    & .gradient {
+    & > .video-container {
       opacity: 0;
       transform: scale(0);
     }
@@ -375,11 +462,14 @@
   .middle-odor {
     left: var(--odor-1);
     font-style: italic;
-    @include typographic-scale(2, 0);
     z-index: 2;
+    @include typographic-scale(3, 0);
 
-    & > .video-container,
-    & .gradient {
+    @include sm {
+      @include typographic-scale(2, 0);
+    }
+
+    & > .video-container {
       opacity: 1;
       transform: scale(1);
     }
@@ -390,8 +480,7 @@
     font-style: normal;
     @include typographic-scale(1, 0);
 
-    & > .video-container,
-    & .gradient {
+    & > .video-container {
       opacity: 0;
       transform: scale(0);
     }
@@ -459,59 +548,11 @@
     transition: transform 0.1s ease-out;
   }
 
-  .odor-carousel-indicator {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 20%;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    display: flex;
+  #dots > * {
+    transition: transform 0.5s ease-in-out;
   }
 
-  .dot-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-  }
-
-  .dot {
-    background-color:var(--White);
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    transition: all 0.5s ease-in-out;
-
-    &.selected {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  .dot.no-color {
-    font-size: 10rem;
-    width: auto;
-    height: auto;
-    background-color: transparent;
-  }
-
-  .go-left, .go-right {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    z-index: 10;
-  }
-
-  .go-left {
-    left: 0;
-  }
-
-  .go-right {
-    right: 0;
+  #dots .bigger {
+    transform: scale(1.5);
   }
 </style>

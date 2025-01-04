@@ -12,10 +12,11 @@ $impact-line-height: 0.75;
   font-weight: 300;
 }
 
-$screen-sm-min: 576;
-$screen-md-min: 768;
-$screen-lg-min: 992;
-$screen-xl-min: 1200;
+$screen-sm-min: 640;
+$screen-md-min: 668;
+$screen-lg-min: 1024;
+$screen-xl-min: 1280;
+$screen-xxl-min: 1536;
 @mixin sm {
   @media (min-width: #{$screen-sm-min}px) {
     @content;
@@ -33,6 +34,11 @@ $screen-xl-min: 1200;
 }
 @mixin xl {
   @media (min-width: #{$screen-xl-min}px) {
+    @content;
+  }
+}
+@mixin xxl {
+  @media (min-width: #{$screen-xxl-min}px) {
     @content;
   }
 }

@@ -12,7 +12,6 @@
   const playVideo = () => {
       video!.play();
       videoAvailable = true;
-      console.log('videoAvailable', videoAvailable);
   };
 
   const setVideoUnavailable = () => {
