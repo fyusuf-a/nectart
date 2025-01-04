@@ -1,8 +1,8 @@
 <script lang="ts">
-  import "../app.css";
+  import '../app.css';
   import '../styles/global.scss';
   import { onMount } from 'svelte';
-  import Lenis from '@studio-freight/lenis';
+  import Lenis from 'lenis';
   import { lenis } from '../stores/lenis';
   import ScrollTrigger from 'gsap/ScrollTrigger';
   import { gsap } from 'gsap';
