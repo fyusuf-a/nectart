@@ -2,7 +2,6 @@
   import { twMerge } from 'tailwind-merge';
 
   export let href: string;
-  export let disabled: boolean = false;
 </script>
 
 <a

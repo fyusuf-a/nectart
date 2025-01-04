@@ -22,7 +22,8 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "./src/styles/variables.scss" as *;'
+        additionalData: '@use "./src/styles/variables.scss" as *;',
+        silenceDeprecations: ['legacy-js-api']
       }
     }
   },
