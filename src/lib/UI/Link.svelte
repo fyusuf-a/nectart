@@ -13,7 +13,7 @@
   )}
 >
   <slot />
-  <div class="absolute z-20 h-[1px] w-full underline bottom-scale--1-0"></div>
+  <div class="absolute z-20 h-[1px] w-full underline -bottom-scale-1-0"></div>
 </a>
 
 <style lang="scss">
