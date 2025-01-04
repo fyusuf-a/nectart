@@ -425,12 +425,6 @@
       height: circle-size(0.6);
     }
 
-    & video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     & .gradient {
       position: absolute;
       width: 100%;

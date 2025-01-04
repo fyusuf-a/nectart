@@ -49,8 +49,8 @@
 </script>
 
 <section class="subsection2">
-  <div class="section-background" />
-  <div class="background" />
+  <div class="section-background"></div>
+  <div class="background"></div>
   <div id="dialogue" bind:this={dialogue}>A dialogue between</div>
   <div class="banner-container uppercase">
     <div class="banner-couple couple1" bind:this={couple1}>

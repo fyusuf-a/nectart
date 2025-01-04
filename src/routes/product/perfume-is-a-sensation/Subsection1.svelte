@@ -11,8 +11,8 @@
 </script>
 
 <section class="subsection1">
-  <div class="section-background" />
-  <div class="background-circle" />
+  <div class="section-background"></div>
+  <div class="background-circle"></div>
   <div
     id="sensation"
     class="uppercase"

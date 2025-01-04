@@ -8,7 +8,7 @@
   <div>
     {text ?? ''}
   </div>
-  <div class="underline" />
+  <div class="underline"></div>
 </button>
 
 <style lang="scss">

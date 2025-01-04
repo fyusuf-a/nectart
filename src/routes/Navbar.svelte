@@ -75,11 +75,11 @@
 
 <Theme tag="div" theme={theme} class="navbar">
 <nav
-  class="bg-[var(--background-color)] h-scale-2-2 flex navbar items-center"
+  class="navbar flex items-center bg-[var(--background-color)] h-scale-2-2"
   bind:this={navbar}
 >
   {#each routesLeft as route}
-    <div class="flex-1 flex justify-center">
+    <div class="flex flex-1 justify-center">
       <Link href={route.path} disabled={route.path === $page.url.pathname}>
         {route.name}
       </Link>
@@ -89,7 +89,7 @@
     <Logo class="h-scale-1-0" />
   </a>
   {#each routesRight as route}
-    <div class="flex-1 flex justify-center">
+    <div class="flex flex-1 justify-center">
       <Link href={route.path} disabled={route.path === $page.url.pathname}>
         {route.name}
       </Link>
@@ -99,10 +99,6 @@
 </Theme>
 
 <style lang="scss">
-  svg path {
-    fill: var(--color);
-  }
-
   .navbar {
     box-sizing: border-box;
     position: fixed;
