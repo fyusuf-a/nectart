@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "../app.css";
+  import '../app.css';
   import '../styles/global.scss';
   import { onMount } from 'svelte';
   import Lenis from '@studio-freight/lenis';
@@ -35,7 +35,7 @@
 <QueryClientProvider client={queryClient}>
   <WalletProvider>
     {#if $page.url.pathname === '/product'}
-      <Navbar theme="dark" />
+      <!--<Navbar theme="dark" />-->
       <slot />
     {:else}
       <Theme tag="div" theme={theme}>
