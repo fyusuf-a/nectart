@@ -62,7 +62,7 @@
 </script>
 
 <div id="cerulean-sky">
-  <h1 bind:this={title}>Plum Elixir</h1>
+  <h1 class="uppercase" bind:this={title}>Plum Elixir</h1>
   <div class="frame">
     <div class="slides">
       {#each slidesContent as slide}

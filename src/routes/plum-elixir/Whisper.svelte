@@ -180,11 +180,11 @@
       <Image style={imageStyle} src={`photos/whisper/${slide.src}`} />
     </div>
     <div class="text-container">
-      <div class="text-stack layer" class:active={i === currentSlideIndex}>
+      <div class="text-stack layer uppercase" class:active={i === currentSlideIndex}>
         <!-- eslint-disable -->
         {@html slide.text}
       </div>
-      <div class="text-stack" class:active={i === currentSlideIndex}>
+      <div class="text-stack uppercase" class:active={i === currentSlideIndex}>
         <!-- eslint-disable -->
         {@html slide.text}
       </div>

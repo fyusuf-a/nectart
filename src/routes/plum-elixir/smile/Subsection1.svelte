@@ -49,7 +49,7 @@
 
 <div class="text-container">
   <div class="smile accent" bind:this={first}>After the effort</div>
-  <div class="smile" bind:this={second}>A smile</div>
+  <div class="smile uppercase" bind:this={second}>A smile</div>
   <div class="smile accent" bind:this={third}>A warmth</div>
 </div>
 
