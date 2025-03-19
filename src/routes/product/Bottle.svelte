@@ -144,14 +144,14 @@
   });
 </script>
 {#if false }
-<div class="h-[100vh] w-[100vw] z-10 fixed">
+<div class="fixed z-10 h-[100vh] w-[100vw]">
   <ThreeScene
     objectWidth={bottleContainer?.clientWidth ?? 100}
   />
 </div>
 {/if}
 <div id="bottle-container"
-  class="left-[50vw] fixed top-0 bottom-0 z-10 -translate-x-1/2 pointer-events-none" 
+  class="pointer-events-none fixed bottom-0 left-[50vw] top-0 z-10 -translate-x-1/2" 
   bind:this={bottleContainer}
 >
   {#if true }
@@ -161,19 +161,19 @@
   >
     <div
       id="bottle-blur"
-      class="absolute z-10 top-0 left-0"
-    />
+      class="absolute left-0 top-0 z-10"
+    ></div>
     <Image
       id="bottle"
       src="photos/bottle"
       alt="A bottle of water"
-      class="w-full z-20 h-auto absolute top-0 left-0"
+      class="absolute left-0 top-0 z-20 h-auto w-full"
     />
     <Image
       id="bottle-shadow"
       src="photos/bottle"
       alt="A bottle of water"
-      class="w-full invisible"
+      class="invisible w-full"
     />
   </div>
   {/if}

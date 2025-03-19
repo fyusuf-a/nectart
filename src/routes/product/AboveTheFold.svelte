@@ -33,14 +33,14 @@
     {#if isWebGLSupported}
       <Shader
         src="/shaders/nectart.glsl"
-        class="w-full h-full"
+        class="h-full w-full"
       />
     {:else}
       <MouseAcceleratedVideo targetReturnTime={1} {easingFunction} />
     {/if}
   </div>
   <div
-    class="z-20 pointer-events-none"
+    class="pointer-events-none z-20"
     id="rocks"
   >
     <Image src="photos/rocks" alt="Black rocks shining reflecting a discreet blue light" />
@@ -51,7 +51,7 @@
   <div
     class="z-30"
     id="black-rectangle"
-  />
+  ></div>
 </section>
 
 <style lang="scss">

@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { twMerge } from "tailwind-merge";
+  import { twMerge } from 'tailwind-merge';
 
   export let href: string;
-  export let disabled: boolean = false;
 </script>
 
 <a
@@ -14,7 +13,7 @@
   )}
 >
   <slot />
-  <div class="absolute bottom-scale--1-0 w-full h-[1px] z-20 underline" />
+  <div class="absolute z-20 h-[1px] w-full underline -bottom-scale-1-0"></div>
 </a>
 
 <style lang="scss">

@@ -76,8 +76,8 @@
     </div>
   </div>
   <div class="grid">
-    <div class="veil behind" />
-    <div class="veil before" />
+    <div class="veil behind"></div>
+    <div class="veil before"></div>
     <Grid />
   </div>
 </section>

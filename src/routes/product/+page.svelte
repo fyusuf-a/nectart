@@ -1,4 +1,5 @@
 <script lang="ts">
+  import './style.scss';
   import Section1 from './AboveTheFold.svelte';
   import Section2 from './OdorCarousel.svelte';
   import Section3 from './PerfumeIsASensation.svelte';
@@ -15,7 +16,3 @@
 <Section3 />
 <Section4 />
 <Section5 />
-
-<style lang="scss">
-  @import './style.scss';
-</style>

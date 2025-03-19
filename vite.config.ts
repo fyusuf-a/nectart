@@ -5,6 +5,11 @@ import tailwindcss from 'tailwindcss';
 import { resolve } from 'path';
 
 export default defineConfig({
+  server: {
+    fs: {
+      allow: ['./tailwind.config.ts']
+    }
+  },
   ssr: {
     noExternal: ['gsap', '@gsap/ScrollTrigger']
   },
@@ -17,7 +22,8 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "./src/styles/variables.scss" as *;'
+        additionalData: '@use "./src/styles/variables.scss" as *;',
+        silenceDeprecations: ['legacy-js-api']
       }
     }
   },

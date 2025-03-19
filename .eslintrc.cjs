@@ -29,6 +29,7 @@ module.exports = {
   ],
   rules: {
     indent: ['error', 2, { ignoredNodes: ['ConditionalExpression'] }],
-    quotes: ['error', 'single']
+    quotes: ['error', 'single'],
+    '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }]
   }
 };

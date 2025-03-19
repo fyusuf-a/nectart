@@ -1,10 +1,11 @@
-export const odors = [
-  {
-    name: 'Bread crust',
-    photo: 'conor-brown-WBYksGoFPb8',
-    photoAlt: 'bread crust',
-    videoUrl: 'bread-carlos-buitrago'
-  },
+type Odor = {
+  name: string;
+  photo: string;
+  photoAlt: string;
+  videoUrl: string;
+}
+
+export const odors: Odor[] = [
   {
     name: 'Vanilla',
     photo: 'sidath-vimukthi-fIGw-jVGy5g',
@@ -28,5 +29,11 @@ export const odors = [
     photoAlt: 'a drenched paved street with a rose',
     photo: 'jana-muller-2rCRXB4W6-0',
     videoUrl: 'petrichor'
+  },
+  {
+    name: 'Bread crust',
+    photo: 'conor-brown-WBYksGoFPb8',
+    photoAlt: 'bread crust',
+    videoUrl: 'bread-carlos-buitrago'
   }
 ];

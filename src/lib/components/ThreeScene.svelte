@@ -51,7 +51,7 @@
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
-    const isIntersecting = (mouseX, mouseY) => {
+    const isIntersecting = (mouseX: number, mouseY: number) => {
       mouse.x = (mouseX / window.innerWidth) * 2 - 1;
       mouse.y = -(mouseY / window.innerHeight) * 2 + 1;
       raycaster.setFromCamera(mouse, camera);
@@ -62,12 +62,12 @@
 
     canvas.addEventListener('mousemove', (event) => {
       if(!gltf) return;
-     // var mousePosition = new THREE.Vector3(0, 0, 0.5);
-     // mousePosition.x = 2 * (event.clientX / window.innerWidth) - 1;
-     // mousePosition.y = 1 - 2 * (event.clientY / window.innerHeight);
-     // mousePosition.unproject(camera);
-     // var raycaster = new THREE.Raycaster(camera.position, mousePosition.sub(camera.position).normalize());
-     // var intersects = raycaster.intersectObjects(scene.children);
+      // var mousePosition = new THREE.Vector3(0, 0, 0.5);
+      // mousePosition.x = 2 * (event.clientX / window.innerWidth) - 1;
+      // mousePosition.y = 1 - 2 * (event.clientY / window.innerHeight);
+      // mousePosition.unproject(camera);
+      // var raycaster = new THREE.Raycaster(camera.position, mousePosition.sub(camera.position).normalize());
+      // var intersects = raycaster.intersectObjects(scene.children);
       if (!isMouseDown) {
         controls.enabled = isIntersecting(event.clientX, event.clientY);
       }
@@ -144,10 +144,10 @@
       const cube = new THREE.Mesh(geometry, material);
       //scene.add(cube);
 
-     // const edges = new THREE.EdgesGeometry(geometry);
-     // const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xff0000 }));
-     // line.scale.set(scaleRatio, scaleRatio, scaleRatio);
-     // scene.add(line);
+      // const edges = new THREE.EdgesGeometry(geometry);
+      // const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xff0000 }));
+      // line.scale.set(scaleRatio, scaleRatio, scaleRatio);
+      // scene.add(line);
 
 
       //const cube = new THREE.Mesh(geometry, material);
@@ -186,7 +186,7 @@
 
 <canvas
   class={
-    twMerge("h-full h-full", $$props.class)
+    twMerge('h-full', $$props.class)
   }
   bind:this={canvas}
-/>
+></canvas>
