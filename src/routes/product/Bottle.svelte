@@ -63,7 +63,7 @@
     let getScreenSize = () => {
       screenWidth = window.innerWidth;
       screenHeight = window.innerHeight;
-      navbarHeight = document.querySelector('nav')!.clientHeight;
+      navbarHeight = document.querySelector('nav')?.clientHeight ?? 0;
       circleSizeWithNavbar = Math.min(0.9 * screenWidth, 0.9 * (screenHeight - navbarHeight));
       bottleWidth = 0.5 * circleSizeWithNavbar;
       bottleHeight = 0.6561 * bottleWidth;
