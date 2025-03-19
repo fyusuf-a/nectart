@@ -1,20 +1,20 @@
 <script lang="ts">
-import { Button } from "$lib/components/ui/button";
-import TypographySize from "$lib/designSystem/TypographySize.svelte";
-import TypographyStyle from "$lib/designSystem/TypographyStyle.svelte";
-import { sizes } from "$lib/designSystem";
-import { onMount } from "svelte";
-import Theme from "$lib/style/Theme.svelte";
+import { Button } from '$lib/components/ui/button';
+import TypographySize from '$lib/designSystem/TypographySize.svelte';
+import TypographyStyle from '$lib/designSystem/TypographyStyle.svelte';
+import { sizes } from '$lib/designSystem';
+import { onMount } from 'svelte';
+import Theme from '$lib/style/Theme.svelte';
 
 let rootElement: HTMLElement | null = null;
 let remSize: number = 0;
-const fontStyles = ["italic", "normal"] as const;
-const fonts = ["sans-serif", "serif"] as const;
+const fontStyles = ['italic', 'normal'] as const;
+const fonts = ['sans-serif', 'serif'] as const;
 
 onMount(() => {
   rootElement = document.documentElement;
   const fontSize = window.getComputedStyle(rootElement!).fontSize;
-  remSize = parseFloat(fontSize.replace("px", ""));
+  remSize = parseFloat(fontSize.replace('px', ''));
 });
 
 </script>
@@ -42,7 +42,7 @@ onMount(() => {
       Typography (fonts)
     </div>
     {#each fonts as font}
-      { #each fontStyles as style }
+      {#each fontStyles as style }
         <div>
           <TypographyStyle
             font={ font }
@@ -63,14 +63,14 @@ onMount(() => {
     <Button
       variant="default"
       size="default"
-      on:click={() => console.log("clicked")}
+      on:click={() => console.log('clicked')}
     >Primary</Button>
   </div>
   <div>
     <Button
       variant="outline"
       size="default"
-      on:click={() => console.log("clicked")}
+      on:click={() => console.log('clicked')}
     >Outline</Button>
   </div>
   </Theme>
@@ -83,7 +83,7 @@ onMount(() => {
       Typography (fonts)
     </div>
     {#each fonts as font}
-      { #each fontStyles as style }
+      {#each fontStyles as style }
         <div>
           <TypographyStyle
             font={ font }
@@ -105,14 +105,14 @@ onMount(() => {
     <Button
       variant="default"
       size="default"
-      on:click={() => console.log("clicked")}
+      on:click={() => console.log('clicked')}
     >Primary</Button>
   </div>
   <div>
     <Button
       variant="outline"
       size="default"
-      on:click={() => console.log("clicked")}
+      on:click={() => console.log('clicked')}
     >Outline</Button>
   </div>
   </Theme>
